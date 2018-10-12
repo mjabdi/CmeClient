@@ -1,0 +1,295 @@
+
+
+.mycard {
+    height: 120px;
+    margin-top: 40px;
+    width: 100%;
+    text-align: center; 
+}
+.widgetcard {
+    height: 150px;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center; 
+    align-content: center;
+}
+.talktoustext {
+    /* height: 120px; */
+    /* margin-top: 40px;
+    width: 100%; */
+    right: 230px;
+    bottom: 100px;
+    text-align: center; 
+    font-size: 20px;
+    
+}
+
+.mycard .item-text-wrap {
+    color: rgb(131, 131, 131);
+    margin-left : 73px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.mycard .item-text-wrap:hover 
+{
+    cursor: pointer;
+    color : rgb(48, 48, 48) !important;
+    transition: all 200ms;
+    -webkit-transition: all 200ms;
+    -moz-transition:  all 200ms;
+    text-shadow: 1px 1px 1px rgb(192, 192, 192);
+
+}
+
+.color-picker 
+{
+    cursor: pointer;
+}
+
+.form-text 
+{
+    font-size: 12px !important;
+    color : black !important;
+}
+
+
+#mycallme {
+    /* position: fixed;
+    right: 230px;
+    bottom: 300px;
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+    opacity: 0.5;
+    z-index: 99990; */
+    /* margin-left: 210px; */
+    margin-top: 10px;
+    margin-bottom: 10px;
+    z-index: 99990 !important;
+    position: relative;
+}
+#mycallme .callmeMain {
+    -moz-border-radius: 50% !important;
+    -webkit-border-radius: 50% !important;
+    border-radius: 50% !important;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    background-color: rgb(207,8,8);
+    width: 70px;
+    height: 70px;
+    /* -webkit-animation: zcwmini2  1.5s 0s ease-out infinite, zcwphone2 1.5s linear infinite ;
+    -moz-animation: zcwmini2  1.5s 0s ease-out infinite, zcwphone2 1.5s linear infinite;
+    animation: zcwmini2  1.5s 0s ease-out infinite, zcwphone2 1.5s linear infinite; */
+
+    background-image: url(http://www.talktoleadsnow.com/assets/img/icon/mini.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    /* -webkit-animation: zcwphone2 1.5s linear infinite;
+    -moz-animation: zcwphone2 1.5s linear infinite;
+    animation: zcwphone2 1.5s linear infinite; */
+}
+
+#mycallme .callmeMain-animate {
+    -moz-border-radius: 50% !important;
+    -webkit-border-radius: 50% !important;
+    border-radius: 50% !important;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    background-color: rgb(207,8,8);
+    width: 70px;
+    height: 70px;
+    -webkit-animation: zcwmini2  1.5s 0s ease-out infinite, zcwphone2 1.5s linear infinite ;
+    -moz-animation: zcwmini2  1.5s 0s ease-out infinite, zcwphone2 1.5s linear infinite;
+    animation: zcwmini2  1.5s 0s ease-out infinite, zcwphone2 1.5s linear infinite;
+
+    background-image: url(http://www.talktoleadsnow.com/assets/img/icon/mini.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    z-index: 99990 !important;
+
+    /* -webkit-animation: zcwphone2 1.5s linear infinite;
+    -moz-animation: zcwphone2 1.5s linear infinite;
+    animation: zcwphone2 1.5s linear infinite; */
+}
+
+ #my-icon-call {
+    position: relative;
+    /* left: 192px; */
+    bottom: 15px;
+    text-align: center;
+    /* cursor: pointer;  */
+    border-radius: 4px;
+    font-size: 12px !important;
+    display: inline-block;
+    width: 110px;
+    min-height: 25px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+} 
+
+
+
+
+#callme #callmeMain:before {
+    /* content: "";
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-image: url(https://ss.zadarma.com/callbackWidget/images/mini.png);
+    background-repeat: no-repeat;
+    background-position: center center; */
+    /* -webkit-animation: zcwphone2 1.5s linear infinite;
+    -moz-animation: zcwphone2 1.5s linear infinite;
+    animation: zcwphone2 1.5s linear infinite; */
+}
+
+
+.text-snippet
+{
+    margin-top : 0 px !important;
+    width: 100% !important;
+    height: 222px !important;
+    text-align: left !important;
+    background: #2f353a !important;
+    color : white !important;
+    border:   #ff6600 2px solid !important;
+    padding: 5px !important;
+}
+
+.btn-copy
+{
+    color : #ff6600 !important;
+    border: 0 !important;
+    background: transparent !important;
+}
+
+
+@-webkit-keyframes zcwphone {
+    0% {-ms-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+    25% {-ms-transform:rotate(30deg);-webkit-transform:rotate(30deg);transform:rotate(30deg);}
+    50% {-ms-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+    75% {-ms-transform:rotate(-30deg);-webkit-transform:rotate(-30deg);transform:rotate(-30deg);}
+    100% {-ms-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+}
+@-moz-keyframes zcwphone {
+    0% {-ms-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+    25% {-ms-transform:rotate(30deg);-webkit-transform:rotate(30deg);transform:rotate(30deg);}
+    50% {-ms-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+    75% {-ms-transform:rotate(-30deg);-webkit-transform:rotate(-30deg);transform:rotate(-30deg);}
+    100% {-ms-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+}
+@keyframes zcwphone {
+    0% {-ms-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+    25% {-ms-transform:rotate(30deg);-webkit-transform:rotate(30deg);transform:rotate(30deg);}
+    50% {-ms-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+    75% {-ms-transform:rotate(-30deg);-webkit-transform:rotate(-30deg);transform:rotate(-30deg);}
+    100% {-ms-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+}
+@-webkit-keyframes zcwphone2 {
+    0% {-ms-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+    25% {-ms-transform:rotate(30deg);-webkit-transform:rotate(30deg);transform:rotate(30deg);}
+    50% {-ms-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+    75% {-ms-transform:rotate(-30deg);-webkit-transform:rotate(-30deg);transform:rotate(-30deg);}
+    100% {-ms-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+}
+@-moz-keyframes zcwphone2 {
+    0% {-ms-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+    25% {-ms-transform:rotate(30deg);-webkit-transform:rotate(30deg);transform:rotate(30deg);}
+    50% {-ms-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+    75% {-ms-transform:rotate(-30deg);-webkit-transform:rotate(-30deg);transform:rotate(-30deg);}
+    100% {-ms-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+}
+@keyframes zcwphone2 {
+    0% {-ms-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+    25% {-ms-transform:rotate(30deg);-webkit-transform:rotate(30deg);transform:rotate(30deg);}
+    50% {-ms-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+    75% {-ms-transform:rotate(-30deg);-webkit-transform:rotate(-30deg);transform:rotate(-30deg);}
+    100% {-ms-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+}
+@-webkit-keyframes zcwmini {
+    0% {box-shadow: 0 0 8px 6px rgba(207,8,8, 0), 0 0 0 0 rgba(0,0,0,0), 0 0 0 0 rgba(207,8,8, 0);}
+    10% {box-shadow: 0 0 8px 6px , 0 0 12px 10px rgba(0,0,0,0), 0 0 12px 14px ;}
+    100% {box-shadow: 0 0 8px 6px rgba(207,8,8, 0), 0 0 0 40px rgba(0,0,0,0), 0 0 0 40px rgba(207,8,8, 0);}
+}
+@-moz-keyframes zcwmini {
+    0% {box-shadow: 0 0 8px 6px rgba(207,8,8, 0), 0 0 0 0 rgba(0,0,0,0), 0 0 0 0 rgba(207,8,8, 0);}
+    10% {box-shadow: 0 0 8px 6px , 0 0 12px 10px rgba(0,0,0,0), 0 0 12px 14px ;}
+    100% {box-shadow: 0 0 8px 6px rgba(207,8,8, 0), 0 0 0 40px rgba(0,0,0,0), 0 0 0 40px rgba(207,8,8, 0);}
+}
+@keyframes zcwmini {
+    0% {box-shadow: 0 0 8px 6px rgba(207,8,8, 0), 0 0 0 0 rgba(0,0,0,0), 0 0 0 0 rgba(207,8,8, 0);}
+    10% {box-shadow: 0 0 8px 6px , 0 0 12px 10px rgba(0,0,0,0), 0 0 12px 14px ;}
+    100% {box-shadow: 0 0 8px 6px rgba(207,8,8, 0), 0 0 0 40px rgba(0,0,0,0), 0 0 0 40px rgba(207,8,8, 0);}
+}
+@-webkit-keyframes zcwmini2 {
+    0% {box-shadow: 0 0 8px 6px rgba(207,8,8, 0), 0 0 0 0 rgba(0,0,0,0), 0 0 0 0 rgba(207,8,8, 0);}
+    10% {box-shadow: 0 0 8px 6px , 0 0 12px 10px rgba(0,0,0,0), 0 0 12px 14px ;}
+    100% {box-shadow: 0 0 8px 6px rgba(207,8,8, 0), 0 0 0 40px rgba(0,0,0,0), 0 0 0 40px rgba(207,8,8, 0);}
+}
+@-moz-keyframes zcwmini2 {
+    0% {box-shadow: 0 0 8px 6px rgba(207,8,8, 0), 0 0 0 0 rgba(0,0,0,0), 0 0 0 0 rgba(207,8,8, 0);}
+    10% {box-shadow: 0 0 8px 6px , 0 0 12px 10px rgba(0,0,0,0), 0 0 12px 14px ;}
+    100% {box-shadow: 0 0 8px 6px rgba(207,8,8, 0), 0 0 0 40px rgba(0,0,0,0), 0 0 0 40px rgba(207,8,8, 0);}
+}
+@keyframes zcwmini2 {
+    0% {box-shadow: 0 0 8px 6px rgba(207,8,8, 0), 0 0 0 0 rgba(0,0,0,0), 0 0 0 0 rgba(207,8,8, 0);}
+    10% {box-shadow: 0 0 8px 6px , 0 0 12px 10px rgba(0,0,0,0), 0 0 12px 14px ;}
+    100% {box-shadow: 0 0 8px 6px rgba(207,8,8, 0), 0 0 0 40px rgba(0,0,0,0), 0 0 0 40px rgba(207,8,8, 0);}
+}
+
+
+.spinner {
+    width: 100%;
+    text-align: center !important;
+    font-size: 14px !important;
+    color:  #ff6600 !important;
+    vertical-align: top;
+    align : center;
+  }
+  
+  .spinner > div {
+    width: 8px;
+    height: 8px;
+    background-color: #ff6600;
+    margin: 3px;
+  
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  }
+  
+  .spinner .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+  }
+  
+  .spinner .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+  }
+  
+  @-webkit-keyframes sk-bouncedelay {
+    0%, 80%, 100% { -webkit-transform: scale(0) }
+    40% { -webkit-transform: scale(1.0) }
+  }
+  
+  @keyframes sk-bouncedelay {
+    0%, 80%, 100% { 
+      -webkit-transform: scale(0);
+      transform: scale(0);
+    } 40% { 
+      -webkit-transform: scale(1.0);
+      transform: scale(1.0);
+    }
+  }
+
+
+
+  

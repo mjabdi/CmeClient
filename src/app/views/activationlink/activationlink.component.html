@@ -1,0 +1,98 @@
+<div class="app-header" align="center">
+                <img src="../../../assets/img/brand/TalktoLeadsNow.png" class="img-logo">
+                </div>  
+                <div class="app-body">    
+                  <div class="container-fluid">
+                    <main class="main">
+                     <div class="container">
+                      <div class="row">
+                        <div class="col-md-9 mx-auto">
+                          <div class="card-group">
+                            <div class="card p-4">
+                              <div *ngIf="result==1" class="card-body card card-accent-primary v">
+                                  <p style="text-align: justify; font-weight: bold; margin-top: 2px !important" class="text">
+                                                You have successfully activated your account.
+                                  </p>
+                                  <p style="text-align: justify ;margin-top: 0px !important" class="text">
+                                                We're sure you'll soon experience an easier and better way of connecting to your clients.
+                                  </p>
+
+                                  <p style="font-size: 13px !important; text-align: left;  margin-top: 10px !important" class="text-muted">
+                                                Good Luck! <br>
+                                                Regards, TalkToLeadsNow team.
+                                  </p>
+
+                                  <div class="row">
+                                    <div class="col-12 text-center">
+                                      <button type="button" class="btn btn-link px-0" (click)="login()">Go to Login</button>
+                                    </div>
+                                  </div>
+                              </div>
+
+                              <div *ngIf="result==-1" class="card-body card card-accent-primary v-error">
+                                          <img src="../../../assets/img/icon/error-icon.png" width="32px">
+                                        <p style="text-align: justify; font-weight: bold; margin-top: 10px !important" class="text">
+                                                      Your link is invalid or has been expired! 
+                                        </p>
+                                        <p style="text-align: justify ;margin-top: 0px !important" class="text">
+                                                      Please SignUp again through the following link.
+                                        </p>
+                                        <div class="row">
+                                          <div class="col-12 text-center">
+                                            <button type="button" class="btn btn-link px-0" (click)="signUp()">SignUp</button>
+                                          </div>
+                                        </div>
+                              </div>
+
+                              <div  *ngIf="result==0" class="card-body text-center card card-accent-primary v-error">
+                                        <div class="spinner" >
+                                                        <div class="bounce1"></div>
+                                                        <div class="bounce2"></div>
+                                                        <div class="bounce3"></div>
+                                                        Loading
+                                          </div>
+                            </div>
+
+                            </div>
+                            <div style="padding-top:0px !important;" class="card text-white bg-primary d-md-down-none" style="width:44%">
+                              <div *ngIf="result==1" class="card-body text-center animated fadeIn">
+                                
+                                  <img style="margin-top:0 !important;vertical-align: top !important" width="150px" src="../../../assets/img/avatars/happy-activation.png">
+                                  <div align="center" class="text-steps">
+                                                <div  style="margin-top:20px !important;">
+                                               <span> Congratulations!</span>
+                                             </div>
+                                  </div>
+                              </div>
+
+                              <div *ngIf="result==-1" class="card-body text-center animated fadeIn">
+                                
+                                        <img style="margin-top:0 !important;vertical-align: top !important" width="150px" src="../../../assets/img/avatars/sorry-face.png">
+                                        <div align="center" class="text-steps">
+                                                      <div  style="margin-top:20px !important;">
+                                                     <span> Sorry!</span>
+                                                   </div>
+                                        </div>
+                              </div>
+                                    
+                              
+                            </div>
+                              
+                          </div>
+                          
+                        </div>
+                        
+                      </div>
+                      
+                    </div>
+                    
+                  </main>
+                  
+                  </div>
+                  
+                  </div>
+                
+                  <div class="app-footer">
+                      <span><a href="http://www.TalkToLeadsNow.com" target="_blank" >TalkToLeadsNow</a> &copy; {{this.today | date: 'yyyy'}}.</span>
+                      <span class="ml-auto">Powered by <a href="https://www.dubseo.co.uk/" target="_blank">DubSEO</a></span>
+                  </div>

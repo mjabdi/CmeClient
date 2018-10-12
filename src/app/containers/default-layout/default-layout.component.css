@@ -1,0 +1,28 @@
+.mylogout-icon
+{
+    margin-right:15px; 
+    margin-left : 0px;
+    color:#ff6600 !important;
+    cursor: pointer;
+}
+
+.mylogout-icon :hover
+{
+    color :white !important;
+    font-weight: bold !important;
+    text-shadow: 0px 0px 10px #ff6600 !important;  
+}
+
+.mat-tooltip {
+    color: white !important;
+    background : black !important;
+    border: 1px solid white !important; 
+    font-size: 12px !important ;
+    font-weight: bold !important ;
+    padding-top: 5px !important ;
+    padding-bottom : 5px !important ;
+    padding-left : 2px !important ;
+    padding-right : 2px !important ;
+    opacity: 1 !important ;
+  }
+  

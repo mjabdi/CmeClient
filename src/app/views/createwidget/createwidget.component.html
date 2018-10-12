@@ -1,0 +1,134 @@
+
+<div class="animated fadeIn">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card card-accent-primary">
+                <form (submit)="onSubmit(name.value,phone.value,domain.value,isanimate.checked)" name="loginForm">
+ 
+              <div class="card-header">
+                <strong>Widget Properties</strong>  
+              </div>
+              <div class="card-body">
+
+                <div class="form-group">
+                  <label class="form-text text-muted" for="name">Display Name</label>
+                  <input  maxlength="20" #name type="text" class="form-control" id="name" placeholder="Enter Widget Name">
+                </div>
+                <div class="form-group">
+                  <label class="form-text text-muted" for="phone">Connected To Phone Number</label>
+                  <input #phone type="number" class="form-control" id="phone" placeholder="Enter Phone Number">
+                </div>
+                <div class="form-group">
+                    <label class="form-text text-muted" for="site">Connected To Website Address</label>
+                    <input #domain (blur)="domain.value = correctURL(domain.value)" type="url" class="form-control" id="site" placeholder="http://www.example.com">
+                  </div>
+                <div class="row">
+                  <div class="form-group col-sm-4" style="text-align: center">
+                    <label style="text-align: center" class="form-text text-muted" for="postal-code">Widget Color</label>
+                    <input  style="cursor:pointer;width: 130px !important;text-align: center !important" [style.color]="this.textcolor(this.colorWidget)" [style.background]="this.colorWidget" [(colorPicker)]="this.colorWidget" [value]="this.colorWidget"
+                     (colorPickerOpen)="onEventLog('colorPickerOpen', $event)" 
+                     (colorPickerClose)="onEventLog('colorPickerClose', $event)" 
+                     (cpInputChange)="onEventLog('cpInputChange', $event)"
+                      (cpSliderDragStart)="onEventLog('cpSliderDragStart', $event)"
+                       (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', $event)"/>
+                </div>
+                <div class="form-group col-sm-4" style="text-align: center">
+                        <label class="form-text text-muted" for="postal-code">Text Color</label>
+                        <input style="cursor:pointer;width: 130px !important;text-align: center !important"  [style.color]="this.textcolor(this.colorText)"  [style.background]="this.colorText" [(colorPicker)]="this.colorText" [value]="this.colorText"
+                         (colorPickerOpen)="onEventLog('colorPickerOpen', $event)" 
+                         (colorPickerClose)="onEventLog('colorPickerClose', $event)" 
+                         (cpInputChange)="onEventLog('cpInputChange', $event)"
+                          (cpSliderDragStart)="onEventLog('cpSliderDragStart', $event)"
+                           (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', $event)"/>
+                    </div>
+                    <div class="form-group col-sm-4" style="text-align: center">
+                        <div  class="form-text text-muted"> Animated </div>
+                        <mat-slide-toggle  #isanimate style="margin-top:10px" labelPosition="after" [checked]="true"></mat-slide-toggle>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                        <label class="form-text text-muted" for="vat">Display Text</label>
+                        <input maxlength="14"  #widgettext (keyup)="this.widgetText = widgettext.value" type="text" class="form-control" id="vat" value="Talk To Us Now">
+                      </div>
+                      
+                </div><!--/.row-->
+
+
+                  <div class="card-footer">
+                    <div class="row">  
+                        <div class="col-4">                            
+                            <button [disabled]="isSubmit" *ngIf="!(this.widgetID.length > 0)" type="submit" class="btn btn-primary">Create Widget</button>
+                            <button  *ngIf="this.widgetID.length > 0" type="button" class="btn btn-link px-0" [routerLink]="['/editwidget', widgetID]"> Edit this widget?</button>
+                          </div>
+                             
+                          <div  *ngIf="windowWidth <= 576px"  class="col-8 text-right" >
+                            <button  *ngIf="this.widgetID.length > 0" type="button" class="btn btn-link px-0" (click)="refreshPage()"> Create another one?</button>
+                          </div> 
+
+                          
+                              <div  *ngIf="windowWidth > 576px"  class="col-4" >
+                                  <button  *ngIf="this.widgetID.length > 0" type="button" class="btn btn-link px-0" (click)="refreshPage()"> Create another one?</button>
+                              </div> 
+
+                              <div *ngIf="windowWidth > 576px" class="col-4 text-right">
+                                  <button type="button" class="btn btn-link px-0" [routerLink]="['/widgets']">Back to My Widgets</button>
+                              </div>
+                          </div>
+                      </div>
+                      </form>
+              </div>
+
+          </div><!--/.col-->
+          
+          
+          <div class="col-md-6">
+              <div class="card card-accent-primary">
+                  <div class="card-header">
+                      <strong>Widget Layout</strong>
+                  </div>
+           <div class="card-body">
+  
+          <div align="center" style="z-index: 10 !important;">
+          <div id="mycallme">
+            
+              <div [class]="isanimate.checked ? 'callmeMain-animate' :  'callmeMain'  " [style.background-color]="this.colorWidget"></div>
+              
+           </div>
+          </div>
+          <div align="center" style="z-index: 1 !important;">
+           <div id="my-icon-call" style="padding-top: 5px !important;" [style.background-color]="this.colorWidget" [style.color]="this.colorText"><a id="mytalk"  style="margin-top: 15px !important;" ><b>{{this.widgetText}}</b></a></div> 
+          </div>
+
+           <!-- <div class="talktoustext" [style.background-color]="this.colorWidget" [style.color]="this.colorText">{{this.TalkToUsText}}</div> -->
+
+           <div class="spinner"  *ngIf="isSubmit">
+              <div class="bounce1"></div>
+              <div class="bounce2"></div>
+              <div class="bounce3"></div>
+              Creating Widget
+            </div>
+
+          <div *ngIf="this.widgetID.length > 0" class="snippet-code">
+            <hr/>
+            Please copy the follwing code and paste it at the end of your html page just before
+            the '&lt;/Body&gt;' tag. 
+            
+            <div align="right">
+            <button class="btn-copy" [ngxClipboard]="inputTarget" (cbOnSuccess) = "copied($event)">
+                <mat-icon [matTooltip]="'cpoy to clipboard'"  class="mat-icon material-icons" role="img" aria-hidden="true">content_copy</mat-icon>
+            </button>
+            </div>
+
+            <textarea #inputTarget readonly="true" class="text-snippet" [innerText]="this.snippetCode">
+            </textarea>
+
+          </div>
+
+
+          </div>
+        </div><!--/.row-->
+      </div>
+      </div>
+      </div>
+
+      

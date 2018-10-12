@@ -1,391 +1,176 @@
 import { Component } from '@angular/core';
 import { getStyle } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
+import {MatIcon} from '@angular/material';
+import {Router} from '@angular/router';
+import {Widget} from './widget';
+import {WidgetService} from './widget.service';
+import {AuthenticationService} from '../../services/authentication.service';
+import {Observable} from 'rxjs/Rx';
+import {ToastrService } from 'ngx-toastr';
+import {MatSnackBar} from '@angular/material';
+import {HostListener, AfterViewInit } from '@angular/core';
 
 @Component({
-  templateUrl: 'widgets.component.html'
-})
+  templateUrl: 'widgets.component.html',
+  styleUrls: ['widgets.component.scss'],
+  providers : [WidgetService]
+  }
+ )
 export class WidgetsComponent {
 
-  // lineChart1
-  public lineChart1Data: Array<any> = [
-    {
-      data: [65, 59, 84, 84, 51, 55, 40],
-      label: 'Series A'
+  myWidgets :   Widget[];
+  myWidgetsShow : Array<boolean>;
+
+  constructor(private router : Router, 
+    private wgtService : WidgetService,
+    private authService : AuthenticationService,
+    private toastrService : ToastrService,
+    private snackbar : MatSnackBar
+    ){
+  }
+
+  windowWidth: number = window.innerWidth;
+
+  //initial values, The window object may still be undefined during this hook, let me know if that's the case and we'll figure out a better hook for the initial value
+  ngAfterViewInit() {
+      this.windowWidth = window.innerWidth;
+  }
+
+   //if screen size changes it'll update
+   @HostListener('window:resize', ['$event'])
+   resize(event) {
+       this.windowWidth = window.innerWidth;
+   }
+
+
+  ticks = 0;
+  ngOnInit()
+  {
+    this.loadWidgets();
+  }
+
+  loadWidgets()
+  {
+    this.wgtService.getAllWidgetsForUser(this.authService.getUsername())
+    .subscribe(widgets => {this.myWidgets = widgets;
+      this.myWidgetsShow = new Array<boolean>(this.myWidgets.length);
+      let timer = Observable.timer(300,300);
+      timer.subscribe(t => {
+        if (this.ticks < this.myWidgetsShow.length)
+          this.myWidgetsShow[this.ticks] = true;
+        this.ticks++;
+      } );
+    });
+  }
+
+
+
+
+  color1 = "#454";
+
+  createNewWidget(){
+    this.router.navigate(['createwidget']);
+  }
+  editwidget(){
+    this.router.navigate(['editwidget']);
+  }
+
+  getStatusText(status):string{
+    if (status=='Disabled'){
+      return 'Enable';
     }
-  ];
-  public lineChart1Labels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public lineChart1Options: any = {
-    tooltips: {
-      enabled: false,
-      custom: CustomTooltips
+    else
+    return 'Disable';
+  }
+  getStatusIcon(status):string{
+    if (status=='Disabled'){
+      // return 'phone_locked';
+      return 'volume_off';
+    }
+    else
+    return 'phone_in_talk';
+    
+  }
+  
+
+  gotoWidget(id)
+  {
+    this.router.navigate(["editwidget/" + id]);
+  }
+
+  ChangeStatus(wgt : Widget)
+  {
+    if (wgt.status == 'Active')
+    {
+      this.updateStatus(wgt, 'Disabled');
+    }
+    else
+    {
+      this.updateStatus(wgt , 'Active');
+    }
+  }
+
+  updateStatus(wgt :Widget , status : string)
+  {
+    var wgt2 = new Widget();
+    wgt2.status = status;
+
+    wgt.statusChanging = true;
+    this.wgtService.updateStatus(wgt.id,wgt2)
+    .subscribe(data => {
+      if (status == 'Active')
+            this.snackbar.open(wgt.widgetName,'Widget Enabled',{
+              duration: 5000,
+              panelClass : 'my-snackbar-style'
+            });
+      else
+            this.snackbar.open(wgt.widgetName,'Widget Disabled',{
+              duration: 5000,
+              panelClass : 'my-snackbar-style'
+            });
+      wgt.statusChanging = false;  
+      wgt.status = status;
+      return true;  
+
     },
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        gridLines: {
-          color: 'transparent',
-          zeroLineColor: 'transparent'
+    error =>
+    {
+      // if  (error.error ==  'DuplicateEmployeeID')
+      //   this.toastrService.error('Duplicate Employee #','Invalid Data');
+      // else
+      //   this.toastrService.error('Sorry, something went wrong. Please try again','Server Error');
+
+      this.toastrService.error(error,'Error');
+
+        wgt.statusChanging = false;
+    });
+  }
+
+  DeleteWidget(wgt : Widget)
+  {
+    let snackBarRef = this.snackbar.open('Are you sure you want to delete ' + wgt.widgetName + '?','Delete',{
+      duration: 5000,
+      panelClass : 'my-snackbar-style',
+
+    });
+
+    snackBarRef.onAction().subscribe(() => {
+
+      wgt.isDeleting = true;
+
+
+      this.wgtService.deleteWidget(wgt.id).subscribe(
+        data => {
+          this.toastrService.success( wgt.widgetName + ' successfully deleted', 'Widget Deleted');
+          this.myWidgets.splice(this.myWidgets.indexOf(wgt),1);
         },
-        ticks: {
-          fontSize: 2,
-          fontColor: 'transparent',
+        error =>
+        {
+          wgt.isDeleting = false;
+          this.toastrService.error('Ooops! Something went wrong! Please try again','Error');
         }
-
-      }],
-      yAxes: [{
-        display: false,
-        ticks: {
-          display: false,
-          min: 40 - 5,
-          max: 84 + 5,
-        }
-      }],
-    },
-    elements: {
-      line: {
-        borderWidth: 1
-      },
-      point: {
-        radius: 4,
-        hitRadius: 10,
-        hoverRadius: 4,
-      },
-    },
-    legend: {
-      display: false
-    }
-  };
-  public lineChart1Colours: Array<any> = [
-    { // grey
-      backgroundColor: getStyle('--primary'),
-      borderColor: 'rgba(255,255,255,.55)'
-    }
-  ];
-  public lineChart1Legend = false;
-  public lineChart1Type = 'line';
-
-  // lineChart2
-  public lineChart2Data: Array<any> = [
-    {
-      data: [1, 18, 9, 17, 34, 22, 11],
-      label: 'Series A'
-    }
-  ];
-  public lineChart2Labels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public lineChart2Options: any = {
-    tooltips: {
-      enabled: false,
-      custom: CustomTooltips
-    },
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        gridLines: {
-          color: 'transparent',
-          zeroLineColor: 'transparent'
-        },
-        ticks: {
-          fontSize: 2,
-          fontColor: 'transparent',
-        }
-
-      }],
-      yAxes: [{
-        display: false,
-        ticks: {
-          display: false,
-          min: 1 - 5,
-          max: 34 + 5,
-        }
-      }],
-    },
-    elements: {
-      line: {
-        tension: 0.00001,
-        borderWidth: 1
-      },
-      point: {
-        radius: 4,
-        hitRadius: 10,
-        hoverRadius: 4,
-      },
-    },
-    legend: {
-      display: false
-    }
-  };
-  public lineChart2Colours: Array<any> = [
-    { // grey
-      backgroundColor: getStyle('--info'),
-      borderColor: 'rgba(255,255,255,.55)'
-    }
-  ];
-  public lineChart2Legend = false;
-  public lineChart2Type = 'line';
-
-
-  // lineChart3
-  public lineChart3Data: Array<any> = [
-    {
-      data: [78, 81, 80, 45, 34, 12, 40],
-      label: 'Series A'
-    }
-  ];
-  public lineChart3Labels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public lineChart3Options: any = {
-    tooltips: {
-      enabled: false,
-      custom: CustomTooltips
-    },
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        display: false
-      }],
-      yAxes: [{
-        display: false
-      }]
-    },
-    elements: {
-      line: {
-        borderWidth: 2
-      },
-      point: {
-        radius: 0,
-        hitRadius: 10,
-        hoverRadius: 4,
-      },
-    },
-    legend: {
-      display: false
-    }
-  };
-  public lineChart3Colours: Array<any> = [
-    {
-      backgroundColor: 'rgba(255,255,255,.2)',
-      borderColor: 'rgba(255,255,255,.55)',
-    }
-  ];
-  public lineChart3Legend = false;
-  public lineChart3Type = 'line';
-
-
-  // barChart1
-  public barChart1Data: Array<any> = [
-    {
-      data: [78, 81, 80, 45, 34, 12, 40, 78, 81, 80, 45, 34, 12, 40, 12, 40],
-      label: 'Series A'
-    }
-  ];
-  public barChart1Labels: Array<any> = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16'];
-  public barChart1Options: any = {
-    tooltips: {
-      enabled: false,
-      custom: CustomTooltips
-    },
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        display: false,
-        barPercentage: 0.6,
-      }],
-      yAxes: [{
-        display: false
-      }]
-    },
-    legend: {
-      display: false
-    }
-  };
-  public barChart1Colours: Array<any> = [
-    {
-      backgroundColor: 'rgba(255,255,255,.3)',
-      borderWidth: 0
-    }
-  ];
-  public barChart1Legend = false;
-  public barChart1Type = 'bar';
-
-  // lineChart4
-  public lineChart4Data: Array<any> = [
-    {
-      data: [4, 18, 9, 17, 34, 22, 11, 3, 15, 12, 18, 9],
-      label: 'Series A'
-    }
-  ];
-  public lineChart4Labels: Array<any> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  public lineChart4Options: any = {
-    tooltips: {
-      enabled: false,
-      custom: CustomTooltips
-    },
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        display: false,
-        points: false,
-      }],
-      yAxes: [{
-        display: false,
-      }]
-    },
-    elements: { point: { radius: 0 } },
-    legend: {
-      display: false
-    }
-  };
-  public lineChart4Colours: Array<any> = [
-    {
-      backgroundColor: 'transparent',
-      borderColor: 'rgba(255,255,255,.55)',
-      borderWidth: 2
-    }
-  ];
-  public lineChart4Legend = false;
-  public lineChart4Type = 'line';
-
-
-  // barChart2
-  public barChart2Data: Array<any> = [
-    {
-      data: [4, 18, 9, 17, 34, 22, 11, 3, 15, 12, 18, 9],
-      label: 'Series A'
-    }
-  ];
-  public barChart2Labels: Array<any> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  public barChart2Options: any = {
-    tooltips: {
-      enabled: false,
-      custom: CustomTooltips
-    },
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        display: false,
-        barPercentage: 0.6,
-      }],
-      yAxes: [{
-        display: false,
-        ticks: {
-          beginAtZero: true,
-        }
-      }]
-    },
-    legend: {
-      display: false
-    }
-  };
-  public barChart2Colours: Array<any> = [
-    {
-      backgroundColor: 'rgba(0,0,0,.2)',
-      borderWidth: 0
-    }
-  ];
-  public barChart2Legend = false;
-  public barChart2Type = 'bar';
-
-
-  // barChart3
-  public barChart3Data: Array<any> = [
-    {
-      data: [4, 18, 9, 17, 34, 22, 11, 3, 15, 12, 18, 9],
-      label: 'Series A'
-    }
-  ];
-  public barChart3Labels: Array<any> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  public barChart3Options: any = {
-    tooltips: {
-      enabled: false,
-      custom: CustomTooltips
-    },
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        display: false
-      }],
-      yAxes: [{
-        display: false
-      }]
-    },
-    legend: {
-      display: false
-    }
-  };
-  public barChart3Primary: Array<any> = [
-    {
-      backgroundColor: getStyle('--primary'),
-      borderColor: 'transparent',
-      borderWidth: 1
-    }
-  ];
-  public barChart3Danger: Array<any> = [
-    {
-      backgroundColor: getStyle('--danger'),
-      borderColor: 'transparent',
-      borderWidth: 1
-    }
-  ];
-  public barChart3Success: Array<any> = [
-    {
-      backgroundColor: getStyle('--success'),
-      borderColor: 'transparent',
-      borderWidth: 1
-    }
-  ];
-  public barChart3Legend = false;
-  public barChart3Type = 'bar';
-
-
-  // lineChart5
-  public lineChart5Data: Array<any> = [
-    {
-      data: [65, 59, 84, 84, 51, 55, 40],
-      label: 'Series A'
-    }
-  ];
-  public lineChart5Labels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public lineChart5Options: any = {
-    tooltips: {
-      enabled: false,
-      custom: CustomTooltips
-    },
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        display: false,
-        points: false,
-      }],
-      yAxes: [{
-        display: false,
-      }]
-    },
-    elements: { point: { radius: 0 } },
-    legend: {
-      display: false
-    }
-  };
-  public lineChart5Info: Array<any> = [
-    {
-      backgroundColor: 'transparent',
-      borderColor: getStyle('--info'),
-      borderWidth: 2
-    }
-  ];
-  public lineChart5Success: Array<any> = [
-    {
-      backgroundColor: 'transparent',
-      borderColor: getStyle('--info'),
-      borderWidth: 2
-    }
-  ];
-  public lineChart5Warning: Array<any> = [
-    {
-      backgroundColor: 'transparent',
-      borderColor: getStyle('--warning'),
-      borderWidth: 2
-    }
-  ];
-  public lineChart5Legend = false;
-  public lineChart5Type = 'line';
+      )
+    });
+  }
 }

@@ -4,13 +4,22 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { WidgetsComponent } from './widgets.component';
 import { WidgetsRoutingModule } from './widgets-routing.module';
+import {MaterialModule} from '../../material.module';
+import {CommonModule} from '@angular/common';
+
 
 @NgModule({
   imports: [
     WidgetsRoutingModule,
+    CommonModule,
     ChartsModule,
-    BsDropdownModule
+    BsDropdownModule,
+    MaterialModule
   ],
   declarations: [ WidgetsComponent ]
 })
-export class WidgetsModule { }
+export class WidgetsModule { 
+
+
+
+}

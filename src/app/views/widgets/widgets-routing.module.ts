@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '',
     component: WidgetsComponent,
     data: {
-      title: 'Widgets'
+      title: 'My Widgets'
     }
   }
 ];

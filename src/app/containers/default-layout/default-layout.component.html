@@ -1,11 +1,12 @@
 <app-header
   [fixed]="true"
-  [navbarBrandFull]="{src: 'assets/img/brand/logo.svg', width: 89, height: 25, alt: 'CoreUI Logo'}"
-  [navbarBrandMinimized]="{src: 'assets/img/brand/sygnet.svg', width: 30, height: 30, alt: 'CoreUI Logo'}"
+  [navbarBrandFull]="{src: 'assets/img/brand/TalktoLeadsNow.png', color:'white' , width: 180, height: 50, alt: 'TalkToLeadsNow'}"
+  [navbarBrandMinimized]="{src: 'assets/img/brand/TinyLogo.png ', width: 45, height: 45, alt: 'TalkToLeadsNow'}"
   [sidebarToggler]="'lg'"
-  [asideMenuToggler]="'lg'">
+  [mobileAsideMenuToggler]="false"
+  [asideMenuToggler]="false">
   <ul class="nav navbar-nav d-md-down-none">
-    <li class="nav-item px-3">
+    <!-- <li class="nav-item px-3">
       <a class="nav-link" href="#">Dashboard</a>
     </li>
     <li class="nav-item px-3">
@@ -13,10 +14,30 @@
     </li>
     <li class="nav-item px-3">
       <a class="nav-link" href="#">Settings</a>
+    </li> -->
+  </ul> 
+   <ul class="nav navbar-nav ml-auto">
+
+      <li>
+          <a class="nav-link" style="margin: 0px; color:#ff6600 ;vertical-align: top">Welcome  <span style=" -webkit-text-stroke: 0.3px rgb(255, 255, 255);  font-style:italic;">{{this.NameofUser}} </span>  &nbsp; </a>
+      </li>
+
+      <li>
+          <mat-icon [matTooltip]="this.username()" aria-label="user" style="cursor: pointer;margin-right: 20px;vertical-align: top ;color:#ff6600 ">person</mat-icon>
+     </li>
+
+
+
+    <li>
+      <div class="mylogout-icon">
+          <i matTooltip="Logout" (click)="logout()" style="vertical-align: top" class="material-icons">logout</i>
+          <!-- <mat-icon aria-label="user" style="margin-right: 0px; color:white">person</mat-icon> -->
+        <!-- <a (click)="this.logout()" ><i class="icon-logout"></i> Logout</a> -->
+      </div>
     </li>
-  </ul>
-  <ul class="nav navbar-nav ml-auto">
-    <li class="nav-item d-md-down-none">
+
+
+    <!-- <li class="nav-item d-md-down-none">
       <a class="nav-link" href="#"><i class="icon-bell"></i><span class="badge badge-pill badge-danger">5</span></a>
     </li>
     <li class="nav-item d-md-down-none">
@@ -44,12 +65,14 @@
         <a class="dropdown-item" href="#"><i class="fa fa-shield"></i> Lock account</a>
         <a class="dropdown-item" href="#"><i class="fa fa-lock"></i> Logout</a>
       </div>
-    </li>
+    </li>  -->
   </ul>
 </app-header>
+
 <div class="app-body">
   <app-sidebar [fixed]="true" [display]="'lg'">
-    <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="sidebarMinimized"></app-sidebar-nav>
+    <div *ngIf="!navItems"> Loading... </div>
+    <app-sidebar-nav *ngIf="navItems" [navItems]="navItems" [perfectScrollbar] [disabled]="sidebarMinimized"></app-sidebar-nav>
     <app-sidebar-minimizer></app-sidebar-minimizer>
   </app-sidebar>
   <!-- Main content -->
@@ -60,9 +83,17 @@
       <!-- Breadcrumb Menu-->
       <li class="breadcrumb-menu d-md-down-none">
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-          <a class="btn" href="#"><i class="icon-speech"></i></a>
-          <a class="btn" [routerLink]="['/dashboard']"><i class="icon-graph"></i> &nbsp;Dashboard</a>
-          <a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>
+          <!-- <a class="btn" [routerLink]="['/dashboard']"><i class="icon-speedometer"></i> &nbsp;Dashboard</a>
+          <div class="btn-group float-right" dropdown>&nbsp;&nbsp;
+            <button type="button" class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
+              <i class="icon-settings"></i>&nbsp;Settings
+            </button>
+          <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
+            <a class="dropdown-item" href="#">My Profile</a>
+            <a class="dropdown-item" (click)="this.logout()" >Logout</a>
+          </div>
+          </div> -->
+          <!-- <a class="btn" (click)="this.logout()"><i class="icon-logout"></i> &nbsp;Logout</a> -->
         </div>
       </li>
     </ol>
@@ -70,7 +101,7 @@
       <router-outlet></router-outlet>
     </div><!-- /.container-fluid -->
   </main>
-  <app-aside [fixed]="true" [display]="false">
+  <!-- <app-aside [fixed]="true" [display]="false">
     <tabset>
       <tab>
         <ng-template tabHeading><i class="icon-list"></i></ng-template>
@@ -320,9 +351,9 @@
         </div>
       </tab>
     </tabset>
-  </app-aside>
+  </app-aside> -->
 </div>
-<app-footer>
-  <span><a href="https://coreui.io">CoreUI</a> &copy; 2018 creativeLabs.</span>
-  <span class="ml-auto">Powered by <a href="https://coreui.io/angular">CoreUI for Angular</a></span>
-</app-footer>
+<div id="myfooter" class="app-footer">
+    <span><a href="http://www.TalkToLeadsNow.com" target="_blank" >TalkToLeadsNow</a> &copy; {{this.today | date: 'yyyy'}}.</span>
+    <span class="ml-auto">Powered by <a href="https://www.dubseo.co.uk/" target="_blank">DubSEO</a></span>
+</div>
