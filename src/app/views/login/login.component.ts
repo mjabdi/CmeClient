@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../environments/environment';
 import {AuthenticationService} from '../../services/authentication.service';
 import {MatSnackBar} from '@angular/material';
+import { ChartsModule } from 'ng2-charts';
 
 
 
@@ -46,7 +47,6 @@ export class LoginComponent {
 
   ngOnInit() {
        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-
      }
 
      ngAfterViewInit()
@@ -92,7 +92,7 @@ export class LoginComponent {
 
           // this.toastrService.success('You have successfully logged in','Logged in');
          
-          this.router.navigate([this.returnUrl]);
+          this.router.navigate(['/home']);
 
           this.isSubmit = false;  
           return true;  

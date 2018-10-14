@@ -13,13 +13,24 @@ import { ResetpasswordComponent } from './views/resetpassword/resetpassword.comp
 import { ChangepasswordComponent } from './views/changepassword/changepassword.component';
 import { ForgotpasswordComponent } from './views/forgotpassword/forgotpassword.component';
 import { AuthGuard } from './services/AuthGuard';
+import { HomePageComponent } from './views/homepage/homepage.component';
+import { AdminAuthGuard } from './services/AdminAuthGuard';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'widgets',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
+  {
+    path: 'home',
+    component: HomePageComponent,
+    canActivate: [AuthGuard],
+    data: {
+      title: 'Home'
+    }
+  },
+
   {
     path: '404',
     component: P404Component,
@@ -79,6 +90,32 @@ export const routes: Routes = [
       title: 'Home'
     },
     children: [
+      {
+        path: 'customers',
+        loadChildren: './admin/customers/customers.module#CustomersModule',
+        canActivate: [AdminAuthGuard]
+      },
+      {
+        path: 'callreports',
+        loadChildren: './admin/callreports/callreports.module#CallReportsModule',
+        canActivate: [AdminAuthGuard]
+      },
+      {
+        path: 'widgetslist',
+        loadChildren: './admin/widgetslist/widgetslist.module#WidgetsListModule',
+        canActivate: [AdminAuthGuard]
+      },
+
+      // {
+      //   path: 'home',
+      //   loadChildren: './views/homepage/homepage.module#HomePageModule'
+      // },
+
+      {
+        path: 'mycalls',
+        loadChildren: './views/mycalls/mycalls.module#MyCallsModule'
+      },
+
       {
         path: 'widgets',
         loadChildren: './views/widgets/widgets.module#WidgetsModule'

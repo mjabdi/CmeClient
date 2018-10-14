@@ -62,6 +62,8 @@ import {AuthInterceptor} from './interceptors/auth-interceptor';
 import {AuthenticationService} from './services/authentication.service';
 import { HttpClientModule } from '@angular/common/http'; 
 import { ClipboardModule } from 'ngx-clipboard';
+import { HomePageComponent } from './views/homepage/homepage.component';
+import { AdminAuthGuard } from './services/AdminAuthGuard';
 
 @NgModule({
   imports: [
@@ -94,6 +96,7 @@ import { ClipboardModule } from 'ngx-clipboard';
     P404Component,
     P500Component,
     LoginComponent,
+    HomePageComponent,
     RegisterComponent,
     ResetpasswordComponent,
     ActivationLinkComponent,
@@ -104,6 +107,7 @@ import { ClipboardModule } from 'ngx-clipboard';
     provide: LocationStrategy,
     useClass: HashLocationStrategy
   },
+  AdminAuthGuard,
   AuthGuard,
   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   AuthenticationService,

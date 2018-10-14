@@ -71,7 +71,7 @@
 
 <div class="app-body">
   <app-sidebar [fixed]="true" [display]="'lg'">
-    <div *ngIf="!navItems"> Loading... </div>
+    <div *ngIf="!navItems" style="text-align: center;color :#fff2ea "> Loading... </div>
     <app-sidebar-nav *ngIf="navItems" [navItems]="navItems" [perfectScrollbar] [disabled]="sidebarMinimized"></app-sidebar-nav>
     <app-sidebar-minimizer></app-sidebar-minimizer>
   </app-sidebar>

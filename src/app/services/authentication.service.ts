@@ -51,13 +51,16 @@ export class AuthenticationService {
             map(data => {
                 if (data)
                 {
-                    sessionStorage.setItem('currentUser', username);
-                    sessionStorage.setItem('userToken' , data.token);  
+                    sessionStorage.setItem('talktoleadsnow-currentUser', username);
+                    sessionStorage.setItem('talktoleadsnow-userToken' , data.token);  
+                    sessionStorage.setItem('talktoleadsnow-userName' , data.name);  
+
 
                     if (rememberMe)
                     {
-                        localStorage.setItem('currentUser', username);
-                        localStorage.setItem('userToken' , data.token);  
+                        localStorage.setItem('talktoleadsnow-currentUser', username);
+                        localStorage.setItem('talktoleadsnow-userToken' , data.token);  
+                        localStorage.setItem('talktoleadsnow-userName' , data.name);  
                     }        
                 }
             }
@@ -70,23 +73,47 @@ export class AuthenticationService {
         localStorage.clear();
     }
 
-    getUsername() {
-        if (sessionStorage.getItem('currentUser'))
-            return sessionStorage.getItem('currentUser');
+
+    setMyRole(role)
+    {
+        sessionStorage.setItem('talktoleadsnow-userRole',role);
+    }
+
+    resetMyRole()
+    {
+        sessionStorage.removeItem('talktoleadsnow-userRole');
+    }
+    
+    getMyCachedRole() : string
+    {
+        return sessionStorage.getItem('talktoleadsnow-userRole');
+    }
+
+
+    getCachedName() {
+        if (sessionStorage.getItem('talktoleadsnow-userName'))
+            return sessionStorage.getItem('talktoleadsnow-userName');
         else
-            return localStorage.getItem('currentUser');
+            return localStorage.getItem('talktoleadsnow-userName');
+    }
+
+    getUsername() {
+        if (sessionStorage.getItem('talktoleadsnow-currentUser'))
+            return sessionStorage.getItem('talktoleadsnow-currentUser');
+        else
+            return localStorage.getItem('talktoleadsnow-currentUser');
     }
 
     getUserToken() {
-        if (sessionStorage.getItem('userToken'))
-        return sessionStorage.getItem('userToken');
+        if (sessionStorage.getItem('talktoleadsnow-userToken'))
+        return sessionStorage.getItem('talktoleadsnow-userToken');
     else
-        return localStorage.getItem('userToken');
+        return localStorage.getItem('talktoleadsnow-userToken');
 
     }
     
     isLogin() {
-        if (sessionStorage.getItem('currentUser') || localStorage.getItem('currentUser')) {
+        if (sessionStorage.getItem('talktoleadsnow-currentUser') || localStorage.getItem('talktoleadsnow-currentUser')) {
             return true;
         }
         return false;
@@ -106,6 +133,9 @@ export class AuthenticationService {
     {
         return this.http.post<any>(this.resetPasswordUrl, {email},httpOptions);
     }  
+
+
+
 
     getMyName () : Observable<string[]>
     {

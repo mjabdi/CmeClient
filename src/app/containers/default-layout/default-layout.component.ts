@@ -36,8 +36,29 @@ export class DefaultLayoutComponent {
 
   ngOnInit()
   {
-    this.authservice.getMyRole().subscribe( (val : string[]) => {
-      this.MyRole = val[0];
+    // this.authservice.getMyRole().subscribe( (val : string[]) => {
+    //   this.MyRole = val[0];
+    //   if (this.MyRole.indexOf('admin') > 0)
+    //   {
+    //     this.navItems = navItems_Admin;
+    //   }
+    //   else
+    //   {
+    //     this.navItems = navItems_User;
+    //   }
+    // }
+    //     );
+
+      this.MyRole = this.authservice.getMyCachedRole();
+
+      if (!this.MyRole)
+      {
+        this.router.navigate(['/home'],{ queryParams: { returnUrl:this.router.url}});
+      }
+
+      this.authservice.resetMyRole();
+
+
       if (this.MyRole.indexOf('admin') > 0)
       {
         this.navItems = navItems_Admin;
@@ -46,12 +67,12 @@ export class DefaultLayoutComponent {
       {
         this.navItems = navItems_User;
       }
-    }
-        );
 
-    this.authservice.getMyName().subscribe( (val : string[]) =>
-    this.NameofUser = val[0]
-      );
+    // this.authservice.getMyName().subscribe( (val : string[]) =>
+    // this.NameofUser = val[0]
+    //   );
+
+    this.NameofUser = this.authservice.getCachedName();
   }
 
   logout()

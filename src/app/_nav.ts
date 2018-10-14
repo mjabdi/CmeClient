@@ -2,17 +2,22 @@
 export const navItems_User = [
   {
     title: true,
-    name: 'Services'
+    name: 'Callback Service'
   },
   {
   name: 'My Widgets',
   url: '/widgets',
-  icon: 'cui-dashboard',
+  icon: 'icon-grid',
  },
   {
     name: 'Create New Widget',
     url: '/createwidget',
-    icon: 'icon-phone',
+    icon: 'icon-frame',
+  },
+  {
+    name: 'My Calls',
+    url: '/mycalls',
+    icon: 'icon-call-in',
   },
   {
     title: true,
@@ -23,7 +28,7 @@ export const navItems_User = [
   url: '/changepassword',
   icon: 'icon-lock',
  },
-];
+  ];
 
 
 export const navItems_Admin = [
@@ -34,17 +39,17 @@ export const navItems_Admin = [
   },
   {
   name: 'Customers',
-  url: '/widgets',
+  url: '/customers',
   icon: 'cui-people',
  },
   {
     name: 'Widgets List',
-    url: '/createwidget',
+    url: '/widgetslist',
     icon: 'cui-list',
   },
   {
     name: 'Call Reports',
-    url: '/createwidget',
+    url: '/callreports',
     icon: 'cui-graph',
   },
 
@@ -64,7 +69,7 @@ export const navItems_Admin = [
   },
   {
     name: 'My Calls',
-    url: '/createwidget',
+    url: '/mycalls',
     icon: 'icon-call-in',
   },
   {
