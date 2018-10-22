@@ -62,8 +62,8 @@ import {AuthInterceptor} from './interceptors/auth-interceptor';
 import {AuthenticationService} from './services/authentication.service';
 import { HttpClientModule } from '@angular/common/http'; 
 import { ClipboardModule } from 'ngx-clipboard';
-import { HomePageComponent } from './views/homepage/homepage.component';
 import { AdminAuthGuard } from './services/AdminAuthGuard';
+import { HomePageModule } from './views/homepage/homepage.module';
 
 @NgModule({
   imports: [
@@ -87,7 +87,9 @@ import { AdminAuthGuard } from './services/AdminAuthGuard';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    HomePageModule
+
 
   ],
   declarations: [
@@ -96,7 +98,6 @@ import { AdminAuthGuard } from './services/AdminAuthGuard';
     P404Component,
     P500Component,
     LoginComponent,
-    HomePageComponent,
     RegisterComponent,
     ResetpasswordComponent,
     ActivationLinkComponent,

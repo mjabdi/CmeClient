@@ -5,6 +5,8 @@ import {map , take, catchError} from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { HttpErrorHandler, HandleError } from '../http-error-handler.service';
 
+import {Md5} from 'ts-md5/dist/md5';
+
 
 const baseUrl :string = environment.apiUrl;
 const httpOptions = {
@@ -30,8 +32,6 @@ export class AuthenticationService {
     changePasswordEmailUrl = baseUrl + '/api/auth/changepasswordemail';
 
 
-
-
     callmeTestUrl =baseUrl + '/api/callme/test';
 
     snippetCodeUrl =baseUrl + '/api/callme/snippetcode';
@@ -44,8 +44,13 @@ export class AuthenticationService {
         this.handleError = httpErrorHandler.createHandleError('EmployeeService');
     }
 
-    login(username :string, password : string,rememberMe : boolean = false) {
+    login(username :string, _password : string,rememberMe : boolean = false) {
 
+        var password =  Md5.hashStr(_password).toString();
+        for (let i=0;i<377;i++)
+        {
+            password =  Md5.hashStr(password).toString();
+        }
 
         return this.http.post<any>(this.loginUrl, {username,password,rememberMe}).pipe(
             map(data => {
@@ -124,8 +129,14 @@ export class AuthenticationService {
       }
 
      
-    signUp(email : string , name : string, password : string)
+    signUp(email : string , name : string, _password : string)
     {
+        var password =  Md5.hashStr(_password).toString();
+        for (let i=0;i<377;i++)
+        {
+            password =  Md5.hashStr(password).toString();
+        }
+
         return this.http.post<any>(this.signupUrl, {email,name,password},httpOptions);
     }  
 
@@ -167,13 +178,28 @@ export class AuthenticationService {
         return this.http.post<any>(this.checkActivationTokenUrl, {token},httpOptions);
     }  
     
-    changePasswordWithToken(token : string,password : string)
+    changePasswordWithToken(token : string,_password : string)
     {
+        var password =  Md5.hashStr(_password).toString();
+        for (let i=0;i<377;i++)
+        {
+            password =  Md5.hashStr(password).toString();
+        }
+
         return this.http.post<any>(this.changePasswordTokenUrl, {token,password},httpOptions);
     }  
 
-    changePasswordWithEmail(email : string,oldPassword : string,newPassword : string)
+    changePasswordWithEmail(email : string,_oldPassword : string,_newPassword : string)
     {
+        var oldPassword =  Md5.hashStr(_oldPassword).toString();
+        var newPassword = Md5.hashStr(_newPassword).toString();
+
+        for (let i=0;i<377;i++)
+        {
+            oldPassword =  Md5.hashStr(oldPassword).toString();
+            newPassword =  Md5.hashStr(newPassword).toString();
+        }
+
         return this.http.post<any>(this.changePasswordEmailUrl, {email,oldPassword,newPassword},httpOptions);
     }  
 

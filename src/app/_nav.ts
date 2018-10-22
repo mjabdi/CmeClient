@@ -14,11 +14,11 @@ export const navItems_User = [
     url: '/createwidget',
     icon: 'icon-frame',
   },
-  {
-    name: 'My Calls',
-    url: '/mycalls',
-    icon: 'icon-call-in',
-  },
+  // {
+  //   name: 'My Calls',
+  //   url: '/mycalls',
+  //   icon: 'icon-call-in',
+  // },
   {
     title: true,
     name: 'Settings'

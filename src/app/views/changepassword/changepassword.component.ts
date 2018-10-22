@@ -48,6 +48,7 @@ export class ChangepasswordComponent {
             return false;
           }
     
+          newpassword = newpassword.trim();
     
     
         this.isSubmit = true;
