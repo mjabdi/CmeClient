@@ -12,8 +12,7 @@ import { BrowserModule }  from '@angular/platform-browser';
     WidgetsListRoutingModule,
     BsDropdownModule,
     MaterialModule,
-    CommonModule,
-    BrowserModule
+    CommonModule
   ],
   declarations: [ WidgetsListComponent ]
 })

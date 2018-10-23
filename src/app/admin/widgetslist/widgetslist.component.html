@@ -1,16 +1,16 @@
 <div class="animated fadeIn">
     <div class="row">
 
-          <div class="col-md-6">
+          <div class="col-md-12">
 
             <div class="card card-accent-primary">
 
-                <form (submit)="onSubmit(name.value,phone.value,domain.value,isanimate.checked)" name="loginForm">
+                <form name="loginForm">
                     <mat-tab-group>
                             <mat-tab label="User Widgets">
 
               <div  class="card-body">
-                    <table>
+                    <!-- <table>
                             <thead>
                                 <tr>
                                     <td>ID</td>
@@ -24,16 +24,53 @@
                             </thead>
                             <tbody>
                                 <tr  *ngFor="let userwidget of userwidgets">
-                                    <td>{{userwidget.widgetId}}</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{userwidget.widgetId}} </td>
+                                    <td>{{userwidget.username}}</td>
+                                    <td>{{userwidget.widgetName}}</td>
+                                    <td>{{userwidget.userPhoneNumber}}</td>
+                                    <td>{{userwidget.apiKey}}</td>
+                                    <td>{{userwidget.extensionNumber}}</td>
 
                                 </tr>
                             </tbody>
-                        </table>
+                        </table> -->
+
+
+                        <div class="wrapper">
+  
+                            <div class="table">
+                              
+                                <div class="row header">
+                                    <div class="cell">ID</div>
+                                    <div class="cell">User Name</div>
+                                    <div class="cell">Widget Name</div>
+                                    <div class="cell">Phone Number</div>
+                                    <div class="cell">API Key</div>
+                                    <div class="cell">Extension</div>
+                                </div>
+
+                                <div *ngFor="let userwidget of userwidgets" class="row">
+                                        <div class="cell" data-title="ID">
+                                          {{userwidget.widgetId}}
+                                        </div>
+                                        <div class="cell" data-title="username">
+                                          {{userwidget.username}}
+                                        </div>   
+                                        <div class="cell" data-title="widgetName">
+                                          {{userwidget.widgetName}}
+                                        </div>
+                                        <div class="cell" data-title="userPhoneNumber">
+                                          {{userwidget.userPhoneNumber}}
+                                        </div>
+                                        <div class="cell" data-title="apiKey">
+                                          <input type="text" matInput autocomplete="off">
+                                        </div>
+                                        <div class="cell" data-title="extensionNumber">
+                                                <input type="text" matInput  autocomplete="off">
+                                        </div>                                                                                                                                                                                                     
+                                </div>
+                             </div>
+                        </div>
 
                 
 
@@ -50,6 +87,56 @@
                     <mat-tab label="History">
                         <div class="card-body">
                             
+                                <div class="wrapper">
+  
+                                        <div class="table">
+                                          
+                                            <div class="row header">
+                                                <div class="cell">ID</div>
+                                                <div class="cell">User Name</div>
+                                                <div class="cell">Widget Name</div>
+                                                <div class="cell">Phone Number</div>
+                                                <div class="cell">API Key</div>
+                                                <div class="cell">Extension</div>
+                                                <div class="cell">Action</div>
+
+                                            </div>
+            
+                                            <div *ngFor="let userwidget of userwidgets" class="row">
+                                                    <div class="cell" data-title="ID">
+                                                      {{userwidget.widgetId}}
+                                                    </div>
+                                                    <div class="cell" data-title="username">
+                                                      {{userwidget.username}}
+                                                    </div>   
+                                                    <div class="cell" data-title="widgetName">
+                                                      {{userwidget.widgetName}}
+                                                    </div>
+                                                    <div class="cell" data-title="userPhoneNumber">
+                                                      {{userwidget.userPhoneNumber}}
+                                                    </div>
+                                                    <div *ngIf="editWidgetID!=userwidget.widgetId"  class="cell" data-title="widgetName">
+                                                      {{userwidget.apiKey}}
+                                                    </div>
+                                                    <div *ngIf="editWidgetID!=userwidget.widgetId"  class="cell" data-title="userPhoneNumber">
+                                                      {{userwidget.extensionNumber}}
+                                                    </div>
+                                                    <div *ngIf="editWidgetID==userwidget.widgetId" class="cell" data-title="apiKey">
+                                                      <input type="text" [value]="userwidget.apiKey" matInput autocomplete="off">
+                                                    </div>
+                                                    <div *ngIf="editWidgetID==userwidget.widgetId" class="cell" data-title="extensionNumber">
+                                                            <input type="text" [value]="userwidget.extensionNumber"  matInput  autocomplete="off">
+                                                    </div>    
+                                                    <div *ngIf="editWidgetID!=userwidget.widgetId"  class="cell" data-title="extensionNumber">
+                                                            <button (click)="Edit(userwidget.widgetId)"> Edit </button>
+                                                    </div>  
+                                                    <div *ngIf="editWidgetID==userwidget.widgetId"  class="cell" data-title="extensionNumber">
+                                                            <button (click)="Save(userwidget.widgetId)"> Save </button>
+                                                    </div>  
+                                            </div>
+                                         </div>
+                                    </div>
+            
    
     
                         </div><!--/.row-->

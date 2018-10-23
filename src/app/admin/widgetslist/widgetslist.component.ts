@@ -81,4 +81,16 @@ export class WidgetsListComponent{
               this.dataSource.data.forEach(row => this.selection.select(row));
         }
 
+
+        editWidgetID = "";
+        Edit(id)
+        {
+           this.editWidgetID = id; 
+        }
+
+        Save(id)
+        {
+           this.editWidgetID = ""; 
+        }
+
 }
