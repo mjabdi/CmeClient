@@ -8,6 +8,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import {WidgetsModule} from '../widgets/widgets.module'
 import {CommonModule} from '@angular/common';
 import { ClipboardModule } from 'ngx-clipboard';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+// import {TimePickerComponent} from 'angular2-timepicker/timepicker-component';
 
 
 @NgModule({
@@ -18,6 +20,8 @@ import { ClipboardModule } from 'ngx-clipboard';
     BsDropdownModule,
     MaterialModule,
     ColorPickerModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule,
     WidgetsModule
   ],
   declarations: [ CreateWidgetComponent ]

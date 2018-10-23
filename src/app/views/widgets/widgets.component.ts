@@ -11,6 +11,8 @@ import {ToastrService } from 'ngx-toastr';
 import {MatSnackBar} from '@angular/material';
 import {HostListener, AfterViewInit } from '@angular/core';
 
+
+
 @Component({
   templateUrl: 'widgets.component.html',
   styleUrls: ['widgets.component.scss'],

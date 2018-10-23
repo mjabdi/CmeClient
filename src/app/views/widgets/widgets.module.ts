@@ -8,6 +8,8 @@ import {MaterialModule} from '../../material.module';
 import {CommonModule} from '@angular/common';
 
 
+
+
 @NgModule({
   imports: [
     WidgetsRoutingModule,

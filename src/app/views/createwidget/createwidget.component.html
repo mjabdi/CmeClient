@@ -1,13 +1,19 @@
 
 <div class="animated fadeIn">
         <div class="row">
+
           <div class="col-md-6">
+
             <div class="card card-accent-primary">
+
                 <form (submit)="onSubmit(name.value,phone.value,domain.value,isanimate.checked)" name="loginForm">
- 
-              <div class="card-header">
-                <strong>Widget Properties</strong>  
-              </div>
+                    <mat-tab-group>
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                <div>
+                                    <strong>Widget Properties</strong>  
+                                  </div>
+                            </ng-template>
               <div class="card-body">
 
                 <div class="form-group">
@@ -50,36 +56,111 @@
                         <label class="form-text text-muted" for="vat">Display Text</label>
                         <input maxlength="14"  #widgettext (keyup)="this.widgetText = widgettext.value" type="text" class="form-control" id="vat" value="Talk To Us Now">
                       </div>
-                      
+    
                 </div><!--/.row-->
 
 
-                  <div class="card-footer">
-                    <div class="row">  
-                        <div class="col-4">                            
-                            <button [disabled]="isSubmit" *ngIf="!(this.widgetID.length > 0)" type="submit" class="btn btn-primary">Create Widget</button>
-                            <button  *ngIf="this.widgetID.length > 0" type="button" class="btn btn-link px-0" [routerLink]="['/editwidget', widgetID]"> Edit this widget?</button>
-                          </div>
-                             
-                          <div  *ngIf="windowWidth <= 576px"  class="col-8 text-right" >
-                            <button  *ngIf="this.widgetID.length > 0" type="button" class="btn btn-link px-0" (click)="refreshPage()"> Create another one?</button>
-                          </div> 
 
-                          
-                              <div  *ngIf="windowWidth > 576px"  class="col-4" >
-                                  <button  *ngIf="this.widgetID.length > 0" type="button" class="btn btn-link px-0" (click)="refreshPage()"> Create another one?</button>
-                              </div> 
-
-                              <div *ngIf="windowWidth > 576px" class="col-4 text-right">
-                                  <button type="button" class="btn btn-link px-0" [routerLink]="['/widgets']">Back to My Widgets</button>
+                    </mat-tab>
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <div >
+                                <strong>Time</strong>  
                               </div>
-                          </div>
-                      </div>
-                      </form>
-              </div>
+                        </ng-template>
 
+                        <div class="card-body">
+
+                            <div class="form-group">
+                                <div class="form-group col-sm-4" style="text-align: left">
+                              <label class="form-header-text text-muted" for="name"><strong>Week Day</strong></label>
+                                </div>
+                              <div class="row">
+                                  <div class="form-group col-sm-4" style="text-align: left">
+                                <label class="form-text text-muted" for="name">Monday</label>
+                                  </div>
+                                  <div class="form-group col-sm-4" style="text-align: left">
+                                      <mat-slide-toggle  #isanimate style="margin-top:10px" labelPosition="after" [checked]="true">Open</mat-slide-toggle>
+                                    </div>
+                                <div class="form-group col-sm-4" style="text-align: center">
+                                <label>
+
+                                    <input [owlDateTimeTrigger]="dt4" [owlDateTime]="dt4">
+                                    <owl-date-time [pickerType]="'timer'" #dt4></owl-date-time>
+                                </label>
+                                </div>
+                              </div>
+                              <div class="row">
+                                  <div class="form-group col-sm-4" style="text-align: left">
+                                  <label class="form-text text-muted" for="name">Tuesday</label>
+                                  </div>
+                                  <div class="form-group col-sm-4" style="text-align: left">
+                                      <mat-slide-toggle  #isanimate style="margin-top:10px" labelPosition="after" [checked]="true">Open</mat-slide-toggle>
+                                    </div>
+                                <div class="form-group col-sm-4" style="text-align: center">
+
+                                </div>
+                              </div>
+                              <div class="row">
+                                  <div class="form-group col-sm-4" style="text-align: left">
+                                  <label class="form-text text-muted" for="name">Wedneday</label>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="form-group col-sm-4" style="text-align: left">
+                                  <label class="form-text text-muted" for="name">Thursday</label>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="form-group col-sm-4" style="text-align: left">
+                                  <label class="form-text text-muted" for="name">Friday</label>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="form-group col-sm-4" style="text-align: left">
+                                  <label class="form-text text-muted" for="name">Saturday</label>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="form-group col-sm-4" style="text-align: left">
+                                  <label class="form-text text-muted" for="name">Sunday</label>
+                                  </div>
+                              </div>
+                                  
+                            </div>
+                           
+                
+                            </div><!--/.row-->
+
+                    </mat-tab>
+                  </mat-tab-group> 
+                  <div class="card-footer">
+                      <div class="row">  
+                          <div class="col-4">                            
+                              <button [disabled]="isSubmit" *ngIf="!(this.widgetID.length > 0)" type="submit" class="btn btn-primary">Create Widget</button>
+                              <button  *ngIf="this.widgetID.length > 0" type="button" class="btn btn-link px-0" [routerLink]="['/editwidget', widgetID]"> Edit this widget?</button>
+                            </div>
+                               
+                            <div  *ngIf="windowWidth <= 576px"  class="col-8 text-right" >
+                              <button  *ngIf="this.widgetID.length > 0" type="button" class="btn btn-link px-0" (click)="refreshPage()"> Create another one?</button>
+                            </div> 
+  
+                            
+                                <div  *ngIf="windowWidth > 576px"  class="col-4" >
+                                    <button  *ngIf="this.widgetID.length > 0" type="button" class="btn btn-link px-0" (click)="refreshPage()"> Create another one?</button>
+                                </div> 
+  
+                                <div *ngIf="windowWidth > 576px" class="col-4 text-right">
+                                    <button type="button" class="btn btn-link px-0" [routerLink]="['/widgets']">Back to My Widgets</button>
+                                </div>
+                            </div>
+                        </div>
+                      </form>
+
+              </div>
+ 
           </div><!--/.col-->
-          
+ 
           
           <div class="col-md-6">
               <div class="card card-accent-primary">

@@ -1,1 +1,70 @@
-<h1> Widget List </h1>
+<div class="animated fadeIn">
+    <div class="row">
+
+          <div class="col-md-6">
+
+            <div class="card card-accent-primary">
+
+                <form (submit)="onSubmit(name.value,phone.value,domain.value,isanimate.checked)" name="loginForm">
+                    <mat-tab-group>
+                            <mat-tab label="User Widgets">
+
+              <div  class="card-body">
+                    <table>
+                            <thead>
+                                <tr>
+                                    <td>ID</td>
+                                    <td>User Name</td>
+                                    <td>Widget Name</td>
+                                    <td>Phone Number</td>
+                                    <td>API Key</td>
+                                    <td>extensionNumber</td>
+                                </tr>
+                            
+                            </thead>
+                            <tbody>
+                                <tr  *ngFor="let userwidget of userwidgets">
+                                    <td>{{userwidget.widgetId}}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+
+                
+
+    
+                </div><!--/.row-->
+
+                <div class="card-footer">
+                        <div class="row">  
+
+                        </div>
+                        </div>
+
+                    </mat-tab>
+                    <mat-tab label="History">
+                        <div class="card-body">
+                            
+   
+    
+                        </div><!--/.row-->
+                        <div class="card-footer">
+                        </div>
+                    </mat-tab>
+                  </mat-tab-group> 
+                      </form>
+
+
+              </div>
+ 
+          </div><!--/.col-->
+
+    </div>
+</div>
+
+      
