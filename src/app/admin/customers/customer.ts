@@ -1,9 +1,10 @@
 export class Customer
 {
-    name : string;
-    email : string;
-    creationDateTime : string;
-    lastLogin : string;
-    widgetsCount : number;
-    subscription : string;
+    constructor( 
+        public name : string,
+        public email : string,
+        public creationDateTime : string,
+        public lastLogin : string,
+        public widgetsCount : number,
+        public subscription : string){}
 }

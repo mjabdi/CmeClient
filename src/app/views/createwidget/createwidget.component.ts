@@ -27,6 +27,8 @@ export class CreateWidgetComponent {
 
   snippetCode = "Loading..."
 
+    dayOffStatus="Open";  
+
     colorWidget = "rgb(255,102,0)";
     colorText = "rgb(255,255,255)";
     TalkToUsText = "Talk To Leads Now";
@@ -76,6 +78,8 @@ export class CreateWidgetComponent {
     {
       
     }
+
+
 
     textcolor(color : string) : string
     {
