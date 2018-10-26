@@ -54,6 +54,7 @@ export class DefaultLayoutComponent {
       if (!this.MyRole)
       {
         this.router.navigate(['/home'],{ queryParams: { returnUrl:this.router.url}});
+        return;
       }
 
       this.authservice.resetMyRole();

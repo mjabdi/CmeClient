@@ -1,3 +1,5 @@
+import { WeekDay } from "../createwidget/weekday";
+
 export class Widget
 {
     id : string;
@@ -14,4 +16,5 @@ export class Widget
 
     statusChanging : boolean;
     isDeleting : boolean;
+    weekDays : WeekDay[];
 }

@@ -4,22 +4,25 @@
       <div class="col-md-6">
         <div class="card card-accent-primary">
             <form (submit)="onSubmit(name.value,phone.value,domain.value,isanimate.checked)" name="loginForm">
-
-          <div class="card-header">
-            <strong>Widget Properties</strong>  
-          </div>
-          <div class="card-body">
+              <mat-tab-group>
+                <mat-tab >
+                    <ng-template mat-tab-label>
+                        <div>
+                            <strong>Design</strong>  
+                          </div>
+                    </ng-template>
+          <div class="card-body" style="height: 400px">
 
             <div class="form-group">
               <label class="form-text text-muted" for="name">Display Name</label>
               <input maxlength="20"  #name type="text" class="form-control" id="name" placeholder="Enter Widget Name" [value]="this.myWidget.widgetName">
             </div>
             <div class="form-group">
-              <label class="form-text text-muted" for="phone">Connected To Phone Number</label>
+              <label class="form-text text-muted" for="phone">Connected To </label>
               <input #phone type="number" class="form-control" id="phone" placeholder="Enter Phone Number" [value]="this.myWidget.connectedTo">
             </div>
             <div class="form-group">
-                <label class="form-text text-muted" for="site">Connected To Website Address</label>
+                <label class="form-text text-muted" for="site">Your Website Address (this widget works only on this url)</label>
                 <input #domain (blur)="domain.value = correctURL(domain.value)" type="url" class="form-control" id="site" placeholder="http://www.example.com" [value]="this.myWidget.domainUrl">
               </div>
             <div class="row">
@@ -52,7 +55,39 @@
                   </div>
                   
             </div><!--/.row-->
+          </mat-tab>
+          <mat-tab>
+              <ng-template mat-tab-label>
+                  <div >
+                      <strong>Working Hours</strong>  
+                    </div>
+              </ng-template>
 
+              <div class="card-body" style="height: 400px">
+
+                  <div style="margin-top:2px;margin-bottom:20px;">
+                      <i class="fa fa-info-circle" style="padding-top:5px;font-size:18px;color:#ff6600 "></i> <span class="text text-muted">  Customer calls will be routed to you only on these hours:</span>
+                  </div>
+
+                              <div *ngFor="let day of weekDays" class="row">
+                                  <div class="form-group col-3" style="text-align: left">
+                                     <label class="form-text text-muted">{{day.name}}</label>
+                                  </div>
+                                  <div class="col-3" style="text-align: left">
+                                      <mat-slide-toggle #mytoggle  style="margin-top:0px" labelPosition="after" (change)="day.isOpen = mytoggle.checked" [checked]="day.isOpen">{{mytoggle.checked ? 'open' : 'closed'}}</mat-slide-toggle>
+                                    </div>
+                                <div class="col-3" style="text-align: center">
+                                    <input #startTime [disabled]="!mytoggle.checked" style="width: 90px;text-align: center" (change)="day.startTime = startTime.value" type="text" placeholder="From" [value]="day.startTime">
+                                </div>
+                                <div class="col-3" style="text-align: center">
+                                    <input #endTime [disabled]="!mytoggle.checked" style="width: 90px;text-align: center" (change)="day.endTime = endTime.value" type="text" placeholder="Until" [value]="day.endTime">
+                                </div>
+                              </div>
+               </div>
+                 
+
+          </mat-tab>
+        </mat-tab-group>
 
               <div class="card-footer">
                 <div class="row">  

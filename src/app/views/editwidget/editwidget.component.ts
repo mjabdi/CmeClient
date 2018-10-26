@@ -11,6 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 import {WidgetService} from '../widgets/widget.service';
 import { ClipboardService } from 'ngx-clipboard';
 import {MatSnackBar} from '@angular/material';
+import { WeekDay } from '../createwidget/weekday';
+
 
 @Component({
   templateUrl: 'editwidget.component.html',
@@ -30,6 +32,15 @@ export class EditWidgetComponent {
 
     snippetCode = "Loading..."
 
+    weekDays : WeekDay[] = [
+      new WeekDay ('Monday' , true , '09:00' ,  '17:00'),
+      new WeekDay ('Tuesday' , true , '09:00' ,  '17:00'),
+      new WeekDay ('Wednesday' , true , '09:00' ,  '17:00'),
+      new WeekDay ('Thursday' , true , '09:00' ,  '17:00'),
+      new WeekDay ('Friday' , true , '09:00' ,  '17:00'),
+      new WeekDay ('Saturday' , false , '09:00' ,  '17:00'),
+      new WeekDay ('Sunday' , false , '09:00' ,  '17:00')
+    ];
     constructor(private cpService: ColorPickerService,
       private route: ActivatedRoute,
       private router : Router, 
@@ -54,6 +65,9 @@ export class EditWidgetComponent {
                 this.colorText = this.myWidget.colorText;
                 this.colorWidget = this.myWidget.colorWidget;
                 this.isLoading = false;
+                if (this.myWidget.weekDays != null && this.myWidget.weekDays.length == 7)
+                  this.weekDays = widget.weekDays;
+
                 this.downloadSnippetCode(this.widgetID);
             }
 
@@ -81,7 +95,8 @@ export class EditWidgetComponent {
   
     
       ngOnDestroy() {
-        this.sub.unsubscribe();
+        if (this.sub)
+          this.sub.unsubscribe();
       }
 
 
@@ -169,6 +184,7 @@ export class EditWidgetComponent {
         wgt.colorText = this.colorText;
         wgt.colorWidget = this.colorWidget;
         wgt.email = this.authService.getUsername();
+        wgt.weekDays = this.weekDays;
 
         this.wgtService.updateWidget(wgt.id,wgt)
         .subscribe(data => {

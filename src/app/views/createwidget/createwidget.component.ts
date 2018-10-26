@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ClipboardService } from 'ngx-clipboard';
 import {MatSnackBar} from '@angular/material';
 import {HostListener, AfterViewInit } from '@angular/core';
+import { WeekDay } from './weekday';
 
 
 
@@ -33,6 +34,18 @@ export class CreateWidgetComponent {
     colorText = "rgb(255,255,255)";
     TalkToUsText = "Talk To Leads Now";
 
+
+     weekDays : WeekDay[] = [
+       new WeekDay ('Monday' , true , '09:00' ,  '17:00'),
+       new WeekDay ('Tuesday' , true , '09:00' ,  '17:00'),
+       new WeekDay ('Wednesday' , true , '09:00' ,  '17:00'),
+       new WeekDay ('Thursday' , true , '09:00' ,  '17:00'),
+       new WeekDay ('Friday' , true , '09:00' ,  '17:00'),
+       new WeekDay ('Saturday' , false , '09:00' ,  '17:00'),
+       new WeekDay ('Sunday' , false , '09:00' ,  '17:00')
+     ];
+
+
     constructor(
       private router : Router, 
       private wgtService : WidgetService,
@@ -42,6 +55,7 @@ export class CreateWidgetComponent {
       private clipboardService: ClipboardService,
       private snackbar : MatSnackBar
       ){
+
     }
 
     downloadSnippetCode(token : string)
@@ -176,6 +190,7 @@ export class CreateWidgetComponent {
         wgt.colorText = this.colorText;
         wgt.colorWidget = this.colorWidget;
         wgt.email = this.authService.getUsername();
+        wgt.weekDays = this.weekDays;
 
         this.wgtService.createNewWidget(wgt)
         .subscribe(data => {
@@ -223,6 +238,7 @@ export class CreateWidgetComponent {
             duration: 3000
           });
       }
+
 
       refreshPage()
       {
