@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { HttpErrorHandler, HandleError } from '../http-error-handler.service';
 
 import {Md5} from 'ts-md5/dist/md5';
+import { Customer } from '../admin/customers/customer';
 
 
 const baseUrl :string = environment.apiUrl;
@@ -25,6 +26,8 @@ export class AuthenticationService {
     resetPasswordUrl = baseUrl + '/api/auth/resetpassword';
     getMyNameURL = baseUrl + '/api/auth/myname';
     getMyRoleURL= baseUrl + '/api/auth/myrole';
+    customersUrl = baseUrl + '/api/auth/customers';
+
 
     checkActivationTokenUrl = baseUrl + '/api/auth/checkactivationtoken';
     checkTokenUrl = baseUrl + '/api/auth/checktoken';
@@ -35,6 +38,7 @@ export class AuthenticationService {
     callmeTestUrl =baseUrl + '/api/callme/test';
 
     snippetCodeUrl =baseUrl + '/api/callme/snippetcode';
+
 
     
     handleError: HandleError;
@@ -160,6 +164,11 @@ export class AuthenticationService {
             catchError(this.handleError('getMyyRole', [])));
     }  
 
+    getCustomers () : Observable<Customer[]>
+    {
+        return this.http.get<Customer[]>(this.customersUrl).pipe(
+            catchError(this.handleError('getCustomers', [])));
+    }  
 
 
 

@@ -17,4 +17,7 @@ export class Widget
     statusChanging : boolean;
     isDeleting : boolean;
     weekDays : WeekDay[];
+
+    authKey : string;
+    extension : string;
 }

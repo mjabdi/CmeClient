@@ -39,13 +39,20 @@ export class WidgetService {
 
 
 
-getAllWidgets() : Observable<Widget[]> {
-
-    return this.http.get<Widget[]>(this.widgetUrl)
+getAllWidgetsNew() : Observable<Widget[]> {
+    return this.http.get<Widget[]>(this.widgetUrl+'/new')
   .pipe(
-    catchError(this.handleError('getAllWidgets', []))
+    catchError(this.handleError('getAllWidgetsNew', []))
   );
   }
+
+  getAllWidgetsHistory() : Observable<Widget[]> {
+    return this.http.get<Widget[]>(this.widgetUrl+'/history')
+  .pipe(
+    catchError(this.handleError('getAllWidgetsHistory', []))
+  );
+  }
+
 
 getAllWidgetsForUser(email : string) : Observable<Widget[]> {
 
@@ -87,6 +94,15 @@ updateStatus(id :string , wgt : Widget)
   var body = JSON.stringify(wgt);
 
   return this.http.put<Widget>(this.widgetUrl + '/status/' + id,
+    body,
+    httpOptions);
+}
+
+updateExtension(id :string , wgt : any)
+{
+  var body = JSON.stringify(wgt);
+
+  return this.http.put<Widget>(this.widgetUrl + '/extension/' + id,
     body,
     httpOptions);
 }

@@ -9,6 +9,7 @@ import { ClipboardService } from 'ngx-clipboard';
 import {MatSnackBar} from '@angular/material';
 import {HostListener, AfterViewInit } from '@angular/core';
 import {Customer} from './customer';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -20,12 +21,7 @@ export class CustomersComponent {
 
 
 
-    customers = [
-        new Customer('sibsib','sibsib@yahoo','20182410','20182410',5,'123'),
-        new Customer('madmad','madmad@yahoo','20182410','20182410',2,'456'),
-        new Customer('soren','soren@yahoo','20182410','20182410',10,'789'),
-        new Customer('sasa','sasa@yahool','20182410','20182410',3,'101')
-      ];
+    customers$ : Observable<Customer[]>;
       
     constructor(
         private router : Router, 
@@ -36,6 +32,10 @@ export class CustomersComponent {
         )
         { }
   
+        ngOnInit()
+        {
+            this.customers$ = this.authService.getCustomers();
+        }
 
 
 }

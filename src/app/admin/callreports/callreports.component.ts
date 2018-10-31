@@ -8,6 +8,9 @@ import { ToastrService } from 'ngx-toastr';
 import { ClipboardService } from 'ngx-clipboard';
 import {MatSnackBar} from '@angular/material';
 import {HostListener, AfterViewInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Widget } from '../../views/widgets/widget';
+import { WidgetService } from '../../views/widgets/widget.service';
 
 
 @Component({
@@ -16,15 +19,20 @@ import {HostListener, AfterViewInit } from '@angular/core';
 })
 export class CallReportsComponent {
     
+
     constructor(
         private router : Router, 
         private authService : AuthenticationService,
         private toastrService : ToastrService,
         private clipboardService: ClipboardService,
-        private snackbar : MatSnackBar
+        private snackbar : MatSnackBar,
+        private widgetService : WidgetService
         )
         { }
   
-
+        ngOnInit()
+        {
+        }
+        
 
 }

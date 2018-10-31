@@ -1,43 +1,18 @@
 <div class="animated fadeIn">
-    <div class="row">
-
-          <div class="col-md-12">
-
+    <div class="main-content">
+        <div class="container-fluid">
             <div class="card card-accent-primary">
 
-                <form name="loginForm">
-                    <mat-tab-group>
-                            <mat-tab label="User Widgets">
+                <div class="card-header card-header-danger">
+
+                    <h4 style="display: inline-block;font-weight: bold" class="card-title ">Widgets</h4>
+  
+                    </div>
+
+                    <mat-tab-group #mat [selectedIndex]="selectedTabIndex" (selectedIndexChange)="selectedTabIndex = mat.selectedIndex">
+                            <mat-tab label="New Widgets">
 
               <div  class="card-body">
-                    <!-- <table>
-                            <thead>
-                                <tr>
-                                    <td>ID</td>
-                                    <td>User Name</td>
-                                    <td>Widget Name</td>
-                                    <td>Phone Number</td>
-                                    <td>API Key</td>
-                                    <td>extensionNumber</td>
-                                </tr>
-                            
-                            </thead>
-                            <tbody>
-                                <tr  *ngFor="let userwidget of userwidgets">
-                                    <td>{{userwidget.widgetId}} </td>
-                                    <td>{{userwidget.username}}</td>
-                                    <td>{{userwidget.widgetName}}</td>
-                                    <td>{{userwidget.userPhoneNumber}}</td>
-                                    <td>{{userwidget.apiKey}}</td>
-                                    <td>{{userwidget.extensionNumber}}</td>
-
-                                </tr>
-                            </tbody>
-                        </table> -->
-
-
-                        <div class="wrapper">
-  
                             <div class="table">
                               
                                 <div class="row header">
@@ -47,48 +22,67 @@
                                     <div class="cell">Phone Number</div>
                                     <div class="cell">API Key</div>
                                     <div class="cell">Extension</div>
+                                    <div class="cell">Action</div>
+
                                 </div>
 
-                                <div *ngFor="let userwidget of userwidgets" class="row">
-                                        <div class="cell" data-title="ID">
-                                          {{userwidget.widgetId}}
+                                <ng-container *ngIf="(userwidgets$ | async) as userwidgets; else loading1">
+
+                                <div *ngFor="let userwidget of userwidgets" [class]="userwidget.id==lastChangeRow ? 'highlight' : 'row'">
+                                        <div [title]="userwidget.id" class="cell" data-title="ID">
+                                          {{userwidget.id.substring(0,5)+'...'}}
                                         </div>
                                         <div class="cell" data-title="username">
-                                          {{userwidget.username}}
+                                          {{userwidget.email}}
                                         </div>   
                                         <div class="cell" data-title="widgetName">
                                           {{userwidget.widgetName}}
                                         </div>
                                         <div class="cell" data-title="userPhoneNumber">
-                                          {{userwidget.userPhoneNumber}}
+                                          {{userwidget.connectedTo}}
                                         </div>
                                         <div class="cell" data-title="apiKey">
-                                          <input type="text" matInput autocomplete="off">
+                                          <input [disabled]="saving == userwidget.id" #apikey1 class="textbox-cell" [value]="userwidget.authKey" type="text" matInput autocomplete="off">
                                         </div>
                                         <div class="cell" data-title="extensionNumber">
-                                                <input type="text" matInput  autocomplete="off">
-                                        </div>                                                                                                                                                                                                     
+                                                <input  [disabled]="saving == userwidget.id"  #extension1 class="textbox-cell" [value]="userwidget.extension"  type="text" matInput  autocomplete="off">
+                                        </div>    
+                                        <div *ngIf="!saving || saving != userwidget.id " class="cell" data-title="extensionNumber">
+                                            <button  class="button-cell" (click)="Save(userwidget.id,apikey1.value,extension1.value)"> Save </button>
+                                        </div>  
+                                        <div *ngIf="saving == userwidget.id" class="cell" data-title="extensionNumber">
+                                            <div class="spinner">
+                                                <div class="bounce1"></div>
+                                                <div class="bounce2"></div>
+                                                <div class="bounce3"></div>
+                                            </div>
+                                        </div>  
+
+
                                 </div>
+                                </ng-container>
+                                <ng-template #loading1>
+                                    <div style="margin-left: 10px ; margin-top:20px;margin-bottom:20px; ">
+                                        <div class="spinner">
+                                            <div class="bounce1"></div>
+                                            <div class="bounce2"></div>
+                                            <div class="bounce3"></div>
+                                        </div>
+                                    </div>
+                                  </ng-template>
+
+
                              </div>
-                        </div>
 
                 
 
     
                 </div><!--/.row-->
 
-                <div class="card-footer">
-                        <div class="row">  
-
-                        </div>
-                        </div>
-
                     </mat-tab>
                     <mat-tab label="History">
                         <div class="card-body">
                             
-                                <div class="wrapper">
-  
                                         <div class="table">
                                           
                                             <div class="row header">
@@ -102,50 +96,63 @@
 
                                             </div>
             
-                                            <div *ngFor="let userwidget of userwidgets" class="row">
-                                                    <div class="cell" data-title="ID">
-                                                      {{userwidget.widgetId}}
-                                                    </div>
-                                                    <div class="cell" data-title="username">
-                                                      {{userwidget.username}}
+                                            <ng-container *ngIf="(userwidgets2$ | async) as userwidgets; else loading2">
+
+                                            <div *ngFor="let userwidget of userwidgets" [class]="userwidget.id==lastChangeRow ? 'highlight' : 'row'">
+                                                <div [title]="userwidget.id" class="cell" data-title="ID">
+                                                    {{userwidget.id.substring(0,5)+'...'}}
+                                                  </div>
+                                                   <div class="cell" data-title="username">
+                                                      {{userwidget.email}}
                                                     </div>   
                                                     <div class="cell" data-title="widgetName">
                                                       {{userwidget.widgetName}}
                                                     </div>
                                                     <div class="cell" data-title="userPhoneNumber">
-                                                      {{userwidget.userPhoneNumber}}
+                                                      {{userwidget.connectedTo}}
                                                     </div>
-                                                    <div *ngIf="editWidgetID!=userwidget.widgetId"  class="cell" data-title="widgetName">
-                                                      {{userwidget.apiKey}}
+                                                    <div  class="cell" data-title="widgetName">
+                                                      {{userwidget.authKey}}
                                                     </div>
-                                                    <div *ngIf="editWidgetID!=userwidget.widgetId"  class="cell" data-title="userPhoneNumber">
-                                                      {{userwidget.extensionNumber}}
+                                                    <div  class="cell" data-title="userPhoneNumber">
+                                                      {{userwidget.extension}}
                                                     </div>
-                                                    <div *ngIf="editWidgetID==userwidget.widgetId" class="cell" data-title="apiKey">
-                                                      <input type="text" [value]="userwidget.apiKey" matInput autocomplete="off">
+                                                    <!-- <div *ngIf="editWidgetID==userwidget.id" class="cell" data-title="apiKey">
+                                                      <input #apikey2 class="textbox-cell" type="text" [value]="userwidget.authKey" matInput autocomplete="off">
                                                     </div>
-                                                    <div *ngIf="editWidgetID==userwidget.widgetId" class="cell" data-title="extensionNumber">
-                                                            <input type="text" [value]="userwidget.extensionNumber"  matInput  autocomplete="off">
-                                                    </div>    
-                                                    <div *ngIf="editWidgetID!=userwidget.widgetId"  class="cell" data-title="extensionNumber">
-                                                            <button (click)="Edit(userwidget.widgetId)"> Edit </button>
+                                                    <div *ngIf="editWidgetID==userwidget.id" class="cell" data-title="extensionNumber">
+                                                       <input #extension2  class="textbox-cell" type="text" [value]="userwidget.extension"  matInput  autocomplete="off">
+                                                    </div>     -->
+                                                    <div *ngIf="editWidgetID!=userwidget.id"  class="cell" data-title="extensionNumber">
+                                                            <button  class="button-cell-edit" (click)="Edit(userwidget.id)"> Reset </button>
                                                     </div>  
-                                                    <div *ngIf="editWidgetID==userwidget.widgetId"  class="cell" data-title="extensionNumber">
-                                                            <button (click)="Save(userwidget.widgetId)"> Save </button>
+                                                    <!-- <div *ngIf="editWidgetID==userwidget.id && !saving"  class="cell" data-title="extensionNumber">
+                                                            <button  class="button-cell" (click)="Edit(userwidget.id,apikey2.value,extension2.value)"> Save </button>
+                                                    </div>   -->
+                                                    <div *ngIf="editWidgetID==userwidget.id && saving "  class="cell" data-title="extensionNumber">
+                                                        <div class="spinner">
+                                                            <div class="bounce1"></div>
+                                                            <div class="bounce2"></div>
+                                                            <div class="bounce3"></div>
+                                                        </div>
                                                     </div>  
+
                                             </div>
-                                         </div>
-                                    </div>
-            
-   
-    
+                                            </ng-container>
+                                            <ng-template #loading2>
+                                                <div style="margin-left: 10px ; margin-top:20px;margin-bottom:20px; ">
+                                                    <div class="spinner">
+                                                        <div class="bounce1"></div>
+                                                        <div class="bounce2"></div>
+                                                        <div class="bounce3"></div>
+                                                    </div>
+                                                </div>
+                                              </ng-template>
+
+                                         </div>    
                         </div><!--/.row-->
-                        <div class="card-footer">
-                        </div>
                     </mat-tab>
                   </mat-tab-group> 
-                      </form>
-
 
               </div>
  
