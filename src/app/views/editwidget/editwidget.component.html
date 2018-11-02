@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
               <label class="form-text text-muted" for="phone">Connected To </label>
-              <input #phone type="number" class="form-control" id="phone" placeholder="Enter Phone Number" [value]="this.myWidget.connectedTo">
+              <input matTooltip="In case you need a new number please create a new Widget." #phone readonly type="number" class="form-control" id="phone" placeholder="Enter Phone Number" [value]="this.myWidget.connectedTo">
             </div>
             <div class="form-group">
                 <label class="form-text text-muted" for="site">Your Website Address (this widget works only on this url)</label>

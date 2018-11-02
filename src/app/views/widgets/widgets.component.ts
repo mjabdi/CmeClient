@@ -52,22 +52,43 @@ export class WidgetsComponent {
     this.loadWidgets();
   }
 
+  IsActive(widget : Widget) 
+  {
+     if (!widget.authKey)
+      return false;
+     if (!widget.extension)
+      return false;
+
+      return (widget.authKey.length > 0) && (widget.extension.length) > 0;
+  }
+
   loadWidgets()
   {
     this.wgtService.getAllWidgetsForUser(this.authService.getUsername())
-    .subscribe(widgets => {this.myWidgets = widgets;
-      this.myWidgetsShow = new Array<boolean>(this.myWidgets.length);
-      let timer = Observable.timer(300,300);
-      timer.subscribe(t => {
-        if (this.ticks < this.myWidgetsShow.length)
-          this.myWidgetsShow[this.ticks] = true;
-        this.ticks++;
-      } );
-    });
+    .subscribe((widgets : Widget[]) => {
+      if (widgets)
+      {
+          for (var i =0 ; i< widgets.length; i++)
+          {
+              if (!this.IsActive(widgets[i]))
+              {
+                widgets[i].status = "Not Active yet!"
+              }
+          }
+          this.myWidgets = widgets;
+          this.myWidgetsShow = new Array<boolean>(this.myWidgets.length);
+          let timer = Observable.timer(300,300);
+          timer.subscribe(t => {
+            if (this.ticks < this.myWidgetsShow.length)
+              this.myWidgetsShow[this.ticks] = true;
+            this.ticks++;
+          } );
+        }
+      }
+    
+    );
+  
   }
-
-
-
 
   color1 = "#454";
 
@@ -78,15 +99,15 @@ export class WidgetsComponent {
     this.router.navigate(['editwidget']);
   }
 
-  getStatusText(status):string{
-    if (status=='Disabled'){
-      return 'Enable';
+  getStatusText(widget : Widget):string{
+    if (widget.status == "Active"){
+      return 'Disable';
     }
     else
-    return 'Disable';
+      return 'Enable';
   }
-  getStatusIcon(status):string{
-    if (status=='Disabled'){
+  getStatusIcon(widget : Widget):string{
+    if (widget.status != "Active"){
       // return 'phone_locked';
       return 'volume_off';
     }
@@ -147,6 +168,11 @@ export class WidgetsComponent {
 
         wgt.statusChanging = false;
     });
+  }
+
+  IsDisabled(widget : Widget)
+  {
+      return (widget.status != 'Active');
   }
 
   DeleteWidget(wgt : Widget)

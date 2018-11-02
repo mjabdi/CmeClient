@@ -56,8 +56,8 @@
       <div  class="card step card-round" [class.show]="this.myWidgetsShow[i]" (dblclick)="gotoWidget(widget.id)" [style.color]="widget.colorText" [style.background-color]="widget.colorWidget">
         <div class="card-body pb-0 mywidget">
 
-          <mat-icon [class.disableWidget]="widget.status=='Disabled'" *ngIf="!widget.statusChanging && !widget.isDeleting" aria-label="user"  class="widget-active-icon" style="color:'widget.colorText'">{{getStatusIcon(widget.status)}}</mat-icon>
-          <span [class.disableWidget]="widget.status=='Disabled'" *ngIf="!widget.statusChanging && !widget.isDeleting" class="widget-text-status">{{widget.status}} </span>
+          <mat-icon [class.disableWidget]="IsDisabled(widget)" *ngIf="!widget.statusChanging && !widget.isDeleting" aria-label="user"  class="widget-active-icon" style="color:'widget.colorText'">{{getStatusIcon(widget)}}</mat-icon>
+          <span [class.disableWidget]="IsDisabled(widget)" *ngIf="!widget.statusChanging && !widget.isDeleting" class="widget-text-status">{{widget.status}} </span>
           <span *ngIf="widget.statusChanging" class="widget-text-status"> Updating...</span>
           <span *ngIf="widget.isDeleting" class="widget-text-status"> Deleting...</span>
 
@@ -76,12 +76,12 @@
             </button>
             <div class="dropdown-menu dropdown-menu-right"  *dropdownMenu>
               <a class="dropdown-item"  [routerLink]="['/editwidget', widget.id]">Edit...</a>
-              <a class="dropdown-item" (click)="ChangeStatus(widget)" >{{getStatusText(widget.status)}}</a>
+              <a *ngIf="IsActive(widget)" class="dropdown-item" (click)="ChangeStatus(widget)" >{{getStatusText(widget)}}</a>
               <a class="dropdown-item" (click)="DeleteWidget(widget)" >Delete Widget</a>
             </div>
           </div>
-          <div [class.disableWidget]="widget.status=='Disabled'" class="text-widgetname" (click)="gotoWidget(widget.id)">{{widget.widgetName}}</div>
-          <div  [class.disableWidget]="widget.status=='Disabled'" class="text-value">{{widget.callsCount}} <span class="text-received-calls">received calls</span></div>
+          <div [class.disableWidget]="IsDisabled(widget)" class="text-widgetname" (click)="gotoWidget(widget.id)">{{widget.widgetName}}</div>
+          <div  [class.disableWidget]="IsDisabled(widget)" class="text-value">{{widget.callsCount}} <span class="text-received-calls">received calls</span></div>
 
         </div>
       </div>

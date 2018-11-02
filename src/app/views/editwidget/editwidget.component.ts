@@ -185,6 +185,8 @@ export class EditWidgetComponent {
         wgt.colorWidget = this.colorWidget;
         wgt.email = this.authService.getUsername();
         wgt.weekDays = this.weekDays;
+        wgt.authKey = this.myWidget.authKey;
+        wgt.extension = this.myWidget.extension;
 
         this.wgtService.updateWidget(wgt.id,wgt)
         .subscribe(data => {

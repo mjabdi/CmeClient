@@ -10,23 +10,32 @@
                     </div>
 
                     <mat-tab-group #mat [selectedIndex]="selectedTabIndex" (selectedIndexChange)="selectedTabIndex = mat.selectedIndex">
-                            <mat-tab label="New Widgets">
+                            <mat-tab>
+
+                                    <ng-template mat-tab-label>
+                                            <mat-icon style="color:red !important" class="example-tab-icon">new_releases</mat-icon>
+                                            <span style="vertical-align: top; margin-left:2px"> New Widgets </span> 
+                                    </ng-template>
+
 
               <div  class="card-body">
-                            <div class="table">
-                              
+
+                            <div class="table">                          
                                 <div class="row header">
                                     <div class="cell">ID</div>
                                     <div class="cell">User Name</div>
                                     <div class="cell">Widget Name</div>
                                     <div class="cell">Phone Number</div>
-                                    <div class="cell">API Key</div>
-                                    <div class="cell">Extension</div>
+                                    <div class="cell">Token (GradWell)</div>
+                                    <div class="cell">Extension (GradWell)</div>
                                     <div class="cell">Action</div>
-
                                 </div>
 
                                 <ng-container *ngIf="(userwidgets$ | async) as userwidgets; else loading1">
+
+                                <div style="text-align: center;color:gray" *ngIf="userwidgets.length == 0">
+                                        No records
+                                </div>    
 
                                 <div *ngFor="let userwidget of userwidgets" [class]="userwidget.id==lastChangeRow ? 'highlight' : 'row'">
                                         <div [title]="userwidget.id" class="cell" data-title="ID">
@@ -57,11 +66,10 @@
                                                 <div class="bounce3"></div>
                                             </div>
                                         </div>  
-
-
                                 </div>
-                                </ng-container>
-                                <ng-template #loading1>
+
+                            </ng-container>
+                            <ng-template #loading1>
                                     <div style="margin-left: 10px ; margin-top:20px;margin-bottom:20px; ">
                                         <div class="spinner">
                                             <div class="bounce1"></div>
@@ -69,18 +77,23 @@
                                             <div class="bounce3"></div>
                                         </div>
                                     </div>
-                                  </ng-template>
+                             </ng-template>
 
 
                              </div>
-
-                
-
     
                 </div><!--/.row-->
 
                     </mat-tab>
-                    <mat-tab label="History">
+                    <mat-tab>
+
+                            <ng-template mat-tab-label>
+                                    <mat-icon style="color:rgb(0, 140, 255) !important" class="example-tab-icon">history</mat-icon>
+                                    <span style="vertical-align: top; margin-left:2px"> History </span> 
+                            </ng-template>
+
+
+
                         <div class="card-body">
                             
                                         <div class="table">
@@ -90,13 +103,18 @@
                                                 <div class="cell">User Name</div>
                                                 <div class="cell">Widget Name</div>
                                                 <div class="cell">Phone Number</div>
-                                                <div class="cell">API Key</div>
-                                                <div class="cell">Extension</div>
+                                                <div class="cell">Token (GradWell)</div>
+                                                <div class="cell">Extension (GradWell)</div>
                                                 <div class="cell">Action</div>
 
                                             </div>
             
                                             <ng-container *ngIf="(userwidgets2$ | async) as userwidgets; else loading2">
+
+                                                    <div style="text-align: center;color:gray" *ngIf="userwidgets.length == 0">
+                                                            No records
+                                                    </div>    
+                    
 
                                             <div *ngFor="let userwidget of userwidgets" [class]="userwidget.id==lastChangeRow ? 'highlight' : 'row'">
                                                 <div [title]="userwidget.id" class="cell" data-title="ID">

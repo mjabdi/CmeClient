@@ -1,6 +1,6 @@
 import { WeekDay } from "../createwidget/weekday";
 
-export class Widget
+export class Widget  
 {
     id : string;
     email : string;

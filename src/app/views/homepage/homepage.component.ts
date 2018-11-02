@@ -37,7 +37,7 @@ export class HomePageComponent {
             }
             else if (this.MyRole.indexOf('admin') >= 0)
             {
-              this.router.navigate(['/customers']);
+              this.router.navigate(['/widgetslist']);
             }
             else
             {
