@@ -15,6 +15,6 @@ export const environment = {
 
   // apiUrl: 'http://localhost:5090'
 // apiUrl: 'http://localhost:5090'
-  apiUrl: 'http://api.talktoleadsnow.com'
+   apiUrl: 'http://api.talktoleadsnow.com'
 };
 

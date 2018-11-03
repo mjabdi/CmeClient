@@ -20,4 +20,6 @@ export class Widget
 
     authKey : string;
     extension : string;
+
+    notificationEmail : string;
 }

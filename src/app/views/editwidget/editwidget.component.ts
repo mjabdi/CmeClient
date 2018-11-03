@@ -32,6 +32,8 @@ export class EditWidgetComponent {
 
     snippetCode = "Loading..."
 
+    selectedTabIndex = 0;
+
     weekDays : WeekDay[] = [
       new WeekDay ('Monday' , true , '09:00' ,  '17:00'),
       new WeekDay ('Tuesday' , true , '09:00' ,  '17:00'),
@@ -141,30 +143,34 @@ export class EditWidgetComponent {
     
       isSubmit = false;
 
-      onSubmit(widgetname : string,phone : string, domain :string ,isanimate :boolean ):boolean {
+      onSubmit(widgetname : string,phone : string, email : string, domain :string ,isanimate :boolean ):boolean {
 
 
         if (!widgetname)
         {
           this.toastrService.warning('Please enter a widget name');
+          this.selectedTabIndex = 0;
           return false;
         }
 
         if (!phone)
         {
           this.toastrService.warning('Please enter a phone number');
+          this.selectedTabIndex = 1;
           return false;
         }
 
         if (!domain)
         {
           this.toastrService.warning('Please enter a domain name');
+          this.selectedTabIndex = 1;
           return false;
         }
 
        if (!this.widgetText)
        {
           this.toastrService.warning('Please enter a widget text');
+          this.selectedTabIndex = 0;
           return false;
        }
 
@@ -187,6 +193,7 @@ export class EditWidgetComponent {
         wgt.weekDays = this.weekDays;
         wgt.authKey = this.myWidget.authKey;
         wgt.extension = this.myWidget.extension;
+        wgt.notificationEmail = email;
 
         this.wgtService.updateWidget(wgt.id,wgt)
         .subscribe(data => {

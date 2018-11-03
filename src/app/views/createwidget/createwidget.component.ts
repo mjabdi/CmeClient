@@ -88,9 +88,10 @@ export class CreateWidgetComponent {
      }
 
 
+    myEmail; 
     ngOnInit()
     {
-      
+      this.myEmail = this.authService.getUsername();
     }
 
 
@@ -141,37 +142,35 @@ export class CreateWidgetComponent {
 
 
       isSubmit = false;
-
-      onSubmit(widgetname : string,phone : string, domain :string ,isanimate :boolean ):boolean {
+      selectedTabIndex = 0;
+      onSubmit(widgetname : string,phone : string,email : string ,  domain :string ,isanimate :boolean ):boolean {
 
        
         if (!widgetname)
         {
           this.toastrService.warning('Please enter a widget name');
+          this.selectedTabIndex = 0;
           return false;
         }
 
         if (!phone)
         {
           this.toastrService.warning('Please enter a phone number');
+          this.selectedTabIndex = 1;
           return false;
         }
 
         if (!domain)
         {
           this.toastrService.warning('Please enter a domain name');
+          this.selectedTabIndex = 1;
           return false;
         }
-
-        // if (this.isValidDomain(domain))
-        // {
-        //   this.toastrService.warning('Your domain name is invalid');
-        //   return false;        
-        // }
 
        if (!this.widgetText)
        {
           this.toastrService.warning('Please enter a widget text');
+          this.selectedTabIndex = 0;
           return false;
        }
        
@@ -191,6 +190,7 @@ export class CreateWidgetComponent {
         wgt.colorWidget = this.colorWidget;
         wgt.email = this.authService.getUsername();
         wgt.weekDays = this.weekDays;
+        wgt.notificationEmail = email;
 
         this.wgtService.createNewWidget(wgt)
         .subscribe(data => {

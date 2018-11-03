@@ -3,91 +3,122 @@
     <div class="row">
       <div class="col-md-6">
         <div class="card card-accent-primary">
-            <form (submit)="onSubmit(name.value,phone.value,domain.value,isanimate.checked)" name="loginForm">
-              <mat-tab-group>
-                <mat-tab >
-                    <ng-template mat-tab-label>
-                        <div>
-                            <strong>Design</strong>  
-                          </div>
-                    </ng-template>
-          <div class="card-body" style="height: 400px">
+            <form (submit)="onSubmit(name.value,phone.value,email.value,domain.value,isanimate.checked)" name="loginForm">
+                <mat-tab-group #matgroup [selectedIndex]="selectedTabIndex" (selectedIndexChange)="selectedTabIndex=matgroup.selectedIndex">
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <mat-icon style="color:#ff6600 !important" class="example-tab-icon">format_color_fill</mat-icon>
+                            <span style="vertical-align: top; margin-left:5px"> Design </span> 
+                          </ng-template>
+                      
+         <div class="card-body" style="height: 400px">
 
             <div class="form-group">
-              <label class="form-text text-muted" for="name">Display Name</label>
-              <input maxlength="20"  #name type="text" class="form-control" id="name" placeholder="Enter Widget Name" [value]="this.myWidget.widgetName">
+              <label class="form-text text-muted" for="name">Widget Name</label>
+              <input  maxlength="20" #name type="text" class="form-control" id="name" placeholder="Choose a name for your widget" [value]="this.myWidget.widgetName">
             </div>
-            <div class="form-group">
-              <label class="form-text text-muted" for="phone">Connected To </label>
-              <input matTooltip="In case you need a new number please create a new Widget." #phone readonly type="number" class="form-control" id="phone" placeholder="Enter Phone Number" [value]="this.myWidget.connectedTo">
-            </div>
-            <div class="form-group">
-                <label class="form-text text-muted" for="site">Your Website Address (this widget works only on this url)</label>
-                <input #domain (blur)="domain.value = correctURL(domain.value)" type="url" class="form-control" id="site" placeholder="http://www.example.com" [value]="this.myWidget.domainUrl">
-              </div>
-            <div class="row">
-              <div class="form-group col-sm-4" style="text-align: center">
-                <label style="text-align: center" class="form-text text-muted" for="postal-code">Widget Color</label>
-                <input  style="cursor:pointer;width: 130px !important;text-align: center !important" [style.color]="this.textcolor(this.colorWidget)" [style.background]="this.colorWidget" [(colorPicker)]="this.colorWidget" [value]="this.colorWidget"
-                 (colorPickerOpen)="onEventLog('colorPickerOpen', $event)" 
-                 (colorPickerClose)="onEventLog('colorPickerClose', $event)" 
-                 (cpInputChange)="onEventLog('cpInputChange', $event)"
-                  (cpSliderDragStart)="onEventLog('cpSliderDragStart', $event)"
-                   (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', $event)"/>
-            </div>
-            <div class="form-group col-sm-4" style="text-align: center">
-                    <label class="form-text text-muted" for="postal-code">Text Color</label>
-                    <input style="cursor:pointer;width: 130px !important;text-align: center !important"  [style.color]="this.textcolor(this.colorText)"  [style.background]="this.colorText" [(colorPicker)]="this.colorText" [value]="this.colorText"
-                     (colorPickerOpen)="onEventLog('colorPickerOpen', $event)" 
-                     (colorPickerClose)="onEventLog('colorPickerClose', $event)" 
-                     (cpInputChange)="onEventLog('cpInputChange', $event)"
-                      (cpSliderDragStart)="onEventLog('cpSliderDragStart', $event)"
-                       (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', $event)"/>
-                </div>
-                <div class="form-group col-sm-4" style="text-align: center">
-                    <div  class="form-text text-muted"> Animated </div>
-                    <mat-slide-toggle  #isanimate style="margin-top:10px" labelPosition="after" [checked]="this.myWidget.isAnimated"></mat-slide-toggle>
-                  </div>
+
+                <div class="form-group">
+                  <label class="form-text text-muted" for="widgetcolor">Widget Color</label>
+                  <input id="widgetcolor" style="cursor:pointer;width:220px !important;text-align: center !important" [style.color]="this.textcolor(this.colorWidget)" [style.background]="this.colorWidget" [(colorPicker)]="this.colorWidget" [value]="this.colorWidget"
+                   (colorPickerOpen)="onEventLog('colorPickerOpen', $event)" 
+                   (colorPickerClose)="onEventLog('colorPickerClose', $event)" 
+                   (cpInputChange)="onEventLog('cpInputChange', $event)"
+                    (cpSliderDragStart)="onEventLog('cpSliderDragStart', $event)"
+                     (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', $event)"/>
               </div>
               <div class="form-group">
+                      <label class="form-text text-muted" for="textcolor">Text Color</label>
+                      <input id="textcolor" style="cursor:pointer;width: 220px !important;text-align: center !important"  [style.color]="this.textcolor(this.colorText)"  [style.background]="this.colorText" [(colorPicker)]="this.colorText" [value]="this.colorText"
+                       (colorPickerOpen)="onEventLog('colorPickerOpen', $event)" 
+                       (colorPickerClose)="onEventLog('colorPickerClose', $event)" 
+                       (cpInputChange)="onEventLog('cpInputChange', $event)"
+                        (cpSliderDragStart)="onEventLog('cpSliderDragStart', $event)"
+                         (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', $event)"/>
+                  </div>
+                    
+              <div class="form-group">
                     <label class="form-text text-muted" for="vat">Display Text</label>
-                    <input maxlength="14"  #widgettext (keyup)="this.widgetText = widgettext.value" type="text" class="form-control" id="vat" [value]="this.widgetText">
-                  </div>
-                  
-            </div><!--/.row-->
-          </mat-tab>
-          <mat-tab>
-              <ng-template mat-tab-label>
-                  <div >
-                      <strong>Working Hours</strong>  
+                    <input maxlength="14"  #widgettext (keyup)="this.widgetText = widgettext.value" type="text" class="form-control" id="vat" [value]="this.myWidget.talkToUsText">
+              </div>
+
+              <div class="form-group">
+                <label class="form-text text-muted" for="animated">Animated</label>
+                  <mat-slide-toggle  id="animated" #isanimate style="margin-top:10px" labelPosition="after" [checked]="this.myWidget.isAnimated"></mat-slide-toggle>
+              </div>
+
+            </div><!--/.card body-->
+
+            </mat-tab>
+
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon style=" color:rgb(0, 140, 255) !important" class="example-tab-icon">phone</mat-icon>
+                    <span style="vertical-align: top; margin-left:5px"> Contact Info </span> 
+                </ng-template>
+
+                <div class="card-body" style="height: 400px">
+
+                    <div style="margin-top:2px;margin-bottom:20px;">
+                        <i class="fa fa-info-circle" style="padding-top:0px; margin-bottom : 10px;font-size:18px;color:rgb(0, 140, 255)"></i> <span class="text text-muted"> Only UK numbers are supported right now.</span>
                     </div>
-              </ng-template>
 
-              <div class="card-body" style="height: 400px">
-
-                  <div style="margin-top:2px;margin-bottom:20px;">
-                      <i class="fa fa-info-circle" style="padding-top:5px;font-size:18px;color:#ff6600 "></i> <span class="text text-muted">  Customer calls will be routed to you only on these hours:</span>
+                <div class="form-group">
+                    <label class="form-text text-muted" for="phone">Connected To </label>
+                        <div class="row" style="border:1px dashed #ff6600 ; padding:1px" > 
+                            <div style="margin:0px; padding: 0px;text-align:right" class="col-2">
+                                    <img style="margin-top: 5px ; width:30px;height:25px" src="../../../assets/img/icon/uk.png">
+                                    <span style="margin-top: 5px" > +44 </span>
+                            </div>
+                            <div style="padding-left : 5px" class="col-10">
+                                    <input #phone type="number" class="form-control" id="phone" placeholder="Enter your phone number" [value]="this.myWidget.connectedTo">
+                            </div>
+                        </div>
                   </div>
+  
+                  <div style="margin-top:30px" class="form-group">
+                      <label class="form-text text-muted" for="phone">Notification Email <span style="color:gray">(Callback notifications will be sent to this email) </span> </label>
+                      <input #email type="text" class="form-control" id="email" placeholder="Enter your email address" [value]="this.myWidget.notificationEmail" >
+                    </div>
+  
+                  <div style="margin-top:30px"  class="form-group">
+                      <label class="form-text text-muted" for="site"> Your Website Address <span style="color:gray">(This widget works only on this domain) </span></label>
+                      <input #domain (blur)="domain.value = correctURL(domain.value)" type="url" class="form-control" id="site" placeholder="http://www.example.com" [value]="this.myWidget.domainUrl">
+                    </div>
 
-                              <div *ngFor="let day of weekDays" class="row">
-                                  <div class="form-group col-3" style="text-align: left">
-                                     <label class="form-text text-muted">{{day.name}}</label>
-                                  </div>
-                                  <div class="col-3" style="text-align: left">
-                                      <mat-slide-toggle #mytoggle  style="margin-top:0px" labelPosition="after" (change)="day.isOpen = mytoggle.checked" [checked]="day.isOpen">{{mytoggle.checked ? 'open' : 'closed'}}</mat-slide-toggle>
-                                    </div>
-                                <div class="col-3" style="text-align: center">
-                                    <input #startTime [disabled]="!mytoggle.checked" style="width: 90px;text-align: center" (change)="day.startTime = startTime.value" type="text" placeholder="From" [value]="day.startTime">
-                                </div>
-                                <div class="col-3" style="text-align: center">
-                                    <input #endTime [disabled]="!mytoggle.checked" style="width: 90px;text-align: center" (change)="day.endTime = endTime.value" type="text" placeholder="Until" [value]="day.endTime">
-                                </div>
+                </div>
+                </mat-tab>
+
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <mat-icon style=" color:rgb(187, 0, 187) !important" class="example-tab-icon">alarm</mat-icon>
+                        <span style="vertical-align: top; margin-left:5px"> Working Hours </span> 
+                    </ng-template>
+
+                    <div class="card-body" style="height: 400px">
+
+                        <div style="margin-top:2px;margin-bottom:20px;">
+                            <i class="fa fa-info-circle" style="padding-top:0px; margin-bottom : 5px;font-size:18px;color:rgb(187, 0, 187)"></i> <span class="text text-muted">  Customer calls will be routed to you only on these hours:</span>
+                        </div>
+
+                          <div *ngFor="let day of weekDays" class="row">
+                              <div class="form-group col-3" style="text-align: left">
+                                 <label class="form-text text-muted">{{day.name}}</label>
                               </div>
-               </div>
-                 
+                              <div class="col-3" style="text-align: left">
+                                  <mat-slide-toggle #mytoggle  style="margin-top:0px" labelPosition="after" (change)="day.isOpen = mytoggle.checked" [checked]="day.isOpen">{{mytoggle.checked ? 'open' : 'closed'}}</mat-slide-toggle>
+                                </div>
+                            <div class="col-3" style="text-align: center">
+                                <input #startTime [disabled]="!mytoggle.checked" style="width: 90px;text-align: center" (change)="day.startTime = startTime.value" type="text" placeholder="From" [value]="day.startTime">
+                            </div>
+                            <div class="col-3" style="text-align: center">
+                                <input #endTime [disabled]="!mytoggle.checked" style="width: 90px;text-align: center" (change)="day.endTime = endTime.value" type="text" placeholder="Until" [value]="day.endTime">
+                            </div>
+                          </div>
+                    </div>
+                </mat-tab>
+              </mat-tab-group> 
 
-          </mat-tab>
-        </mat-tab-group>
 
               <div class="card-footer">
                 <div class="row">  
@@ -146,8 +177,6 @@
           <div class="bounce3"></div>
           Saving Changes
         </div>
-
-
 
       <div *ngIf="this.widgetID.length > 0" class="snippet-code">
         <hr/>
