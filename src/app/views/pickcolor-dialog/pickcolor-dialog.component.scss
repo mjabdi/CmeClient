@@ -1,0 +1,42 @@
+.container-colors
+{
+    padding: 2px;
+    align-items: center;
+}
+
+
+.color-component
+{
+    display: inline-block;
+    margin: 3px 1px;
+    text-align: center;
+    font-family: Courier,monospace;
+    padding: 6px;
+    width: 80px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.color-component:hover
+{
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.color-box
+{
+    height: 72px;
+    width: 72px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0,0.1);
+}
+
+.color-text
+{
+    color: #111;
+    text-transform: uppercase;
+}

@@ -45,21 +45,26 @@ export class LoginComponent {
       private authenticationService: AuthenticationService) {
   }
 
+  dayofWeek;
+
   ngOnInit() {
        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+      // this.authenticationService.getdayofWeek().subscribe(
+      //   data =>
+      //     alert(JSON.stringify(data))
+      //     ,
+      //     error =>
+      //       alert(JSON.stringify(error))
+      // )
+
      }
 
      ngAfterViewInit()
      {
       setTimeout(() => { 
-        this.imageLogoClass = "show";
-        this.overBoxClass = "move";
         this.cardLogoClass ="card-group show"
       }, 10); 
-
-      setTimeout(() => { 
-        this.overBoxClass ="hide"
-      }, 2000); 
 
       setTimeout(() => { 
         this.footerClass ="app-footer show"
@@ -99,6 +104,7 @@ export class LoginComponent {
         },
         error =>
         {
+
           let errormsg : string = error.message;
           if (errormsg.indexOf('404') > 0)
           {

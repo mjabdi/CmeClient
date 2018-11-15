@@ -14,10 +14,10 @@ export class AuthInterceptor implements HttpInterceptor {
     // Get the auth token from the service.
 
     
-    const authToken = this.auth.getAuthorizationToken();
+    var authToken = this.auth.getAuthorizationToken();
     var username = this.auth.getUsername();
-    if (!username)
-      username = '';
+    
+
 
     /*
     * The verbose way:
@@ -28,8 +28,16 @@ export class AuthInterceptor implements HttpInterceptor {
     });
     */
     // Clone the request and set the new header in one step.
-    const authReq = req.clone({ setHeaders: { Authorization: authToken , From: username } });
 
+    var authReq;
+    if (!authToken || !username)
+    {
+      authReq = req.clone();
+    }
+    else
+    {
+       authReq = req.clone({ setHeaders: { Authorization: authToken , From: username } });
+    }
     // send cloned request with header to the next handler.
     return next.handle(authReq);
   }

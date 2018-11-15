@@ -64,6 +64,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { ClipboardModule } from 'ngx-clipboard';
 import { AdminAuthGuard } from './services/AdminAuthGuard';
 import { HomePageModule } from './views/homepage/homepage.module';
+import { SignUpComponent } from './views/signup/signup.component';
+
+import { NgxStripeModule } from 'ngx-stripe';
+import { MyStripeService } from './services/MyStripeService';
+import { PickColorDialogComponent } from './views/pickcolor-dialog/pickcolor-dialog.component';
 
 @NgModule({
   imports: [
@@ -88,9 +93,8 @@ import { HomePageModule } from './views/homepage/homepage.module';
     TabsModule.forRoot(),
     ChartsModule,
     ToastrModule.forRoot(),
-    HomePageModule
-
-
+    HomePageModule,
+    NgxStripeModule.forRoot('pk_test_kVTRNkZf8RffabKEyt93GI8V'),
   ],
   declarations: [
     AppComponent,
@@ -99,9 +103,11 @@ import { HomePageModule } from './views/homepage/homepage.module';
     P500Component,
     LoginComponent,
     RegisterComponent,
+    SignUpComponent,
     ResetpasswordComponent,
     ActivationLinkComponent,
-    ForgotpasswordComponent
+    ForgotpasswordComponent,
+    PickColorDialogComponent
    
   ],
   providers: [{
@@ -113,9 +119,11 @@ import { HomePageModule } from './views/homepage/homepage.module';
   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   AuthenticationService,
   HttpErrorHandler,
-  MessageService
+  MessageService,
+  MyStripeService
 
 ],
+  entryComponents: [PickColorDialogComponent],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

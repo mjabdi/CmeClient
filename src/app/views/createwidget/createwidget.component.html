@@ -23,21 +23,31 @@
 
                     <div class="form-group">
                       <label class="form-text text-muted" for="widgetcolor">Widget Color</label>
-                      <input id="widgetcolor" style="cursor:pointer;width:220px !important;text-align: center !important" [style.color]="this.textcolor(this.colorWidget)" [style.background]="this.colorWidget" [(colorPicker)]="this.colorWidget" [value]="this.colorWidget"
+
+                       <input #wgtbackcolor (keyup)="validHexColor(wgtbackcolor.value) ? this.colorWidget = wgtbackcolor.value : this.colorWidget" type="text" maxlength="7" autocomplete="off" id="widgetcolor" style="text-transform: uppercase ;width:220px !important;text-align: center !important" [style.color]="this.textcolor(this.colorWidget)" [style.background]="this.colorWidget" [value]="this.colorWidget">  
+                       <div (click)="showColorDialog(1)" matTooltip="Change Color" style="display:inline-block;vertical-align: top">
+                            <img src="../../../assets/img/icon/colorpicker-2.png" class="pickcolor-icon">
+                       </div>
+                      <!-- <input id="widgetcolor" style="cursor:pointer;width:220px !important;text-align: center !important" [style.color]="this.textcolor(this.colorWidget)" [style.background]="this.colorWidget" [(colorPicker)]="this.colorWidget" [value]="this.colorWidget"
                        (colorPickerOpen)="onEventLog('colorPickerOpen', $event)" 
                        (colorPickerClose)="onEventLog('colorPickerClose', $event)" 
                        (cpInputChange)="onEventLog('cpInputChange', $event)"
                         (cpSliderDragStart)="onEventLog('cpSliderDragStart', $event)"
-                         (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', $event)"/>
+                         (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', $event)"/> -->
                   </div>
                   <div class="form-group">
                           <label class="form-text text-muted" for="textcolor">Text Color</label>
-                          <input id="textcolor" style="cursor:pointer;width: 220px !important;text-align: center !important"  [style.color]="this.textcolor(this.colorText)"  [style.background]="this.colorText" [(colorPicker)]="this.colorText" [value]="this.colorText"
+                          <input #wgttextcolor (keyup)="validHexColor(wgttextcolor.value) ? this.colorText = wgttextcolor.value : this.colorText"  type="text" maxlength="7" autocomplete="off" id="textcolor" style="text-transform: uppercase ;width: 220px !important;text-align: center !important"  [style.color]="this.textcolor(this.colorText)"  [style.background]="this.colorText" [value]="this.colorText">
+                          <div (click)="showColorDialog(2)" matTooltip="Change Color" style="display:inline-block;vertical-align: top">
+                            <img src="../../../assets/img/icon/colorpicker-2.png" class="pickcolor-icon">
+                          </div>
+
+                          <!-- <input id="textcolor" style="cursor:pointer;width: 220px !important;text-align: center !important"  [style.color]="this.textcolor(this.colorText)"  [style.background]="this.colorText" [(colorPicker)]="this.colorText" [value]="this.colorText"
                            (colorPickerOpen)="onEventLog('colorPickerOpen', $event)" 
                            (colorPickerClose)="onEventLog('colorPickerClose', $event)" 
                            (cpInputChange)="onEventLog('cpInputChange', $event)"
                             (cpSliderDragStart)="onEventLog('cpSliderDragStart', $event)"
-                             (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', $event)"/>
+                             (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', $event)"/>  -->
                       </div>
                         
                   <div class="form-group">
@@ -70,8 +80,8 @@
                         <label class="form-text text-muted" for="phone">Connected To </label>
                             <div class="row" style="border:1px dashed #ff6600 ; padding:1px" > 
                                 <div style="margin:0px; padding: 0px;text-align:right" class="col-2">
-                                        <img style="margin-top: 5px ; width:30px;height:25px" src="../../../assets/img/icon/uk.png">
-                                        <span style="margin-top: 5px" > +44 </span>
+                                    <img style="vertical-align: bottom;margin-top: 6px ; width:30px;height:23px" src="../../../assets/img/icon/uk.png">
+                                        <span> +44 </span>
                                 </div>
                                 <div style="padding-left : 5px" class="col-10">
                                         <input #phone type="number" class="form-control" id="phone" placeholder="Enter your phone number">
@@ -100,7 +110,7 @@
 
                         <div class="card-body" style="height: 400px">
 
-                            <div style="margin-top:2px;margin-bottom:20px;">
+                            <div style="margin-top:0px;margin-bottom:5px;">
                                 <i class="fa fa-info-circle" style="padding-top:0px; margin-bottom : 5px;font-size:18px;color:rgb(187, 0, 187)"></i> <span class="text text-muted">  Customer calls will be routed to you only on these hours:</span>
                             </div>
 
@@ -118,6 +128,7 @@
                                     <input #endTime [disabled]="!mytoggle.checked" style="width: 90px;text-align: center" (change)="day.endTime = endTime.value" type="text" placeholder="Until" [value]="day.endTime">
                                 </div>
                               </div>
+                              <mat-checkbox #agreecheck color="primary" (change)="this.agreeChecked = agreecheck.checked">  <span [class]="this.getClassAgree()">I agree to the above working hours </span> </mat-checkbox>
                         </div>
                     </mat-tab>
                   </mat-tab-group> 

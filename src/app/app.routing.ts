@@ -15,6 +15,7 @@ import { ForgotpasswordComponent } from './views/forgotpassword/forgotpassword.c
 import { AuthGuard } from './services/AuthGuard';
 import { HomePageComponent } from './views/homepage/homepage.component';
 import { AdminAuthGuard } from './services/AdminAuthGuard';
+import { SignUpComponent } from './views/signup/signup.component';
 
 export const routes: Routes = [
   {
@@ -61,17 +62,24 @@ export const routes: Routes = [
     }
   },
   {
+    path: 'signup',
+    component: SignUpComponent,
+    data: {
+      title: 'SignUp Page'
+    }
+  },
+  {
     path: 'resetpassword/:id',
     component: ResetpasswordComponent,
     data: {
-      title: 'Resetpassword Page'
+      title: 'Reset Password Page'
     }
   },
   {
     path: 'activationlink/:id',
     component: ActivationLinkComponent,
     data: {
-      title: 'Activationlink Page'
+      title: 'Activation Link Page'
     }
   },
   
@@ -79,7 +87,7 @@ export const routes: Routes = [
     path: 'forgotpassword',
     component: ForgotpasswordComponent,
     data: {
-      title: 'Forgotpassword Page'
+      title: 'Forgot Password Page'
     }
   },
   {

@@ -1,0 +1,8 @@
+<div class="container-colors">
+
+<div *ngFor="let color of popularColors" class="color-component" (click)="selectColor(color)">
+    <div [style.background]="color" class="color-box"></div>
+    <div class="color-text">{{color}}</div>
+</div>
+
+</div>

@@ -78,7 +78,7 @@ export class ChangepasswordComponent {
               }
               else
               {
-                this.toastrService.error('Sorry! Something went wrong, please try again!' ,'Register Failed');
+                this.toastrService.error('Sorry! Something went wrong, please try again!' ,'Change Password Failed');
               }  
               this.isSubmit = false;
             }

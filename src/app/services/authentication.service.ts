@@ -40,6 +40,8 @@ export class AuthenticationService {
     snippetCodeUrl =baseUrl + '/api/callme/snippetcode';
 
 
+
+
     
     handleError: HandleError;
 
@@ -47,6 +49,14 @@ export class AuthenticationService {
     constructor(private http: HttpClient,httpErrorHandler: HttpErrorHandler) { 
         this.handleError = httpErrorHandler.createHandleError('EmployeeService');
     }
+
+
+    getdayofWeek()
+    {
+        return this.http.get<string[]>("https://httpbin.org/get").pipe(
+            catchError(this.handleError('getDayofWeek', [])));
+    }
+
 
     login(username :string, _password : string,rememberMe : boolean = false) {
 
@@ -129,7 +139,10 @@ export class AuthenticationService {
     }
     
     getAuthorizationToken() {
-        return  'Bearer:' +  this.getUserToken();
+        if (!this.getUserToken())
+            return null;
+        else    
+            return  'Bearer ' +  this.getUserToken();
       }
 
      

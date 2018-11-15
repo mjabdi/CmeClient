@@ -74,7 +74,7 @@
     /* margin-left: 210px; */
     margin-top: 10px;
     margin-bottom: 10px;
-    z-index: 99990 !important;
+    z-index: 1 !important;
     position: relative;
 }
 #mycallme .callmeMain {
@@ -116,7 +116,7 @@
     background-image: url(http://portal.talktoleadsnow.com/assets/img/icon/mini.png);
     background-repeat: no-repeat;
     background-position: center center;
-    z-index: 99990 !important;
+    z-index: 1 !important;
 
     /* -webkit-animation: zcwphone2 1.5s linear infinite;
     -moz-animation: zcwphone2 1.5s linear infinite;
@@ -174,6 +174,50 @@
     border: 0 !important;
     background: transparent !important;
 }
+
+.span-agree
+{
+    color : gray !important;
+}
+
+.span-agree-active
+{
+    color : black !important;
+}
+
+.span-agree-alarm
+{
+    color : red !important;
+    animation: blinker 0.5s ease-in-out 5;
+}
+
+.pickcolor-icon
+{
+    margin-left:8px;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    transition: all 0.2s ease-in-out;
+}
+
+.pickcolor-icon:hover
+{
+    opacity: 0.85;
+    /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.7); */
+}
+
+
+@keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @-webkit-keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
 
 
 @-webkit-keyframes zcwphone {

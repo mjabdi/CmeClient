@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { getStyle } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
-import {MatIcon} from '@angular/material';
+import {MatIcon, MatDialogConfig, MatDialog} from '@angular/material';
 import { ColorPickerService, Cmyk } from 'ngx-color-picker';
 import {WidgetService} from '../widgets/widget.service';
 import {AuthenticationService} from '../../services/authentication.service';
@@ -12,7 +12,7 @@ import { ClipboardService } from 'ngx-clipboard';
 import {MatSnackBar} from '@angular/material';
 import {HostListener, AfterViewInit } from '@angular/core';
 import { WeekDay } from './weekday';
-
+import { PickColorDialogComponent } from '../pickcolor-dialog/pickcolor-dialog.component';
 
 
 @Component({
@@ -30,9 +30,12 @@ export class CreateWidgetComponent {
 
     dayOffStatus="Open";  
 
-    colorWidget = "rgb(255,102,0)";
-    colorText = "rgb(255,255,255)";
+    colorWidget = "#FF6600";
+    colorText = "#FFFFFF";
     TalkToUsText = "Talk To Leads Now";
+
+    agreeChecked = false;
+    alarmAgree = false;
 
 
      weekDays : WeekDay[] = [
@@ -53,7 +56,8 @@ export class CreateWidgetComponent {
       private cpService: ColorPickerService,
       private toastrService : ToastrService,
       private clipboardService: ClipboardService,
-      private snackbar : MatSnackBar
+      private snackbar : MatSnackBar,
+      private dialog: MatDialog
       ){
 
     }
@@ -174,6 +178,14 @@ export class CreateWidgetComponent {
           return false;
        }
        
+
+       if (!this.agreeChecked)
+       {
+        this.toastrService.warning('Please check the "I agree with the above working hours" checkbox');
+        this.selectedTabIndex = 2;
+        this.alarmAgree = true;
+        return false;  
+       }
        
         this.isSubmit = true;
 
@@ -260,6 +272,55 @@ export class CreateWidgetComponent {
       isValidDomain(domain) {
         var re = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
         return re.test(String(domain).toLowerCase());
+      }
+
+
+      getClassAgree() : string
+      {
+        if (this.agreeChecked)
+          return 'span-agree-active';
+         else if (this.alarmAgree)
+          return 'span-agree-alarm';
+         else
+            return 'span-agree';
+      }
+
+      validHexColor(val)
+      {
+        var re = /^#[0-9A-F]{6}$/ ;
+        return re.test(val);
+      }
+
+      showColorDialog(type : number)
+      {
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.hasBackdrop = true;
+        dialogConfig.disableClose = false;
+        dialogConfig.autoFocus = true;    
+        dialogConfig.panelClass = "custom-modalbox";    
+        dialogConfig.width = "50%";
+        dialogConfig.height = "50%";
+    
+        const dialogRef = this.dialog.open(PickColorDialogComponent,dialogConfig);
+    
+    
+        dialogRef.afterClosed().subscribe(
+          val => {
+              if (val)
+              {
+                if (type == 1 )
+                {
+                  this.colorWidget = val;
+                } 
+                else if (type == 2)
+                {
+                  this.colorText = val;
+                }
+              }
+          }
+      );
+    
       }
 
 }

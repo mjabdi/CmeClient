@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { getStyle } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
-import {MatIcon} from '@angular/material';
+import {MatIcon, MatDialog, MatDialogConfig} from '@angular/material';
 import { ColorPickerService, Cmyk } from 'ngx-color-picker';
 import { ActivatedRoute } from '@angular/router';
 import {AuthenticationService} from '../../services/authentication.service';
@@ -12,6 +12,7 @@ import {WidgetService} from '../widgets/widget.service';
 import { ClipboardService } from 'ngx-clipboard';
 import {MatSnackBar} from '@angular/material';
 import { WeekDay } from '../createwidget/weekday';
+import { PickColorDialogComponent } from '../pickcolor-dialog/pickcolor-dialog.component';
 
 
 @Component({
@@ -50,7 +51,8 @@ export class EditWidgetComponent {
       private authService : AuthenticationService,
       private toastrService : ToastrService,
       private clipboardService: ClipboardService,
-      private snackbar : MatSnackBar
+      private snackbar : MatSnackBar,
+      private dialog: MatDialog
       
       
       ) {
@@ -240,5 +242,46 @@ export class EditWidgetComponent {
           }
           return value;
       }
+
+
+
+      validHexColor(val)
+      {
+        var re = /^#[0-9A-F]{6}$/ ;
+        return re.test(val);
+      }
+
+      showColorDialog(type : number)
+      {
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.hasBackdrop = true;
+        dialogConfig.disableClose = false;
+        dialogConfig.autoFocus = true;    
+        dialogConfig.panelClass = "custom-modalbox";    
+        dialogConfig.width = "50%";
+        dialogConfig.height = "50%";
+    
+        const dialogRef = this.dialog.open(PickColorDialogComponent,dialogConfig);
+    
+    
+        dialogRef.afterClosed().subscribe(
+          val => {
+              if (val)
+              {
+                if (type == 1 )
+                {
+                  this.colorWidget = val;
+                } 
+                else if (type == 2)
+                {
+                  this.colorText = val;
+                }
+              }
+          }
+      );
+    
+      }
+
 
 }
