@@ -92,7 +92,16 @@ import { PickColorDialogComponent } from './views/pickcolor-dialog/pickcolor-dia
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-top-full-width',
+      preventDuplicates: true,
+      closeButton : true,
+      easing : 'ease-in-out',
+      easeTime : 200,
+      progressBar : false
+
+    }),
     HomePageModule,
     NgxStripeModule.forRoot('pk_test_kVTRNkZf8RffabKEyt93GI8V'),
   ],

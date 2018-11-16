@@ -25,7 +25,7 @@
                       <label class="form-text text-muted" for="widgetcolor">Widget Color</label>
 
                        <input #wgtbackcolor (keyup)="validHexColor(wgtbackcolor.value) ? this.colorWidget = wgtbackcolor.value : this.colorWidget" type="text" maxlength="7" autocomplete="off" id="widgetcolor" style="text-transform: uppercase ;width:220px !important;text-align: center !important" [style.color]="this.textcolor(this.colorWidget)" [style.background]="this.colorWidget" [value]="this.colorWidget">  
-                       <div (click)="showColorDialog(1)" matTooltip="Change Color" style="display:inline-block;vertical-align: top">
+                       <div (click)="showColorDialog(1)" matTooltip="Choose Color" style="display:inline-block;vertical-align: top">
                             <img src="../../../assets/img/icon/colorpicker-2.png" class="pickcolor-icon">
                        </div>
                       <!-- <input id="widgetcolor" style="cursor:pointer;width:220px !important;text-align: center !important" [style.color]="this.textcolor(this.colorWidget)" [style.background]="this.colorWidget" [(colorPicker)]="this.colorWidget" [value]="this.colorWidget"
@@ -38,7 +38,7 @@
                   <div class="form-group">
                           <label class="form-text text-muted" for="textcolor">Text Color</label>
                           <input #wgttextcolor (keyup)="validHexColor(wgttextcolor.value) ? this.colorText = wgttextcolor.value : this.colorText"  type="text" maxlength="7" autocomplete="off" id="textcolor" style="text-transform: uppercase ;width: 220px !important;text-align: center !important"  [style.color]="this.textcolor(this.colorText)"  [style.background]="this.colorText" [value]="this.colorText">
-                          <div (click)="showColorDialog(2)" matTooltip="Change Color" style="display:inline-block;vertical-align: top">
+                          <div (click)="showColorDialog(2)" matTooltip="Choose Color" style="display:inline-block;vertical-align: top">
                             <img src="../../../assets/img/icon/colorpicker-2.png" class="pickcolor-icon">
                           </div>
 
@@ -95,8 +95,8 @@
                         </div>
       
                       <div style="margin-top:30px"  class="form-group">
-                          <label class="form-text text-muted" for="site"> Your Website Address <span style="color:gray">(This widget works only on this domain) </span></label>
-                          <input #domain (blur)="domain.value = correctURL(domain.value)" type="url" class="form-control" id="site" placeholder="http://www.example.com">
+                          <label class="form-text text-muted" for="site"> Your Website Address <span style="color:gray">(e.g. http://www.example.com) </span></label>
+                          <input #domain (blur)="domain.value = correctURL(domain.value)" type="url" class="form-control" id="site" placeholder="Enter your website address">
                         </div>
 
                     </div>

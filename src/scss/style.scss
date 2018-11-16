@@ -17,3 +17,11 @@
     -ms-transition: none !important;
     -o-transition: none !important;
   }
+
+.toast
+{
+  opacity: 1;
+  font-size : 16px;
+  border: 1px solid rgba(0,0,0,0.2);
+  top : 2px;
+}

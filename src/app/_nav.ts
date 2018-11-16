@@ -14,11 +14,16 @@ export const navItems_User = [
     url: '/createwidget',
     icon: 'icon-frame',
   },
-  // {
-  //   name: 'My Calls',
-  //   url: '/mycalls',
-  //   icon: 'icon-call-in',
-  // },
+  {
+    name: 'My Calls',
+    url: '/mycalls',
+    icon: 'icon-call-in',
+  },
+    {
+    name: 'My Subscriptions',
+    url: '/mysubscriptions',
+    icon: 'icon-credit-card',
+  },
   {
     title: true,
     name: 'Settings'
@@ -71,6 +76,11 @@ export const navItems_Admin = [
     name: 'My Calls',
     url: '/mycalls',
     icon: 'icon-call-in',
+  },
+  {
+    name: 'My Subscriptions',
+    url: '/mysubscriptions',
+    icon: 'icon-credit-card',
   },
   {
     title: true,

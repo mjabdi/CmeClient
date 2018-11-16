@@ -123,6 +123,10 @@ export const routes: Routes = [
         path: 'mycalls',
         loadChildren: './views/mycalls/mycalls.module#MyCallsModule'
       },
+      {
+        path: 'mysubscriptions',
+        loadChildren: './views/mysubscriptions/mysubscriptions.module#MySubscriptionsModule'
+      },
 
       {
         path: 'widgets',

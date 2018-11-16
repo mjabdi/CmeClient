@@ -366,6 +366,35 @@
     margin: 6px 0 12px 16px;
 }
 
-
+.spinner2 {
+    width: 100%;
+    text-align: center !important;
+    font-size: 16px !important;
+    color:  #ff6600 !important;
+    vertical-align: top;
+    align : center;
+  }
+  
+  .spinner2 > div {
+    width: 12px;
+    height: 12px;
+    background-color: #ff6600;
+    margin: 4px;
+  
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  }
+  
+  .spinner2 .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+  }
+  
+  .spinner2 .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+  }
 
   
