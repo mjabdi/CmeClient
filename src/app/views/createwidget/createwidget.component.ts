@@ -13,6 +13,8 @@ import {MatSnackBar} from '@angular/material';
 import {HostListener, AfterViewInit } from '@angular/core';
 import { WeekDay } from './weekday';
 import { PickColorDialogComponent } from '../pickcolor-dialog/pickcolor-dialog.component';
+import { MySubscriptionService } from '../mysubscriptions/mysubscriptions.service';
+import { MySubscription } from '../mysubscriptions/mysubscription';
 
 
 @Component({
@@ -21,6 +23,8 @@ import { PickColorDialogComponent } from '../pickcolor-dialog/pickcolor-dialog.c
 })
 export class CreateWidgetComponent {
 
+
+  mysubscriptions : MySubscription[];
 
   today = new Date();
 
@@ -54,9 +58,10 @@ export class CreateWidgetComponent {
       private wgtService : WidgetService,
       private authService : AuthenticationService,
       private cpService: ColorPickerService,
-      private toastrService : ToastrService,
       private clipboardService: ClipboardService,
       private snackbar : MatSnackBar,
+      private toastrService : ToastrService,
+      private mysubscriptionService : MySubscriptionService,
       private dialog: MatDialog
       ){
 
@@ -96,7 +101,24 @@ export class CreateWidgetComponent {
     ngOnInit()
     {
       this.myEmail = this.authService.getUsername();
+      this.loadMySubscriptions();
     }
+
+    loadMySubscriptions()
+    {
+        this.mysubscriptionService.getMySubscriptions()
+        .map(subs => subs.filter(sub => sub.status === 'active' ||  sub.status === 'trialing'))
+        .subscribe(
+
+          (data : MySubscription[])=>
+          {
+            this.mysubscriptions = data;
+          }
+
+        );
+
+    }
+
 
 
 
@@ -147,7 +169,7 @@ export class CreateWidgetComponent {
 
       isSubmit = false;
       selectedTabIndex = 0;
-      onSubmit(widgetname : string,phone : string,email : string ,  domain :string ,isanimate :boolean ):boolean {
+      onSubmit(widgetname : string,phone : string,email : string ,  domain :string ,isanimate :boolean , subscription : string):boolean {
 
        
         if (!widgetname)
@@ -177,6 +199,13 @@ export class CreateWidgetComponent {
           this.selectedTabIndex = 0;
           return false;
        }
+
+       if (!subscription)
+       {
+          this.toastrService.warning('Please choose a subscription');
+          this.selectedTabIndex = 0;
+          return false;
+       }
        
 
        if (!this.agreeChecked)
@@ -203,6 +232,7 @@ export class CreateWidgetComponent {
         wgt.email = this.authService.getUsername();
         wgt.weekDays = this.weekDays;
         wgt.notificationEmail = email;
+        wgt.subscriptionId = subscription;
 
         this.wgtService.createNewWidget(wgt)
         .subscribe(data => {

@@ -1,0 +1,28 @@
+
+
+<div class="div-payment">
+    <div class="text-question">
+
+    Are you sure you want to cancel the subscription with id : <span style="color:#ff6600;text-decoration: underline" >{{this.mysub.subscriptionID}}</span> ?
+
+    </div>
+
+    <div align="right">
+            <button [disabled]="submitting" style="margin-top:20px;margin-right:10px" class="btn btn-light" (click)="close()" >
+                    Close
+            </button>
+            
+            <button [disabled]="submitting" style="margin-top:20px" class="btn btn-primary" (click)="cancel()">
+                Cancel Subscription
+            </button>
+    </div>
+</div>
+
+<div *ngIf="submitting" align="center">
+        <div class="spinner">
+            Please wait 
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+   </div>

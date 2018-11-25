@@ -1,0 +1,90 @@
+* {
+    box-sizing: border-box;
+}
+
+.plan-title
+{
+    text-align : center;
+    color : #696969;
+    font-size : 20px;
+    margin-bottom: 20px;
+}
+
+.columns {
+    float: left;
+    width: 33.3%;
+    padding: 8px;
+}
+
+.price {
+    list-style-type: none;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    margin: 0;
+    padding: 0;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.price:hover {
+    box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2);
+    transition: all 0.2s ease-out;
+}
+
+.price .header {
+    background-color:white;
+    color: #ff6600;
+    font-size: 20px;
+    border : 1px solid #eee;
+    border-bottom: none;
+    font-weight: 400;
+}
+
+
+.price li {
+    border-bottom: 1px solid #eee;
+    padding: 20px;
+    text-align: center;
+}
+
+.price .grey {
+    background-color: #eee;
+    font-size: 20px;
+}
+
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.vat-text
+{
+    font-size: 10px;
+    color: #222;
+}
+
+.trial-text
+{
+    color: #5cb85c;
+    background : white;
+    font-weight: 700;    
+}
+
+.trial-icon
+{
+    vertical-align: bottom;
+    margin-right : 5px;
+}
+
+@media only screen and (max-width: 600px) {
+    .columns {
+        width: 100%;
+    }
+}
+

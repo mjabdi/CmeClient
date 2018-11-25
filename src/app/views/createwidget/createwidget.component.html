@@ -6,7 +6,7 @@
 
             <div class="card card-accent-primary">
 
-                <form (submit)="onSubmit(name.value,phone.value,email.value,domain.value,isanimate.checked)" name="loginForm">
+                <form (submit)="onSubmit(name.value,phone.value,email.value,domain.value,isanimate.checked,subscription.value)" name="loginForm">
                     <mat-tab-group #matgroup [selectedIndex]="selectedTabIndex" (selectedIndexChange)="selectedTabIndex=matgroup.selectedIndex">
                         <mat-tab>
                             <ng-template mat-tab-label>
@@ -14,7 +14,7 @@
                                 <span style="vertical-align: top; margin-left:5px"> Design </span> 
                               </ng-template>
                           
-             <div class="card-body" style="height: 400px">
+             <div class="card-body" style="height: 470px">
 
                 <div class="form-group">
                   <label class="form-text text-muted" for="name">Widget Name</label>
@@ -60,6 +60,19 @@
                       <mat-slide-toggle  id="animated" #isanimate style="margin-top:10px" labelPosition="after" [checked]="true"></mat-slide-toggle>
                   </div>
 
+                  <div class="form-group">
+                        <mat-form-field style="width:100%">
+                                <mat-select #subscription placeholder="Choose a subscription">
+                                        <mat-option  *ngFor="let item of mysubscriptions" [value]="item.subscriptionID">
+                                          {{item.subscriptionID}} : {{item.plan}}  ({{item.status}})
+                                        </mat-option>
+                                </mat-select>                      
+                        </mat-form-field>
+                  </div>
+    
+                  
+
+
                 </div><!--/.card body-->
 
                 </mat-tab>
@@ -70,7 +83,7 @@
                         <span style="vertical-align: top; margin-left:5px"> Contact Info </span> 
                     </ng-template>
 
-                    <div class="card-body" style="height: 400px">
+                    <div class="card-body" style="height: 470px">
 
                         <div style="margin-top:2px;margin-bottom:20px;">
                             <i class="fa fa-info-circle" style="padding-top:0px; margin-bottom : 10px;font-size:18px;color:rgb(0, 140, 255)"></i> <span class="text text-muted"> Only UK numbers are supported right now.</span>
@@ -108,7 +121,7 @@
                             <span style="vertical-align: top; margin-left:5px"> Working Hours </span> 
                         </ng-template>
 
-                        <div class="card-body" style="height: 400px">
+                        <div class="card-body" style="height: 470px">
 
                             <div style="margin-top:0px;margin-bottom:5px;">
                                 <i class="fa fa-info-circle" style="padding-top:0px; margin-bottom : 5px;font-size:18px;color:rgb(187, 0, 187)"></i> <span class="text text-muted">  Customer calls will be routed to you only on these hours:</span>

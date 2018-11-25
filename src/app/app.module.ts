@@ -69,6 +69,9 @@ import { SignUpComponent } from './views/signup/signup.component';
 import { NgxStripeModule } from 'ngx-stripe';
 import { MyStripeService } from './services/MyStripeService';
 import { PickColorDialogComponent } from './views/pickcolor-dialog/pickcolor-dialog.component';
+import { BuyPlanDialogComponent } from './views/buyplan-dialog/buyplan-dialog.component';
+import { ChangePlanDialogComponent } from './views/changeplan-dialog/changeplan-dialog.component';
+import { StripeFormDialogComponent } from './views/stripeform-dialog/stripeform-dialog.component';
 
 @NgModule({
   imports: [
@@ -116,7 +119,10 @@ import { PickColorDialogComponent } from './views/pickcolor-dialog/pickcolor-dia
     ResetpasswordComponent,
     ActivationLinkComponent,
     ForgotpasswordComponent,
-    PickColorDialogComponent
+    PickColorDialogComponent,
+    BuyPlanDialogComponent,
+    ChangePlanDialogComponent,
+    StripeFormDialogComponent
    
   ],
   providers: [{
@@ -132,7 +138,7 @@ import { PickColorDialogComponent } from './views/pickcolor-dialog/pickcolor-dia
   MyStripeService
 
 ],
-  entryComponents: [PickColorDialogComponent],
+  entryComponents: [PickColorDialogComponent,BuyPlanDialogComponent,ChangePlanDialogComponent,StripeFormDialogComponent],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

@@ -13,6 +13,8 @@ import { ClipboardService } from 'ngx-clipboard';
 import {MatSnackBar} from '@angular/material';
 import { WeekDay } from '../createwidget/weekday';
 import { PickColorDialogComponent } from '../pickcolor-dialog/pickcolor-dialog.component';
+import { MySubscription } from '../mysubscriptions/mysubscription';
+import { MySubscriptionService } from '../mysubscriptions/mysubscriptions.service';
 
 
 @Component({
@@ -20,6 +22,9 @@ import { PickColorDialogComponent } from '../pickcolor-dialog/pickcolor-dialog.c
   styleUrls: ['editwidget.component.css']
 })
 export class EditWidgetComponent {
+
+
+    mysubscriptions : MySubscription[];
 
     colorWidget = "rgb(77,189,116)"
     colorText = "rgb(240,243,245)"
@@ -52,16 +57,19 @@ export class EditWidgetComponent {
       private toastrService : ToastrService,
       private clipboardService: ClipboardService,
       private snackbar : MatSnackBar,
+      private mysubscriptionService : MySubscriptionService,
       private dialog: MatDialog
-      
-      
       ) {
     }
     widgetText : string = "Talk To Us Now";
     ngOnInit() {
+
+        this.loadMySubscriptions();
+
         this.sub = this.route.params.subscribe(params => {
            this.widgetID = params['id']; // (+) converts string 'id' to a number
            
+
            this.wgtService.findWidget(this.widgetID).subscribe(
             (widget : Widget) => {
                 this.myWidget = widget;
@@ -80,6 +88,22 @@ export class EditWidgetComponent {
            // In a real app: dispatch action to load the details here.
         });
       }
+
+      loadMySubscriptions()
+      {
+          this.mysubscriptionService.getMySubscriptions()
+          .map(subs => subs.filter(sub => sub.status === 'active' ||  sub.status === 'trialing'))
+          .subscribe(
+  
+            (data : MySubscription[])=>
+            {
+              this.mysubscriptions = data;
+            }
+  
+          );
+  
+      }
+  
 
 
       downloadSnippetCode(token : string)
@@ -145,7 +169,7 @@ export class EditWidgetComponent {
     
       isSubmit = false;
 
-      onSubmit(widgetname : string,phone : string, email : string, domain :string ,isanimate :boolean ):boolean {
+      onSubmit(widgetname : string,phone : string, email : string, domain :string ,isanimate :boolean, subscription : string ):boolean {
 
 
         if (!widgetname)
@@ -176,6 +200,14 @@ export class EditWidgetComponent {
           return false;
        }
 
+       if (!subscription)
+       {
+          this.toastrService.warning('Please choose a subscription');
+          this.selectedTabIndex = 0;
+          return false;
+       }
+
+
         this.isSubmit = true;
 
 
@@ -196,6 +228,7 @@ export class EditWidgetComponent {
         wgt.authKey = this.myWidget.authKey;
         wgt.extension = this.myWidget.extension;
         wgt.notificationEmail = email;
+        wgt.subscriptionId = subscription;
 
         this.wgtService.updateWidget(wgt.id,wgt)
         .subscribe(data => {

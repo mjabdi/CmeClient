@@ -1,7 +1,28 @@
+<div class="div-payment">
+
 <form novalidate (ngSubmit)="buy($event)" [formGroup]="stripeTest">
-    <input type="text" formControlName="name" placeholder="Jane Doe">
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Name" formControlName="name" autocomplete="off">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Address" formControlName="address" autocomplete="address">
+    </mat-form-field>
+
     <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions"></ngx-stripe-card>
-    <button type="submit">
+    <div align="right">
+       
+    <button style="width:100px;margin-top:20px;margin-right:10px" class="btn btn-light">
+            Close
+    </button>
+    
+    <button style="width:120px;margin-top:20px" class="btn btn-primary" type="submit">
       BUY
     </button>
+
+  </div>
   </form>
+
+
+</div>

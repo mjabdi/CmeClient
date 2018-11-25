@@ -1,18 +1,85 @@
-<div class="main-content">
-    <div class="container-fluid">
-              <div class="card card-accent-primary">
-                
-                  <div class="card-header card-header-danger">
-  
+<div class="animated fadeIn">
+    <div class="main-content">
+        <div class="container-fluid">
+            <div class="card card-accent-primary">
+
+                <div class="card-header card-header-danger">
+
                     <h4 style="display: inline-block;font-weight: bold" class="card-title ">My Subscriptions</h4>
   
                     </div>
-  
-                <div style="height: 400px;" class="card-body">
-                </div>
-   
-            </div>
+
+
+            <ng-template mat-tab-label>
+                    <mat-icon style="color:#ff6600 !important" class="example-tab-icon">assignment_turned_in</mat-icon>
+                    <span style="vertical-align: top; margin-left:5px"> Active Subscriptions </span> 
+            </ng-template>
+
+
+              <div  class="card-body">
+
+                            <div class="table">                          
+                                <div class="row header">
+                                    <div class="cell">Subscription ID</div>
+                                    <div class="cell">Plan</div>
+                                    <div class="cell">Current Period</div>
+                                    <div class="cell">Trialing Until</div>
+                                    <div class="cell">Status</div>
+                                    <div class="cell">Action</div>
+                                </div>
+
+                                <ng-container *ngIf="(currentSubscriptions$ | async) as cur_subs; else loading1">
+
+                                <div style="text-align: center;color:gray" *ngIf="cur_subs.length == 0">
+                                        No Active Subscriptions
+                                </div>    
+
+                                <div *ngFor="let sub of cur_subs" class="row">
+                                        <div class="cell" data-title="ID">
+                                          {{sub.subscriptionID}}
+                                        </div>
+                                        <div class="cell" data-title="Plan">
+                                            {{sub.plan}}
+                                        </div>   
+                                        <div class="cell" data-title="Current Period">
+                                          {{sub.currentPeriodStartDate | date:'yyyy/MM/dd'}} - {{sub.currentPeriodEndDate | date:'yyyy/MM/dd'}}
+                                        </div>
+                                        <div class="cell" data-title="Trialing Until">
+                                          {{sub.trialingUntilDate | date:'yyyy/MM/dd'}}
+                                        </div>
+                                        <div class="cell" data-title="Status">
+                                            {{sub.status}}
+                                        </div>
+                                        <div class="cell" data-title="action">
+                                            <button *ngIf="sub.status != 'canceled'" class="button-cell-edit" (click)="openChangeDialog(sub)"> Cancel Subscription </button>
+                                        </div>    
+                                </div>
+
+                            </ng-container>
+                            <ng-template #loading1>
+                                    <div style="margin-left: 10px ; margin-top:20px;margin-bottom:20px; ">
+                                        <div class="spinner">
+                                            <div class="bounce1"></div>
+                                            <div class="bounce2"></div>
+                                            <div class="bounce3"></div>
+                                        </div>
+                                    </div>
+                             </ng-template>
+
+
+                             </div>
+    
+                             <div align="center">
+                             <button [disabled]="!this.loaded" style="width:200px" class="btn btn-secondary" (click)="openBuyDialog()">Buy a New Plan</button>
+                            </div>
+                </div><!--/.row-->
+
+              </div>
+ 
+          </div><!--/.col-->
+
     </div>
-  </div>
-  
-        
+</div>
+
+      
+

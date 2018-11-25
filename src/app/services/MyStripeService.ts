@@ -18,7 +18,9 @@ const httpOptions = {
 @Injectable()
 export class MyStripeService {
 
-    chargeUrl = baseUrl + '/api/stripepayment/charge';
+    createCustomerUrl = baseUrl + '/api/stripepayment/createcustomer';
+    subscribeUrl = baseUrl + '/api/stripepayment/subscribe';
+    UnsubscribeUrl = baseUrl + '/api/stripepayment/unsubscribe';
 
     handleError: HandleError;
 
@@ -27,9 +29,19 @@ export class MyStripeService {
         this.handleError = httpErrorHandler.createHandleError('MyStripeService');
     }
 
-    Charge(s_token : string)
+    CreateCustomer(s_token : string)
     {
-        return this.http.post<any>(this.chargeUrl, {s_token},httpOptions);
+        return this.http.post<any>(this.createCustomerUrl, {s_token},httpOptions);
+    }  
+
+    Subscribe(planId : string)
+    {
+        return this.http.post<any>(this.subscribeUrl, {planId},httpOptions);
+    }  
+
+    UnSubscribe(subscriptionId : string)
+    {
+        return this.http.post<any>(this.UnsubscribeUrl, {subscriptionId},httpOptions);
     }  
 
 }

@@ -1,0 +1,43 @@
+<h3 class="plan-title"> Please choose your plan : </h3>
+
+
+<div class="columns">
+    <ul class="price">
+    <li class="header">Sole Trader</li>
+    <li class="grey">£ 49 / month  <span class="vat-text"> (VAT INC.) </span>  </li>
+    <li> <strong> 40 calls </strong>/ month</li>
+    <li *ngIf="this.hasTrial" class="trial-text"> 
+        <mat-icon class="trial-icon">accessibility_new</mat-icon>
+       FREE 14 Days Trial
+    </li>
+    <li class="grey"><button class="btn btn-primary" (click)="selectPlan(1)">Buy Now</button></li>
+    </ul>
+</div>
+
+
+  <div class="columns">
+    <ul class="price">
+      <li class="header">Small Business</li>
+      <li class="grey">£ 99 / month  <span class="vat-text"> (VAT INC.) </span>  </li>
+      <li>  <strong>90 calls</strong> / month</li>
+      <li *ngIf="this.hasTrial" class="trial-text"> 
+            <mat-icon class="trial-icon">accessibility_new</mat-icon>
+           FREE 14 Days Trial
+        </li>
+              <li class="grey"><button class="btn btn-primary" (click)="selectPlan(2)">Buy Now</button></li>
+    </ul>
+  </div>
+  
+  <div class="columns">
+    <ul class="price">
+      <li class="header">Large Business</li>
+      <li class="grey">£ 199 / month  <span class="vat-text"> (VAT INC.) </span> </li>
+      <li> <strong>200 calls </strong>  / month</li>
+      <li *ngIf="this.hasTrial" class="trial-text"> 
+            <mat-icon class="trial-icon">accessibility_new</mat-icon>
+           FREE 14 Days Trial
+        </li>
+              <li class="grey"><button class="btn btn-primary" (click)="selectPlan(3)">Buy Now</button></li>
+    </ul>
+  </div>
+  

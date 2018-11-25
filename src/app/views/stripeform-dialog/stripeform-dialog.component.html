@@ -1,0 +1,42 @@
+<div class="plan-title"> {{selectedPlan.planName}} - £ {{selectedPlan.price}} / month </div>
+<div *ngIf="this.selectedPlan.hastTrial" class="trial-text"> 
+        <mat-icon class="trial-icon">accessibility_new</mat-icon>
+       FREE 14 Days Trial
+</div>
+
+
+<div class="div-payment">
+        <form novalidate (submit)="buy()" [formGroup]="stripeTest">
+        
+            <mat-form-field class="example-full-width">
+                <input [readonly]="submitting" matInput placeholder="Name" formControlName="name" autocomplete="off">
+            </mat-form-field>
+        
+            <mat-form-field style="margin-bottom:20px;" class="example-full-width">
+                <input [readonly]="submitting" matInput placeholder="Address" formControlName="address" autocomplete="address">
+            </mat-form-field>
+        
+           <div style="border: 1px dashed #6000ff; padding : 5px; border-radius:5px">
+             <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions"></ngx-stripe-card>
+           </div>
+
+            <div align="right">
+                <button [disabled]="submitting" style="margin-top:20px;margin-right:10px" class="btn btn-light" (click)="close()" >
+                        Close
+                </button>
+                
+                <button [disabled]="submitting" style="margin-top:20px" class="btn btn-primary" type="submit">
+                Subscribe to this Plan
+                </button>
+            </div>
+          </form>
+ </div>
+
+ <div *ngIf="submitting" align="center">
+        <div class="spinner">
+            Please wait 
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+   </div>

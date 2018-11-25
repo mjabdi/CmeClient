@@ -22,4 +22,6 @@ export class Widget
     extension : string;
 
     notificationEmail : string;
+
+    subscriptionId : string;
 }
