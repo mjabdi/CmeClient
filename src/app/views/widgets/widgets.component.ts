@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { getStyle } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
-import {MatIcon} from '@angular/material';
+import {MatIcon, MatTreeFlatDataSource} from '@angular/material';
 import {Router} from '@angular/router';
 import {Widget} from './widget';
 import {WidgetService} from './widget.service';
@@ -59,7 +59,19 @@ export class WidgetsComponent {
      if (!widget.extension)
       return false;
 
-      return (widget.authKey.length > 0) && (widget.extension.length) > 0;
+      return ((widget.authKey.length > 0) && (widget.extension.length) > 0);
+  }
+
+  HideEnableMenu(widget : Widget)
+  {
+    
+    if (!this.IsActive(widget))
+      return false;
+
+    if ((widget.status != 'Active') && (widget.status != 'Disabled'))
+       return false;  
+
+       return  true;
   }
 
   loadWidgets()
@@ -201,4 +213,16 @@ export class WidgetsComponent {
       )
     });
   }
+
+  getTooltipWidget(widget : Widget)
+  {
+      if (widget.status == 'Not Active yet!')
+      {
+          return 'Waiting For The Administrator Approval';
+      }
+
+      return '';
+  }
+
+
 }

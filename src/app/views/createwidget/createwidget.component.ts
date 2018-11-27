@@ -113,6 +113,19 @@ export class CreateWidgetComponent {
           (data : MySubscription[])=>
           {
             this.mysubscriptions = data;
+            if (this.mysubscriptions.length == 0)
+            {
+              let snackBarRef = this.snackbar.open('You have no subscriptions yet?','Go to MySubscriptions page',{
+                duration: 30000,
+                panelClass : 'my-snackbar-style',
+  
+              });
+  
+              snackBarRef.onAction().subscribe(() => {
+                this.router.navigate(['/mysubscriptions']);
+              });
+
+            }
           }
 
         );

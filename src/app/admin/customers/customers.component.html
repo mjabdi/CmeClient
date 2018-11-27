@@ -8,9 +8,26 @@
                   <h4 style="display: inline-block;font-weight: bold" class="card-title ">Customers</h4>
 
                   </div>
-                <form name="loginForm">
 
-              <div  class="card-body">
+        
+
+                  <mat-tab-group>
+                      <mat-tab>
+
+                              <ng-template mat-tab-label>
+                                      <mat-icon style="color:#42a72e !important" class="example-tab-icon">assignment_turned_in</mat-icon>
+                                      <span style="vertical-align: top; margin-left:5px"> Subscribed  </span> 
+                              </ng-template>
+
+
+
+                              <div  class="card-body">
+
+
+                                  <mat-form-field style="width:90%;margin-left:20px;">
+                                      <input #search1 matInput placeholder="Search..." formControlName="Search" autocomplete="off">
+                                  </mat-form-field>
+                                  
                             <div class="table">
                               
                                 <div class="row header">
@@ -25,9 +42,11 @@
                                 
                                 <ng-container *ngIf="(customers$ | async) as customers; else loading">
 
-                                <div *ngFor="let customer of customers" class="row">
+                                <div *ngFor="let customer of Filter(customers,search1.value)" class="row">
                                         <div class="cell" data-title="name">
-                                          {{customer.name}}
+                                            <a matTooltip="View Details" style="text-decoration:underline;color:blue;cursor: pointer;" (click)="ViewDetail(customer)">
+                                              {{customer.name}}
+                                            </a>  
                                         </div>
                                         <div class="cell" data-title="Email">
                                           {{customer.email}}
@@ -62,10 +81,73 @@
                         </div>
 
                 </div><!--/.row-->
+                    </mat-tab>
+                    <mat-tab>
 
+                            <ng-template mat-tab-label>
+                                    <mat-icon style="color:gray !important" class="example-tab-icon">assignment_late</mat-icon>
+                                    <span style="vertical-align: top; margin-left:5px"> Non-Subscribed </span> 
+                            </ng-template>
+                            <div  class="card-body">
 
-                      </form>
+                                <mat-form-field style="width:90%;margin-left:20px;">
+                                    <input #search2 matInput placeholder="Search..." formControlName="Search" autocomplete="off">
+                                </mat-form-field>
+  
 
+                                <div class="table">
+                                  
+                                    <div class="row header">
+                                        <div class="cell">Name</div>
+                                        <div class="cell">Email</div>
+                                        <div class="cell">SignUp Date Time</div>
+                                        <div class="cell">Last Login</div>
+                                        <!-- <div class="cell">widgetsCount</div>
+                                        <div class="cell">subscription</div> -->
+                                    </div>
+    
+                                    
+                                    <ng-container *ngIf="(customersNo$ | async) as customers; else loading">
+    
+                                    <div *ngFor="let customer of Filter(customers,search2.value)" class="row">
+                                            <div class="cell" data-title="name">
+                                                  {{customer.name}}
+                                            </div>
+                                            <div class="cell" data-title="Email">
+                                              {{customer.email}}
+                                            </div>   
+                                            <div class="cell" data-title="creationDateTime">
+                                              {{customer.creationDateTime}}
+                                            </div>
+                                            <div class="cell" data-title="lastLogin">
+                                              {{customer.lastLogin}}
+                                            </div>
+                                            <!-- <div class="cell" data-title="widgetsCount">
+                                                {{customer.widgetsCount}}
+                                              </div>
+                                              <div class="cell" data-title="subscription">
+                                                {{customer.subscription}}
+                                              </div> -->
+                                                                                                                                                                                                        
+                                    </div>
+                                    </ng-container>
+    
+                                                            
+                                    <ng-template #loading>
+                                      <div style="margin-left: 10px ; margin-top:20px;margin-bottom:20px; ">
+                                          <div class="spinner">
+                                              <div class="bounce1"></div>
+                                              <div class="bounce2"></div>
+                                              <div class="bounce3"></div>
+                                          </div>
+                                      </div>
+                                    </ng-template>
+    
+                            </div>
+    
+                    </div><!--/.row-->
+                  </mat-tab>
+                </mat-tab-group> 
 
               </div>
  

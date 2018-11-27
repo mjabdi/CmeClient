@@ -12,6 +12,7 @@ export class Widget
     colorText : string;
     isAnimated : boolean;
     callsCount : number;
+    callsCountMonth : number;
     domainUrl : string;
 
     statusChanging : boolean;

@@ -36,7 +36,9 @@
 
                                 <div *ngFor="let sub of cur_subs" class="row">
                                         <div class="cell" data-title="ID">
+                                            <a matTooltip="View Details" style="text-decoration:underline;color:blue;cursor: pointer;" (click)="ViewDetail(sub)">
                                           {{sub.subscriptionID}}
+                                             </a>
                                         </div>
                                         <div class="cell" data-title="Plan">
                                             {{sub.plan}}
@@ -45,7 +47,7 @@
                                           {{sub.currentPeriodStartDate | date:'yyyy/MM/dd'}} - {{sub.currentPeriodEndDate | date:'yyyy/MM/dd'}}
                                         </div>
                                         <div class="cell" data-title="Trialing Until">
-                                          {{sub.trialingUntilDate | date:'yyyy/MM/dd'}}
+                                          {{ sub.trialingUntilDate ? (sub.trialingUntilDate | date:'yyyy/MM/dd') : '-'}}
                                         </div>
                                         <div class="cell" data-title="Status">
                                             {{sub.status}}
@@ -70,7 +72,7 @@
                              </div>
     
                              <div align="center">
-                             <button [disabled]="!this.loaded" style="width:200px" class="btn btn-secondary" (click)="openBuyDialog()">Buy a New Plan</button>
+                             <button [disabled]="!this.loaded" style="width:200px" class="btn btn-secondary" (click)="openBuyDialog()">Subscribe to a New Plan</button>
                             </div>
                 </div><!--/.row-->
 

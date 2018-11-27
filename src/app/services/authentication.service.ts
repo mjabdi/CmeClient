@@ -177,10 +177,19 @@ export class AuthenticationService {
             catchError(this.handleError('getMyyRole', [])));
     }  
 
-    getCustomers () : Observable<Customer[]>
+    getCustomers (active = true) : Observable<Customer[]>
     {
-        return this.http.get<Customer[]>(this.customersUrl).pipe(
-            catchError(this.handleError('getCustomers', [])));
+        if (active)
+        {
+            return this.http.get<Customer[]>(this.customersUrl + 'active').pipe(
+                 catchError(this.handleError('getCustomers', [])));
+        }
+        else
+        {
+            return this.http.get<Customer[]>(this.customersUrl + 'deactive').pipe(
+                catchError(this.handleError('getCustomers', [])));
+
+        }
     }  
 
 

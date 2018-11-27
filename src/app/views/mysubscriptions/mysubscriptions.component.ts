@@ -15,6 +15,7 @@ import { BuyPlanDialogComponent } from '../buyplan-dialog/buyplan-dialog.compone
 import { ChangePlanDialogComponent } from '../changeplan-dialog/changeplan-dialog.component';
 import { Plan } from '../stripeform-dialog/plan';
 import { StripeFormDialogComponent } from '../stripeform-dialog/stripeform-dialog.component';
+import { SubscriptionDetailDialogComponent } from '../subscriptiondetail-dialog/subscriptiondetail-dialog.component';
 
 
 @Component({
@@ -109,6 +110,33 @@ export class MySubscriptionsComponent {
           }
       );
     }
+
+    ViewDetail(sub : MySubscription)
+    {
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.hasBackdrop = true;
+        dialogConfig.disableClose = false;
+        dialogConfig.autoFocus = false;    
+        dialogConfig.panelClass = "custom-modalbox";    
+        //dialogConfig.width = "800px";
+       // dialogConfig.height = "450px";
+        dialogConfig.data = sub;  
+        dialogConfig.disableClose = false;
+   
+        const dialogRef = this.dialog.open(SubscriptionDetailDialogComponent,dialogConfig);
+    
+        dialogRef.afterClosed().subscribe(
+          val => {
+              if (val)
+              {
+
+              }
+          }
+      );
+    }
+   
+    
 
     openChangeDialog(subscribtion : MySubscription )
     {

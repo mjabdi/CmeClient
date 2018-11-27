@@ -72,6 +72,8 @@ import { PickColorDialogComponent } from './views/pickcolor-dialog/pickcolor-dia
 import { BuyPlanDialogComponent } from './views/buyplan-dialog/buyplan-dialog.component';
 import { ChangePlanDialogComponent } from './views/changeplan-dialog/changeplan-dialog.component';
 import { StripeFormDialogComponent } from './views/stripeform-dialog/stripeform-dialog.component';
+import { SubscriptionDetailDialogComponent } from './views/subscriptiondetail-dialog/subscriptiondetail-dialog.component';
+import { CustomerDetailDialgoComponent } from './views/customerdetail-dialog/customerdetail-dialog.component';
 
 @NgModule({
   imports: [
@@ -122,8 +124,9 @@ import { StripeFormDialogComponent } from './views/stripeform-dialog/stripeform-
     PickColorDialogComponent,
     BuyPlanDialogComponent,
     ChangePlanDialogComponent,
-    StripeFormDialogComponent
-   
+    StripeFormDialogComponent,
+    SubscriptionDetailDialogComponent,
+    CustomerDetailDialgoComponent
   ],
   providers: [{
     provide: LocationStrategy,
@@ -138,7 +141,13 @@ import { StripeFormDialogComponent } from './views/stripeform-dialog/stripeform-
   MyStripeService
 
 ],
-  entryComponents: [PickColorDialogComponent,BuyPlanDialogComponent,ChangePlanDialogComponent,StripeFormDialogComponent],
+  entryComponents: [PickColorDialogComponent,
+    BuyPlanDialogComponent,
+    ChangePlanDialogComponent,
+    StripeFormDialogComponent,
+    SubscriptionDetailDialogComponent,
+    CustomerDetailDialgoComponent
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
