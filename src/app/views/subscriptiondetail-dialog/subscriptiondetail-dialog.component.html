@@ -1,4 +1,107 @@
-<h3 class="plan-title"> {{this.subscription.subscriptionID}} </h3>
+<div *ngIf="subscription.back_button" mat-dialog-title (click)="this.dialogRef.close()" class="back-button">
+    <span><mat-icon style="vertical-align: middle" class="example-tab-icon">arrow_back</mat-icon>Back</span>
+</div>
+
+<mat-dialog-content>
+
+<mat-card>
+        <div class="section-title">
+                Subscription Details:
+        </div>
+    
+        <div class="customer-detials">
+
+            <div class="row">
+                <div class="col-md-6 customer-item">
+                Subscription ID: <strong> {{subscription.subscriptionID}} </strong>
+                </div>
+            
+                <div class="col-md-6 customer-item">
+                Plan: <strong> {{subscription.plan}} </strong>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col-md-6 customer-item">
+                    Created at: <strong> {{subscription.createdDateTime | date:'yyyy/MM/dd'}} </strong>
+                </div>
+    
+                <div class="col-md-6 customer-item">
+                        Trialing Until: <strong> {{subscription.trialingUntilDate ? (subscription.trialingUntilDate  | date:'yyyy/MM/dd') : '-'}}  </strong>
+                </div>
+            </div>
+    
+            <div class="row">
+                    <div class="col-md-6 customer-item">
+                        Current Period: <strong> {{subscription.currentPeriodStartDate | date:'yyyy/MM/dd'}} - {{subscription.currentPeriodEndDate | date:'yyyy/MM/dd'}}</strong>
+                    </div>
+        
+                    <div class="col-md-6 customer-item">
+                            Status: <strong>  {{subscription.status}} </strong>
+                    </div>
+                </div>
+
+        </div>
+    
+    </mat-card>
+    
+    <mat-card>
+            <div class="section-title">
+                    Issued Invoices:
+            </div>
+
+<div class="subtable">                          
+    <div class="subrow header">
+        <div class="subcell">Invoice ID</div>
+        <div class="subcell">Amount Paid</div>
+        <div class="subcell">Plan</div>
+        <div class="subcell">Issue Date</div>
+        <div class="subcell">Description</div>
+        <div class="subcell">File</div>
+    </div>
+
+    <ng-container *ngIf="(invoices$ | async) as invoices; else loading1">
+
+    <div style="text-align: center;color:gray" *ngIf="invoices.length == 0">
+            No Issued Invoices Yet
+    </div>    
+
+    <div *ngFor="let inv of invoices" class="subrow">
+            <div class="subcell" data-title="ID">
+             {{inv.invoiceID}}
+            </div>
+            <div class="subcell" data-title="Amount">
+                {{inv.amountPaid | currency : 'GBP' :'symbol':'1.0-2'}}
+            </div>   
+            <div class="subcell" data-title="Plan">
+                {{inv.planName}}
+            </div>   
+            <div class="subcell" data-title="Issue Date">
+              {{inv.invoiceDateTime | date:'yyyy/MM/dd'}} 
+            </div>
+            <div class="subcell" data-title="Description">
+                {{inv.description}}
+            </div>
+            <div class="subcell" data-title="File">
+                <a [href]="inv.invoicePdf" target="_blank">
+                     <img matTooltip="Download as PDF" style="cursor:pointer;width:25px;height:25px" src="../../../assets/img/icon/pdficon.png">
+                </a>
+            </div>    
+    </div>
+
+</ng-container>
+<ng-template #loading1>
+        <div style="margin-left: 10px ; margin-top:20px;margin-bottom:20px; ">
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </div>
+ </ng-template>
 
 
-  
+ </div>
+
+</mat-card>
+</mat-dialog-content>

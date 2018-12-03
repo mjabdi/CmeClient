@@ -1,4 +1,12 @@
 <div class="plan-title"> {{selectedPlan.planName}} - £ {{selectedPlan.price}} / month </div>
+
+<div *ngIf="this.selectedPlan.hastTrial" class="text-attention">
+
+    * Your Two Weeks Free Trial. We will bill you after 14 days (includes VAT) unless you cancel before then. 
+    After that, your plan will renew monthly. Cancel in your Account settings or by contacting our support team.
+
+</div>
+
 <div *ngIf="this.selectedPlan.hastTrial" class="trial-text"> 
         <mat-icon class="trial-icon">accessibility_new</mat-icon>
        FREE 14 Days Trial

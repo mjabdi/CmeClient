@@ -1,28 +1,127 @@
-<div class="div-payment">
+<div class="container-fluid" style="background:white;margin:0;padding:0;width:100%; font-family: 'Open Sans', sans-serif !important;">
 
-<form novalidate (ngSubmit)="buy($event)" [formGroup]="stripeTest">
 
-    <mat-form-field class="example-full-width">
-        <input matInput placeholder="Name" formControlName="name" autocomplete="off">
-    </mat-form-field>
+<header>
+    <div class="header-top">
+      <div class="container align-items-start"> <a class="navbar-brand" href="https://www.talktoleadsnow.com"><img src="../../../assets/ttln/images/logo.png" class="img-fluid"></a>
+        <ul class="header-social">
+          <li> <a href="https://www.facebook.com/TalkToLeadsNow/" target="_blank"><span class="fa fa-facebook"></span></a> </li>
+          <li> <a href="https://twitter.com/talktoleadsnow" target="_blank"><span class="flaticon-twitter"></span></a> </li>
+          <li> <a href="https://www.instagram.com/talktoleadsnow/" target="_blank"><span class="flaticon-instagram"></span></a> </li>
+          <li> <a href="https://www.talktoleadsnow.com/contact.html"><span class="flaticon-mail"></span></a> </li>
+        </ul>
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-md navbar-dark navbar-inverse bg-inverse static-top">
+      <div class="container">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarResponsive">
+          <ul class="navbar-nav main-menu">
+            <li class="menu1"> <a href="https://www.talktoleadsnow.com/index.html">HOME</a></li>
+            <li class="menu2"> <a href="https://www.talktoleadsnow.com/index.html#features">Features</a> </li>
+            <li class="menu4"> <a href="https://www.talktoleadsnow.com/index.html#pricing">Pricing</a> </li>
+            <li class="menu6 current-menu-item"> <a href="#">Sign Up</a></li>
+            <li class="menu7"> <a [routerLink]="['/login']">Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+      
+  <section class="inn-container custom-inn-container">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-6 offset-lg-1 col-md-8 col-sm-12 mx-auto">
+                      <div class="form">
+                          <h2>Signup</h2>
+                      <form class="form-signin" (ngSubmit)="onSubmit(email.value,name.value,password.value,rpassword.value)" name="signupForm" [formGroup]="signupForm">
+                          <p class="float-left text-white">Please enter your information</p>
+                      
+                      <div class="form-group">
+                          <div class="input-group">
+                              <div class="input-group-prepend">
+                                  <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-user" aria-hidden="true"></i></span>
+                              </div>
+                              <input #name type="text" class="form-control" name="name" id="name" placeholder="Full Name"/>
+                          </div>
+                      </div>
+  
+                      <div class="form-group">
+                          <div class="input-group">
+                              <div class="input-group-prepend">
+                                  <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                              </div>
+                              <input #email type="text" class="form-control" name="email" id="email" placeholder="Email"/>
+                          </div>
+                      </div>
+  
+                      <div class="form-group">
+                          <div class="input-group">
+                              <div class="input-group-prepend">
+                                  <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                              </div>
+                              <input #password type="password" class="form-control" name="password" id="password" placeholder="Password"/>
+                          </div>
+                      </div>
+  
+                      <div class="form-group">
+                          <div class="input-group">
+                              <div class="input-group-prepend">
+                                  <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                              </div>
+                              <input #rpassword type="password" class="form-control" name="rpassword" id="rpassword" placeholder="Repeat Password"/>
+                          </div>
+                      </div>
+  
+                          <p class="text-white mt-3">Have an account? <a [routerLink]="['/login']">Click Here</a></p>
+                          <button [disabled]='isSubmit' style="margin-right : 10px !important"  class="btn btn_login" type="submit">Create Account</button>
 
-    <mat-form-field class="example-full-width">
-        <input matInput placeholder="Address" formControlName="address" autocomplete="address">
-    </mat-form-field>
+                          <div class="spinner" *ngIf="isSubmit">
+                            <div class="bounce1"></div>
+                            <div class="bounce2"></div>
+                            <div class="bounce3"></div>
+                          </div>
 
-    <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions"></ngx-stripe-card>
-    <div align="right">
-       
-    <button style="width:100px;margin-top:20px;margin-right:10px" class="btn btn-light">
-            Close
-    </button>
+                  </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section> 
+   
+     <div class="clearfix"></div>
+  
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+            <div class="footer-social">
+              <ul>
+                  <li><a class="facebook social-icon" href="https://www.facebook.com/TalkToLeadsNow//" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                  <li><a class="twitter social-icon" href="https://twitter.com/talktoleadsnow" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                  <li><a class="instagram social-icon" href="https://www.instagram.com/talktoleadsnow/" title="Instagram"><i class="fa fa-instagram"></i></a></li>
+                  <li><a class="envelope social-icon" href="#" title="envelope"><i class="fa fa-envelope"></i></a></li>		
+              </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-5">
+          <p>© Copyright 2018 - Talk To Leads Now</p>
+        </div>
+        <div class="col-lg-6 col-md-7">
+          <ul class="footer-nav">
+            <li><a href="#">Blog</a></li>
+            <li><a href="https://www.talktoleadsnow.com/contact.html">Contact</a></li>
+            <li><a href="https://www.talktoleadsnow.com/terms-of-condition.html">Terms of Condition</a></li>
+            <li><a href="https://www.talktoleadsnow.com/terms-of-use.html">Terms of Use</a></li>
+            <li><a href="https://www.talktoleadsnow.com/privacy-policy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+      
     
-    <button style="width:120px;margin-top:20px" class="btn btn-primary" type="submit">
-      BUY
-    </button>
-
-  </div>
-  </form>
-
-
 </div>
+  <!-- Bootstrap core JavaScript --> 

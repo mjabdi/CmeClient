@@ -18,6 +18,7 @@ import { MySubscriptionService } from '../mysubscriptions/mysubscriptions.servic
 
 
 @Component({
+  
   templateUrl: 'editwidget.component.html',
   styleUrls: ['editwidget.component.css']
 })

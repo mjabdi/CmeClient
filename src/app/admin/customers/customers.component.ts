@@ -50,8 +50,8 @@ export class CustomersComponent {
             dialogConfig.disableClose = false;
             dialogConfig.autoFocus = false;    
             dialogConfig.panelClass = "custom-modalbox";    
-            //dialogConfig.width = "800px";
-           // dialogConfig.height = "450px";
+            dialogConfig.width = "800px";
+            dialogConfig.height = "450px";
             dialogConfig.data = customer;  
             dialogConfig.disableClose = false;
        

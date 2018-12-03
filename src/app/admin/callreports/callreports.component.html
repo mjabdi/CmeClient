@@ -10,8 +10,61 @@
       
                     <div style="height: 400px;" class="card-body">
 
+                       <div align="center" style="margin-bottom : 10px;">
+                                <button style="width:200px" class="btn btn-secondary" (click)="openFileDialog()">Import Gradwell File</button>
+                        </div>
+                   
+                        <div class="table">                          
+                            <div class="row header">
+                                <div class="cell">#</div>
+                                <div class="cell">Time</div>
+                                <div class="cell">Extension</div>
+                                <div class="cell">Source</div>
+                                <div class="cell">Destination</div>
+                                <div class="cell">Duration</div>
+                            </div>
 
-                            <!-- <label class='dropdown-times' for='styledSelect12567'> <select id='styledSelect12567' name='options' ><option value='22:00'>22:00</option><option value='22:15'>22:15</option><option value='22:30'>22:30</option><option value='22:45'>22:45</option><option value='23:00'>23:00</option></select></label> -->
+                            <ng-container *ngIf="(callreports$ | async) as callreports; else loading1">
+
+                            <div style="text-align: center;color:gray" *ngIf="callreports.length == 0">
+                                    No records
+                            </div>    
+
+                            <div *ngFor="let call of callreports; let rowIndex = index" class="row">
+                                    <div class="cell" data-title="#">
+                                      {{rowIndex+1}}
+                                    </div>
+                                    <div class="cell" data-title="Time">
+                                      {{call.time | date : 'yyyy/MM/dd [HH:mm]'}}
+                                    </div>   
+                                    <div class="cell" data-title="Extension">
+                                      {{call.extension}}
+                                    </div>
+                                    <div class="cell" data-title="Source">
+                                      {{call.source}}
+                                    </div>
+                                    <div class="cell" data-title="Destination">
+                                        {{call.destination}}
+                                    </div>
+                                    <div class="cell" data-title="Duration">
+                                        {{call.duration}}
+                                    </div>    
+                            </div>
+
+                        </ng-container>
+                        <ng-template #loading1>
+                                <div style="margin-left: 10px ; margin-top:20px;margin-bottom:20px; ">
+                                    <div class="spinner">
+                                        <div class="bounce1"></div>
+                                        <div class="bounce2"></div>
+                                        <div class="bounce3"></div>
+                                    </div>
+                                </div>
+                         </ng-template>
+
+
+                         </div>
+
 
 
                     </div>

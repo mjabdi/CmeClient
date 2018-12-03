@@ -1,98 +1,121 @@
-<div class="app-header" align="center">
-                <img src="../../../assets/img/brand/TalktoLeadsNow.png" class="img-logo">
-                </div>  
-                <div class="app-body">    
-                  <div class="container-fluid">
-                    <main class="main">
-                     <div class="container">
-                      <div class="row">
-                        <div class="col-md-9 mx-auto">
-                          <div class="card-group">
-                            <div class="card p-4">
-                              <div *ngIf="result==1" class="card-body card card-accent-primary v">
-                                  <p style="text-align: justify; font-weight: bold; margin-top: 2px !important" class="text">
-                                                You have successfully activated your account.
-                                  </p>
-                                  <p style="text-align: justify ;margin-top: 0px !important" class="text">
-                                                We're sure you'll soon experience an easier and better way of connecting to your clients.
-                                  </p>
+<div class="container-fluid" style="background:white;margin:0;padding:0;width:100%; font-family: 'Open Sans', sans-serif !important;">
 
-                                  <p style="font-size: 13px !important; text-align: left;  margin-top: 10px !important" class="text-muted">
-                                                Good Luck! <br>
-                                                Regards, TalkToLeadsNow team.
-                                  </p>
 
-                                  <div class="row">
-                                    <div class="col-12 text-center">
-                                      <button type="button" class="btn btn-link px-0" (click)="login()">Go to Login</button>
-                                    </div>
-                                  </div>
-                              </div>
+  <header>
+    <div class="header-top">
+      <div class="container align-items-start"> <a class="navbar-brand" href="https://www.talktoleadsnow.com/index.html"><img src="../../../assets/ttln/images/logo.png" class="img-fluid"></a>
+        <ul class="header-social">
+          <li> <a href="https://www.facebook.com/TalkToLeadsNow/" target="_blank"><span class="fa fa-facebook"></span></a> </li>
+          <li> <a href="https://twitter.com/talktoleadsnow" target="_blank"><span class="flaticon-twitter"></span></a> </li>
+          <li> <a href="https://www.instagram.com/talktoleadsnow/" target="_blank"><span class="flaticon-instagram"></span></a> </li>
+          <li> <a href="https://www.talktoleadsnow.com/contact.html"><span class="flaticon-mail"></span></a> </li>
+        </ul>
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-md navbar-dark navbar-inverse bg-inverse static-top">
+      <div class="container">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarResponsive">
+          <ul class="navbar-nav main-menu">
+            <li class="menu1 "> <a href="https://www.talktoleadsnow.com/index.html">HOME</a></li>
+            <li class="menu2"> <a href="https://www.talktoleadsnow.com/index.html#features">Features</a> </li>
+            <li class="menu4"> <a href="https://www.talktoleadsnow.com/index.html#pricing">Pricing</a> </li>
+            <li class="menu6"> <a [routerLink]="['/signup']">Sign Up</a></li>
+            <li class="menu7 current-menu-item"> <a href="#">Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+      <section class="inn-container pd custom-inn-container">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5 col-md-7 col-sm-12 mx-auto">
 
-                              <div *ngIf="result==-1" class="card-body card card-accent-primary v-error">
-                                          <img src="../../../assets/img/icon/error-icon.png" width="32px">
-                                        <p style="text-align: justify; font-weight: bold; margin-top: 10px !important" class="text">
-                                                      Your link is invalid or has been expired! 
-                                        </p>
-                                        <p style="text-align: justify ;margin-top: 0px !important" class="text">
-                                                      Please SignUp again through the following link.
-                                        </p>
-                                        <div class="row">
-                                          <div class="col-12 text-center">
-                                            <button type="button" class="btn btn-link px-0" (click)="signUp()">SignUp</button>
-                                          </div>
-                                        </div>
-                              </div>
+            <div *ngIf="result==1" class="form">
 
-                              <div  *ngIf="result==0" class="card-body text-center card card-accent-primary v-error">
-                                        <div class="spinner" >
-                                                        <div class="bounce1"></div>
-                                                        <div class="bounce2"></div>
-                                                        <div class="bounce3"></div>
-                                                        Loading
-                                          </div>
-                            </div>
+                        <h2>Congratulations</h2>
 
-                            </div>
-                            <div style="padding-top:0px !important;" class="card text-white bg-primary d-md-down-none" style="width:44%">
-                              <div *ngIf="result==1" class="card-body text-center animated fadeIn">
-                                
-                                  <img style="margin-top:0 !important;vertical-align: top !important" width="150px" src="../../../assets/img/avatars/happy-activation.png">
-                                  <div align="center" class="text-steps">
-                                                <div  style="margin-top:20px !important;">
-                                               <span> Congratulations!</span>
-                                             </div>
-                                  </div>
-                              </div>
+                        <form class="form-signin">
 
-                              <div *ngIf="result==-1" class="card-body text-center animated fadeIn">
-                                
-                                        <img style="margin-top:0 !important;vertical-align: top !important" width="150px" src="../../../assets/img/avatars/sorry-face.png">
-                                        <div align="center" class="text-steps">
-                                                      <div  style="margin-top:20px !important;">
-                                                     <span> Sorry!</span>
-                                                   </div>
-                                        </div>
-                              </div>
-                                    
-                              
-                            </div>
-                              
+
+                          <p style="text-align:justify" class="text-white"> You have successfully activated your account. We're sure you'll soon experience an easier and better way of connecting to your clients. Good Luck! 
+                          </p>
+
+
+                          <div>
+                            <button class="btn btn_login" (click)="login()">Go to Login Page</button>
                           </div>
-                          
-                        </div>
-                        
-                      </div>
-                      
-                    </div>
+
+                          </form>
+
+                          <!-- <a style="margin-left : 10px"  [routerLink]="['/login']">Go to Login</a> -->
+            </div>
+
+            <div *ngIf="result==-1" class="form">
+
+                <h2>Sorry</h2>
+
+                <form class="form-signin">
+
+
+                  <p class="text-white"> Your link is invalid or has been expired! Please SignUp again through the following link :
                     
-                  </main>
+                      <a style="margin-left : 10px" [routerLink]="['/signup']">SignUp</a> 
+
+                  </p>
+
+                  </form>
+
+
+          </div>
+
+          <div *ngIf="result==0">
+
+              <div class="spinner" >
+                  <div class="bounce1"></div>
+                  <div class="bounce2"></div>
+                  <div class="bounce3"></div>
                   
-                  </div>
-                  
-                  </div>
-                
-                  <div class="app-footer">
-                      <span><a href="http://www.TalkToLeadsNow.com" target="_blank" >TalkToLeadsNow</a> &copy; {{this.today | date: 'yyyy'}}.</span>
-                      <span class="ml-auto">Powered by <a href="https://www.dubseo.co.uk/" target="_blank">DubSEO</a></span>
-                  </div>
+             </div>
+         </div>
+          </div>
+        </div>
+      </div>
+      
+      </section> 
+   
+   <div class="clearfix"></div>
+  
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+            <div class="footer-social">
+              <ul>
+                  <li><a class="facebook social-icon" href="https://www.facebook.com/TalkToLeadsNow//" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                  <li><a class="twitter social-icon" href="https://twitter.com/talktoleadsnow" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                  <li><a class="instagram social-icon" href="https://www.instagram.com/talktoleadsnow/" title="Instagram"><i class="fa fa-instagram"></i></a></li>
+                  <li><a class="envelope social-icon" href="#" title="envelope"><i class="fa fa-envelope"></i></a></li>		
+              </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-5">
+         <p>© Copyright 2018 - Talk To Leads Now</p>
+        </div>
+        <div class="col-lg-6 col-md-7">
+          <ul class="footer-nav">
+            <li><a href="#">Blog</a></li>
+            <li><a href="https://www.talktoleadsnow.com/contact.html">Contact</a></li>
+            <li><a href="https://www.talktoleadsnow.com/terms-of-condition.html">Terms of Condition</a></li>
+            <li><a href="https://www.talktoleadsnow.com/terms-of-use.html">Terms of Use</a></li>
+            <li><a href="https://www.talktoleadsnow.com/privacy-policy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  </div>

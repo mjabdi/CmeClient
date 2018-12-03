@@ -8,7 +8,7 @@ import {MAT_DIALOG_DATA, MatDialogRef, MatDialog} from "@angular/material";
 })
 export class PickColorDialogComponent implements OnInit {
 
-    popularColors = ['#ff6600', '#065535','#133337','#000000','#ffc0cb','#ffffff','#008080','#ffe4e1',
+    popularColors = ['#ff6600', '#065535','#f05b23','#133337','#000000','#ffc0cb','#ffffff','#008080','#ffe4e1',
     '#ff0000','#ffd700','#666666','#00ffff','#40e0d0','#ff7373','#d3ffce',
     '#e6e6fa','#0000ff','#ffa500','#f0f8ff','#b0e0e6','#c6e2ff','#7fffd4',
     '#faebd7','#fa8072','#eeeeee','#cccccc','#800080','#ffb6c1','#800000',

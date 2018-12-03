@@ -15,6 +15,9 @@ import { WeekDay } from './weekday';
 import { PickColorDialogComponent } from '../pickcolor-dialog/pickcolor-dialog.component';
 import { MySubscriptionService } from '../mysubscriptions/mysubscriptions.service';
 import { MySubscription } from '../mysubscriptions/mysubscription';
+import { Plan } from '../stripeform-dialog/plan';
+import { StripeFormDialogComponent } from '../stripeform-dialog/stripeform-dialog.component';
+import { BuyPlanDialogComponent } from '../buyplan-dialog/buyplan-dialog.component';
 
 
 @Component({
@@ -104,10 +107,11 @@ export class CreateWidgetComponent {
       this.loadMySubscriptions();
     }
 
+    hasTrial = false;
     loadMySubscriptions()
     {
         this.mysubscriptionService.getMySubscriptions()
-        .map(subs => subs.filter(sub => sub.status === 'active' ||  sub.status === 'trialing'))
+        .map(subs => subs.filter(sub => sub.status.toLowerCase() === 'active' ||  sub.status.toLowerCase() === 'trialing'))
         .subscribe(
 
           (data : MySubscription[])=>
@@ -115,14 +119,16 @@ export class CreateWidgetComponent {
             this.mysubscriptions = data;
             if (this.mysubscriptions.length == 0)
             {
-              let snackBarRef = this.snackbar.open('You have no subscriptions yet?','Go to MySubscriptions page',{
+              this.hasTrial = true;
+              let snackBarRef = this.snackbar.open('You have no subscriptions yet?','Create Your First Subscription Now',{
                 duration: 30000,
                 panelClass : 'my-snackbar-style',
   
               });
   
               snackBarRef.onAction().subscribe(() => {
-                this.router.navigate(['/mysubscriptions']);
+                  this.openBuyDialog();
+                //this.router.navigate(['/mysubscriptions']);
               });
 
             }
@@ -133,6 +139,23 @@ export class CreateWidgetComponent {
     }
 
 
+    CheckForNoSubscription()
+    {
+      if (this.mysubscriptions && this.mysubscriptions.length == 0)
+      {
+        this.hasTrial = true;
+        let snackBarRef = this.snackbar.open('You have no subscriptions yet?','Create Your First Subscription Now',{
+          duration: 30000,
+          panelClass : 'my-snackbar-style',
+
+        });
+
+        snackBarRef.onAction().subscribe(() => {
+            this.openBuyDialog();
+          //this.router.navigate(['/mysubscriptions']);
+        });
+      }
+    }
 
 
     textcolor(color : string) : string
@@ -365,6 +388,62 @@ export class CreateWidgetComponent {
       );
     
       }
+
+
+
+
+      openBuyDialog()
+      {
+       
+       const dialogConfig = new MatDialogConfig();
+
+       dialogConfig.hasBackdrop = true;
+       dialogConfig.disableClose = false;
+       dialogConfig.autoFocus = false;    
+       dialogConfig.panelClass = "custom-modalbox";    
+       dialogConfig.width = "800px";
+       dialogConfig.data = this.hasTrial;
+       // dialogConfig.minHeight = "300px";
+   
+       const dialogRef = this.dialog.open(BuyPlanDialogComponent,dialogConfig);
+   
+       dialogRef.afterClosed().subscribe(
+         val => {
+             if (val)
+             {
+                 var plan : Plan;
+                 plan = val;
+
+                 const dialogConfig2 = new MatDialogConfig();
+
+                 dialogConfig2.hasBackdrop = true;
+                 dialogConfig2.disableClose = false;
+                 dialogConfig2.autoFocus = false;    
+                 dialogConfig2.panelClass = "custom-modalbox";    
+                 //dialogConfig2.width = "600px";
+                 dialogConfig2.data = plan;
+                 dialogConfig2.disableClose = true;
+
+                 // dialogConfig.minHeight = "300px";
+             
+                 const dialogRef2 = this.dialog.open(StripeFormDialogComponent,dialogConfig2);
+
+                 dialogRef2.afterClosed().subscribe(
+                   val2 => {
+                       if (val2)
+                       {
+                           this.loadMySubscriptions();
+                       }
+                   }
+
+                 )
+             }
+         }
+     );
+   }
+
+
+
 
 }
 

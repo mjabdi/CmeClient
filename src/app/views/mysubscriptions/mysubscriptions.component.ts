@@ -119,8 +119,8 @@ export class MySubscriptionsComponent {
         dialogConfig.disableClose = false;
         dialogConfig.autoFocus = false;    
         dialogConfig.panelClass = "custom-modalbox";    
-        //dialogConfig.width = "800px";
-       // dialogConfig.height = "450px";
+        dialogConfig.width = "800px";
+        dialogConfig.height = "450px";
         dialogConfig.data = sub;  
         dialogConfig.disableClose = false;
    

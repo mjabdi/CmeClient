@@ -13,10 +13,12 @@
 export const environment = {
   production: false,
 
-   //  apiUrl: 'https://api.talktoleadsnow.com'
-    apiUrl: 'http://localhost:5090',
+     apiUrl: 'https://api.talktoleadsnow.com',
+    //apiUrl: 'http://localhost:5090',
 
-    planId1 : 'plan_DyKREpq8pGQqPo',
+    
+    // planId1 : 'plan_DyKREpq8pGQqPo',
+    planId1 : 'plan_E4lhlZy0GA3akU',
     planId2 : 'plan_DyKSvf9djCEUs6',
     planId3: 'plan_DyKTNXWj9EzUz6'
 

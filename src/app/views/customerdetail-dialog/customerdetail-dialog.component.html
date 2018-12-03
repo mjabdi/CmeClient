@@ -1,4 +1,140 @@
-<h3 class="plan-title"> {{this.customer.email}} </h3>
+
+<h3 mat-dialog-title class="plan-title"> {{this.customer.name}} </h3>
+
+<mat-dialog-content>
 
 
-  
+<mat-card>
+    <div class="section-title">
+            Customer Details:
+    </div>
+
+    <div class="customer-detials">
+
+
+        <div class="row">
+            <div class="col-md-6 customer-item">
+            Name: <strong> {{customer.name}} </strong>
+            </div>
+        
+            <div class="col-md-6 customer-item">
+            Email: <strong> {{customer.email}} </strong>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 customer-item">
+                Sign-Up Date: <strong> {{customer.creationDateTime | date : 'yyyy/MM/dd [HH:mm]'}} </strong>
+            </div>
+
+            <div class="col-md-6 customer-item">
+                    Last Login: <strong> {{customer.lastLogin | date : 'yyyy/MM/dd [HH:mm]'}} </strong>
+            </div>
+        </div>
+
+    </div>
+
+</mat-card>
+
+<mat-card>
+    <div class="section-title">
+            Customer Widgets:
+    </div>
+
+
+    <div  *ngIf="!myWidgets" >
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+              </div>
+     </div>
+
+    <div style="min-width:250px;display: inline-block; margin-right:50px;margin-left:50px" *ngFor="let widget of myWidgets; let i = index" >
+            <div  class="card step card-round" [class.show]="this.myWidgetsShow[i]" (dblclick)="gotoWidget(widget.id)" [style.color]="widget.colorText" [style.background-color]="widget.colorWidget">
+              <div class="card-body pb-0 mywidget">
+      
+                <mat-icon [class.disableWidget]="IsDisabled(widget)" *ngIf="!widget.statusChanging && !widget.isDeleting" aria-label="user"  class="widget-active-icon" style="color:'widget.colorText';cursor: default">{{getStatusIcon(widget)}}</mat-icon>
+                <span style="cursor: default" [matTooltip]="getTooltipWidget(widget)" [class.disableWidget]="IsDisabled(widget)" *ngIf="!widget.statusChanging && !widget.isDeleting" class="widget-text-status">{{widget.status}} </span>
+                <span *ngIf="widget.statusChanging" class="widget-text-status"> Updating...</span>
+                <span *ngIf="widget.isDeleting" class="widget-text-status"> Deleting...</span>
+      
+                <div class="btn-group float-right" dropdown>
+                  <button type="button" [style.color]="widget.colorText"  class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
+                    <i class="icon-settings"></i>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right"  *dropdownMenu>
+                    <a class="dropdown-item" (click)="this.dialogRef.close()" [routerLink]="['/editwidget', widget.id]">Edit...</a>
+                    <a *ngIf="HideEnableMenu(widget)" class="dropdown-item" (click)="ChangeStatus(widget)" >{{getStatusText(widget)}}</a>
+                    <a class="dropdown-item" (click)="DeleteWidget(widget)" >Delete Widget</a>
+                  </div>
+                </div>
+                <div [class.disableWidget]="IsDisabled(widget)" class="text-widgetname" (click)="gotoWidget(widget.id)">{{widget.widgetName}}</div>
+                <div style="cursor: default" [class.disableWidget]="IsDisabled(widget)" class="text-value">{{widget.callsCountMonth}} <span style="cursor: default" class="text-received-calls">received calls (this month)</span> </div>
+                <!-- <div style="cursor: default" [class.disableWidget]="IsDisabled(widget)" class="text-value">{{widget.callsCountMonth}} <span style="cursor: default" class="text-received-calls">received calls (this month)</span></div> -->
+              </div>
+            </div>
+          </div><!--/.col-->
+      
+    
+</mat-card>
+
+
+
+<mat-card>
+    <div class="section-title">
+            Customer Subscriptions:
+    </div>
+
+    <div class="subtable">                          
+            <div class="subrow header">
+                <div class="subcell">Subscription ID</div>
+                <div class="subcell">Plan</div>
+                <div class="subcell">Current Period</div>
+                <div class="subcell">Trialing Until</div>
+                <div class="subcell">Status</div>
+            </div>
+
+            <ng-container *ngIf="(currentSubscriptions$ | async) as cur_subs; else loading1">
+
+            <div style="text-align: center;color:gray" *ngIf="cur_subs.length == 0">
+                    No Active Subscriptions
+            </div>    
+
+            <div *ngFor="let sub of cur_subs" class="subrow">
+                    <div class="subcell" data-title="ID">
+                        <a matTooltip="View Details" style="text-decoration:underline;color:blue;cursor: pointer;" (click)="ViewDetail(sub)">
+                      {{sub.subscriptionID}}
+                         </a>
+                    </div>
+                    <div class="subcell" data-title="Plan">
+                        {{sub.plan}}
+                    </div>   
+                    <div class="subcell" data-title="Current Period">
+                      {{sub.currentPeriodStartDate | date:'yyyy/MM/dd'}} - {{sub.currentPeriodEndDate | date:'yyyy/MM/dd'}}
+                    </div>
+                    <div class="subcell" data-title="Trialing Until">
+                      {{ sub.trialingUntilDate ? (sub.trialingUntilDate | date:'yyyy/MM/dd') : '-'}}
+                    </div>
+                    <div class="subcell" data-title="Status">
+                        {{sub.status}}
+                    </div>
+            </div>
+
+        </ng-container>
+        <ng-template #loading1>
+                <div style="margin-left: 10px ; margin-top:20px;margin-bottom:20px; ">
+                    <div class="spinner">
+                        <div class="bounce1"></div>
+                        <div class="bounce2"></div>
+                        <div class="bounce3"></div>
+                    </div>
+                </div>
+         </ng-template>
+
+
+         </div>
+    
+</mat-card>
+
+</mat-dialog-content>

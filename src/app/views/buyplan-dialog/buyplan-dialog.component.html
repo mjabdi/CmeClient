@@ -1,4 +1,7 @@
+
+
 <h3 class="plan-title"> Please choose your plan : </h3>
+
 
 
 <div class="columns">
@@ -10,7 +13,11 @@
         <mat-icon class="trial-icon">accessibility_new</mat-icon>
        FREE 14 Days Trial
     </li>
-    <li class="grey"><button class="btn btn-primary" (click)="selectPlan(1)">Buy Now</button></li>
+    <li class="grey"><button class="btn btn-primary" (click)="selectPlan(1)">Buy Now</button>
+      <div *ngIf="this.hasTrial" class="text-attention">
+        You will not be charged today!
+       </div>
+    </li>
     </ul>
 </div>
 
@@ -24,7 +31,11 @@
             <mat-icon class="trial-icon">accessibility_new</mat-icon>
            FREE 14 Days Trial
         </li>
-              <li class="grey"><button class="btn btn-primary" (click)="selectPlan(2)">Buy Now</button></li>
+              <li class="grey"><button class="btn btn-primary" (click)="selectPlan(2)">Buy Now</button>
+                <div *ngIf="this.hasTrial" class="text-attention">
+                  You will not be charged today!
+                 </div>
+              </li>
     </ul>
   </div>
   
@@ -37,7 +48,14 @@
             <mat-icon class="trial-icon">accessibility_new</mat-icon>
            FREE 14 Days Trial
         </li>
-              <li class="grey"><button class="btn btn-primary" (click)="selectPlan(3)">Buy Now</button></li>
+              <li class="grey"><button class="btn btn-primary" (click)="selectPlan(3)">Buy Now</button>
+                <div *ngIf="this.hasTrial" class="text-attention">
+                 You will not be charged today!
+                </div>
+              </li>
     </ul>
+
+
+
   </div>
   

@@ -52,7 +52,7 @@
       </div>
     </div>
 
-    <div *ngFor="let widget of myWidgets; let i = index" class="col-md-4 col-sm-6 col-lg-3">
+    <div style="min-width:250px" *ngFor="let widget of myWidgets; let i = index" class="col-md-4 col-sm-6 col-lg-3">
       <div  class="card step card-round" [class.show]="this.myWidgetsShow[i]" (dblclick)="gotoWidget(widget.id)" [style.color]="widget.colorText" [style.background-color]="widget.colorWidget">
         <div class="card-body pb-0 mywidget">
 
@@ -60,15 +60,6 @@
           <span style="cursor: default" [matTooltip]="getTooltipWidget(widget)" [class.disableWidget]="IsDisabled(widget)" *ngIf="!widget.statusChanging && !widget.isDeleting" class="widget-text-status">{{widget.status}} </span>
           <span *ngIf="widget.statusChanging" class="widget-text-status"> Updating...</span>
           <span *ngIf="widget.isDeleting" class="widget-text-status"> Deleting...</span>
-
-
-          <!-- <mat-spinner  *ngIf="widget.statusChanging"  diameter="20"></mat-spinner> -->
-
-          <!-- <div [style.color]="widget.colorText" [style.background-color]="widget.colorText" class="spinner" *ngIf="widget.statusChanging">
-              <div class="bounce1"></div>
-              <div class="bounce2"></div>
-              <div class="bounce3"></div>
-          </div> -->
 
           <div class="btn-group float-right" dropdown>
             <button type="button" [style.color]="widget.colorText"  class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>

@@ -9,8 +9,59 @@
                         </div>
       
                     <div style="height: 400px;" class="card-body">
+
+                        <div class="table">                          
+                            <div class="row header">
+                                <div class="cell">#</div>
+                                <div class="cell">Time</div>
+                                <div class="cell">Extension</div>
+                                <div class="cell">Source</div>
+                                <div class="cell">Destination</div>
+                                <div class="cell">Duration</div>
+                            </div>
+
+                            <ng-container *ngIf="(callreports$ | async) as callreports; else loading1">
+
+                            <div style="text-align: center;color:gray" *ngIf="callreports.length == 0">
+                                    No records
+                            </div>    
+
+                            <div *ngFor="let call of callreports; let rowIndex = index" class="row">
+                                    <div class="cell" data-title="#">
+                                      {{rowIndex+1}}
+                                    </div>
+                                    <div class="cell" data-title="Time">
+                                      {{call.time | date : 'yyyy/MM/dd [HH:mm]'}}
+                                    </div>   
+                                    <div class="cell" data-title="Extension">
+                                      {{call.extension}}
+                                    </div>
+                                    <div class="cell" data-title="Source">
+                                      {{call.source}}
+                                    </div>
+                                    <div class="cell" data-title="Destination">
+                                        {{call.destination}}
+                                    </div>
+                                    <div class="cell" data-title="Duration">
+                                        {{call.duration}}
+                                    </div>    
+                            </div>
+
+                        </ng-container>
+                        <ng-template #loading1>
+                                <div style="margin-left: 10px ; margin-top:20px;margin-bottom:20px; ">
+                                    <div class="spinner">
+                                        <div class="bounce1"></div>
+                                        <div class="bounce2"></div>
+                                        <div class="bounce3"></div>
+                                    </div>
+                                </div>
+                         </ng-template>
+
+
+                         </div>
+
                     </div>
-       
                 </div>
         </div>
       </div>

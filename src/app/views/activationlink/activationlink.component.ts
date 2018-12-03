@@ -88,7 +88,7 @@ export class ActivationLinkComponent {
 } 
 
 login(){
-  this.router.navigate(['login']);
+  this.router.navigate(['/login']);
 }
 
 signUp(){

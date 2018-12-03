@@ -26,7 +26,7 @@
 
                        <input #wgtbackcolor (keyup)="validHexColor(wgtbackcolor.value) ? this.colorWidget = wgtbackcolor.value : this.colorWidget" type="text" maxlength="7" autocomplete="off" id="widgetcolor" style="text-transform: uppercase ;width:220px !important;text-align: center !important" [style.color]="this.textcolor(this.colorWidget)" [style.background]="this.colorWidget" [value]="this.colorWidget">  
                        <div (click)="showColorDialog(1)" matTooltip="Choose Color" style="display:inline-block;vertical-align: top">
-                            <img src="../../../assets/img/icon/colorpicker-2.png" class="pickcolor-icon">
+                            <mat-icon style="color:#ff6600 !important" class="pickcolor-icon">format_color_fill</mat-icon>
                        </div>
                       <!-- <input id="widgetcolor" style="cursor:pointer;width:220px !important;text-align: center !important" [style.color]="this.textcolor(this.colorWidget)" [style.background]="this.colorWidget" [(colorPicker)]="this.colorWidget" [value]="this.colorWidget"
                        (colorPickerOpen)="onEventLog('colorPickerOpen', $event)" 
@@ -39,7 +39,7 @@
                           <label class="form-text text-muted" for="textcolor">Text Color</label>
                           <input #wgttextcolor (keyup)="validHexColor(wgttextcolor.value) ? this.colorText = wgttextcolor.value : this.colorText"  type="text" maxlength="7" autocomplete="off" id="textcolor" style="text-transform: uppercase ;width: 220px !important;text-align: center !important"  [style.color]="this.textcolor(this.colorText)"  [style.background]="this.colorText" [value]="this.colorText">
                           <div (click)="showColorDialog(2)" matTooltip="Choose Color" style="display:inline-block;vertical-align: top">
-                            <img src="../../../assets/img/icon/colorpicker-2.png" class="pickcolor-icon">
+                            <mat-icon style="color:#ff6600 !important" class="pickcolor-icon">format_color_fill</mat-icon>
                           </div>
 
                           <!-- <input id="textcolor" style="cursor:pointer;width: 220px !important;text-align: center !important"  [style.color]="this.textcolor(this.colorText)"  [style.background]="this.colorText" [(colorPicker)]="this.colorText" [value]="this.colorText"
@@ -62,7 +62,7 @@
 
                   <div class="form-group">
                         <mat-form-field style="width:100%">
-                                <mat-select #subscription placeholder="Choose a subscription">
+                                <mat-select #subscription placeholder="Choose a subscription" (click)="CheckForNoSubscription()" >
                                         <mat-option  *ngFor="let item of mysubscriptions" [value]="item.subscriptionID">
                                           {{item.subscriptionID}} : {{item.plan}}  ({{item.status}})
                                         </mat-option>

@@ -33,7 +33,7 @@
                                 <div class="row header">
                                     <div class="cell">Name</div>
                                     <div class="cell">Email</div>
-                                    <div class="cell">SignUp Date Time</div>
+                                    <div class="cell">Sign-Up Date</div>
                                     <div class="cell">Last Login</div>
                                     <!-- <div class="cell">widgetsCount</div>
                                     <div class="cell">subscription</div> -->
@@ -52,10 +52,10 @@
                                           {{customer.email}}
                                         </div>   
                                         <div class="cell" data-title="creationDateTime">
-                                          {{customer.creationDateTime}}
+                                          {{customer.creationDateTime | date : 'yyyy/MM/dd [HH:mm]'}}
                                         </div>
                                         <div class="cell" data-title="lastLogin">
-                                          {{customer.lastLogin}}
+                                          {{customer.lastLogin | date : 'yyyy/MM/dd [HH:mm]'}}
                                         </div>
                                         <!-- <div class="cell" data-title="widgetsCount">
                                             {{customer.widgetsCount}}
@@ -117,10 +117,10 @@
                                               {{customer.email}}
                                             </div>   
                                             <div class="cell" data-title="creationDateTime">
-                                              {{customer.creationDateTime}}
+                                              {{customer.creationDateTime | date : 'yyyy/MM/dd [HH:mm]'}}
                                             </div>
                                             <div class="cell" data-title="lastLogin">
-                                              {{customer.lastLogin}}
+                                              {{customer.lastLogin | date : 'yyyy/MM/dd [HH:mm]'}}
                                             </div>
                                             <!-- <div class="cell" data-title="widgetsCount">
                                                 {{customer.widgetsCount}}

@@ -12,6 +12,7 @@ import { MySubscription } from './mysubscription'
 import { environment } from '../../../environments/environment';
 
 import { HttpErrorHandler, HandleError } from '../../http-error-handler.service';
+import { Invoice } from '../subscriptiondetail-dialog/invoice';
 
 
 const baseUrl :string = environment.apiUrl;
@@ -30,6 +31,10 @@ const httpOptions = {
 export class MySubscriptionService {
 
   subscriptionUrl = baseUrl + '/api/subscription';
+  invloceUrl = baseUrl + '/api/subscription/invoice';
+  uploadreportUrl = baseUrl + '/api/gradwell/uploadreport';
+  
+
   handleError: HandleError;
 
 
@@ -42,6 +47,28 @@ getMySubscriptions() : Observable<MySubscription[]> {
   .pipe(
     catchError(this.handleError('getMySubscriptions', []))
   );
+  }
+
+  getUserSubscriptions(email :string) : Observable<MySubscription[]> {
+    return this.http.get<MySubscription[]>(this.subscriptionUrl + '/user/' + email)
+  .pipe(
+    catchError(this.handleError('getMySubscriptions', []))
+  );
+  }
+
+
+  getInvoices(subscriptionId : string) : Observable<Invoice[]> {
+    return this.http.get<Invoice[]>(this.invloceUrl + '/' + subscriptionId)
+  .pipe(
+    catchError(this.handleError('getInvoices', []))
+  );
+  }
+
+
+  uploadData(data : any[][])
+  {
+    var body = JSON.stringify(data);
+    return this.http.post<any>(this.uploadreportUrl , body , httpOptions);
   }
 
 }

@@ -1,100 +1,116 @@
+<div class="container-fluid" style="background:white;margin:0;padding:0;width:100%; font-family: 'Open Sans', sans-serif !important;">
 
 
-
-<div class="app-header" align="center">
-<img id="img-logo" src="../../../assets/img/brand/TalktoLeadsNow.png" [class]="this.imageLogoClass">
-</div>  
-
-<div class="app-body">    
-  <div class="container-fluid">
-    <main class="main">
-     <div class="container">
-      <div class="row">
-        <div class="col-md-8 mx-auto">
-          <div id="mycard-group" [class]="this.cardLogoClass">
-            <div class="card p-4">
-              <div class="card-body card card-accent-primary">
-                <form (ngSubmit)="onSubmit(username.value,password.value,rememberme.checked)" name="loginForm">
-                  <h2>Login</h2>
-                  <p class="text-muted">Sign In to your account</p>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="icon-user"></i></span>
-                    </div>
-                    <input required type="email" #username id="username" [disabled]="isSubmit" class="form-control" placeholder="Your Email" autocomplete="email">
-                  </div>
-                  <div class="input-group mb-4">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="icon-lock"></i></span>
-                    </div>
-                    <input type="password" #password id="password" name="password" required [disabled]="isSubmit" class="form-control" placeholder="Password" autocomplete="current-password" required>
-                  </div>
-                  <div class="input-group mb-4">
-                      <div class="input-group-prepend">
-                          <mat-slide-toggle  #rememberme style="margin-right:20px" labelPosition="after" [checked]="false">Remember me</mat-slide-toggle>
-
-                  </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-3">
-                      <button type="submit" class="btn btn-primary px-4" [disabled]="isSubmit" >Login</button>
-                    </div>
-                    <div class="col-3">
-                        <div class="spinner"  *ngIf="isSubmit">
-                            <div class="bounce1"></div>
-                            <div class="bounce2"></div>
-                            <div class="bounce3"></div>
-                          </div>
-                    </div>
-                    <div class="col-3 text-right">
-                      <button type="button" class="btn btn-link px-0" (click)="forgotpassword()">Forgot password?</button>
-                    </div>
-                  </div>
-                 
-
-
-                  <!-- <div align ="center" *ngIf="isSubmit">
-                      <mat-spinner  color="primary" diameter="30"></mat-spinner>
-                    </div> -->
-                </form>
-              </div>
-            </div>
-            <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
-              <div class="card-body text-center">
-                <div>
-                  <h2>Sign up</h2>
-                  <p>Are you a new customer?<p>
-
-
-                  <p> Click 'Register Now' and become a member of TalkToLeadsNow within just a few seconds for FREE! </p>
-                  <button type="button" class="btn btn-primary active mt-3" (click)="register()">Register Now!</button>
-                </div>
-              </div>
-              
-            </div>
-            
-          </div>
-
-          
-              <a class="shiny fadeIn animated" href="#" [routerLink]="'/register'">
-                SignUp Now!
-                <i class="i-shiny"></i>
-              </a>
-          
-        </div>
-        
-      </div>
-      
+<header>
+  <div class="header-top">
+    <div class="container align-items-start"> <a class="navbar-brand" href="https://www.talktoleadsnow.com/index.html"><img src="../../../assets/ttln/images/logo.png" class="img-fluid"></a>
+      <ul class="header-social">
+        <li> <a href="https://www.facebook.com/TalkToLeadsNow/" target="_blank"><span class="fa fa-facebook"></span></a> </li>
+        <li> <a href="https://twitter.com/talktoleadsnow" target="_blank"><span class="flaticon-twitter"></span></a> </li>
+        <li> <a href="https://www.instagram.com/talktoleadsnow/" target="_blank"><span class="flaticon-instagram"></span></a> </li>
+        <li> <a href="https://www.talktoleadsnow.com/contact.html"><span class="flaticon-mail"></span></a> </li>
+      </ul>
     </div>
-    
-  </main>
-  
   </div>
-  
-  </div>
+  <nav class="navbar navbar-expand-md navbar-dark navbar-inverse bg-inverse static-top">
+    <div class="container">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarResponsive">
+        <ul class="navbar-nav main-menu">
+          <li class="menu1 "> <a href="https://www.talktoleadsnow.com/index.html">HOME</a></li>
+          <li class="menu2"> <a href="https://www.talktoleadsnow.com/index.html#features">Features</a> </li>
+          <li class="menu4"> <a href="https://www.talktoleadsnow.com/index.html#pricing">Pricing</a> </li>
+          <li class="menu6"> <a [routerLink]="['/signup']">Sign Up</a></li>
+          <li class="menu7 current-menu-item"> <a href="#">Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+    <section class="inn-container pd custom-inn-container">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-5 col-md-7 col-sm-12 mx-auto">
+                    <div class="form">
+                        <h2>LOGIN</h2>
+					<form class="form-signin" (ngSubmit)="onSubmit(username.value,password.value,rememberme.checked)" name="loginForm">
+                        <p class="float-left text-white">Sign In to your account</p>
+						<div class="form-group">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                </div>
+								<input #username type="text" class="form-control" name="username" id="username" placeholder="Enter your Username"/>
+				              </div>
+						</div>
 
-  <div id="myfooter" [class]="this.footerClass">
-      <span><a href="http://www.TalkToLeadsNow.com" target="_blank" >TalkToLeadsNow</a> &copy; {{this.today | date: 'yyyy'}}.</span>
-      <span class="ml-auto">Powered by <a href="https://www.dubseo.co.uk/" target="_blank">DubSEO</a></span>
+						<div class="form-group">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                </div>
+								<input #password type="password" class="form-control" name="password" id="password" placeholder="Enter your Password"/>
+				              </div>
+						</div>
+                        
+                        <div class="form-check">
+                            <input #rememberme type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label text-white" for="exampleCheck1">Remember me</label>
+                        </div>
+                        <p class="text-white">Forgot your password? <a [routerLink]="['/forgotpassword']">Click Here</a></p>
+
+                        <button [disabled]="isSubmit" style="margin-right : 10px !important" class="btn btn_login" type="submit">Login</button>
+
+                        <div class="spinner" *ngIf="isSubmit">
+                          <div class="bounce1"></div>
+                          <div class="bounce2"></div>
+                          <div class="bounce3"></div>
+                        </div>
+
+           </form>
+
+                    </div>
+
+
+
+
+				</div>
+			</div>
+		</div>
+    
+    </section> 
+ 
+ <div class="clearfix"></div>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+          <div class="footer-social">
+            <ul>
+                <li><a class="facebook social-icon" href="https://www.facebook.com/TalkToLeadsNow//" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                <li><a class="twitter social-icon" href="https://twitter.com/talktoleadsnow" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                <li><a class="instagram social-icon" href="https://www.instagram.com/talktoleadsnow/" title="Instagram"><i class="fa fa-instagram"></i></a></li>
+                <li><a class="envelope social-icon" href="#" title="envelope"><i class="fa fa-envelope"></i></a></li>		
+            </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-5">
+       <p>© Copyright 2018 - Talk To Leads Now</p>
+      </div>
+      <div class="col-lg-6 col-md-7">
+        <ul class="footer-nav">
+          <li><a href="#">Blog</a></li>
+          <li><a href="https://www.talktoleadsnow.com/contact.html">Contact</a></li>
+          <li><a href="https://www.talktoleadsnow.com/terms-of-condition.html">Terms of Condition</a></li>
+          <li><a href="https://www.talktoleadsnow.com/terms-of-use.html">Terms of Use</a></li>
+          <li><a href="https://www.talktoleadsnow.com/privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
+</footer>
+
+</div>

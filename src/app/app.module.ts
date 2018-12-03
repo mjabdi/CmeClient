@@ -22,7 +22,6 @@ import { DefaultLayoutComponent } from './containers';
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
-import { RegisterComponent } from './views/register/register.component';
 import { ResetpasswordComponent } from './views/resetpassword/resetpassword.component';
 import { ActivationLinkComponent } from './views/activationlink/activationlink.component';
 import { ForgotpasswordComponent } from './views/forgotpassword/forgotpassword.component';
@@ -74,6 +73,7 @@ import { ChangePlanDialogComponent } from './views/changeplan-dialog/changeplan-
 import { StripeFormDialogComponent } from './views/stripeform-dialog/stripeform-dialog.component';
 import { SubscriptionDetailDialogComponent } from './views/subscriptiondetail-dialog/subscriptiondetail-dialog.component';
 import { CustomerDetailDialgoComponent } from './views/customerdetail-dialog/customerdetail-dialog.component';
+import { LoadCsvFileDialog } from './views/loadcsvfile-dialog/loadcsvfile-dialog.component';
 
 @NgModule({
   imports: [
@@ -108,7 +108,7 @@ import { CustomerDetailDialgoComponent } from './views/customerdetail-dialog/cus
 
     }),
     HomePageModule,
-    NgxStripeModule.forRoot('pk_test_kVTRNkZf8RffabKEyt93GI8V'),
+    NgxStripeModule.forRoot('pk_live_x0qk8E6ojnNK6Tw9bLQAYh9z'),
   ],
   declarations: [
     AppComponent,
@@ -116,7 +116,6 @@ import { CustomerDetailDialgoComponent } from './views/customerdetail-dialog/cus
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent,
     SignUpComponent,
     ResetpasswordComponent,
     ActivationLinkComponent,
@@ -126,11 +125,12 @@ import { CustomerDetailDialgoComponent } from './views/customerdetail-dialog/cus
     ChangePlanDialogComponent,
     StripeFormDialogComponent,
     SubscriptionDetailDialogComponent,
-    CustomerDetailDialgoComponent
+    CustomerDetailDialgoComponent,
+    LoadCsvFileDialog
   ],
   providers: [{
     provide: LocationStrategy,
-    useClass: HashLocationStrategy
+    useClass: HashLocationStrategy,
   },
   AdminAuthGuard,
   AuthGuard,
@@ -146,7 +146,8 @@ import { CustomerDetailDialgoComponent } from './views/customerdetail-dialog/cus
     ChangePlanDialogComponent,
     StripeFormDialogComponent,
     SubscriptionDetailDialogComponent,
-    CustomerDetailDialgoComponent
+    CustomerDetailDialgoComponent,
+    LoadCsvFileDialog
   ],
   bootstrap: [ AppComponent ]
 })

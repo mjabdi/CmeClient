@@ -33,6 +33,7 @@ export class StripeFormDialogComponent implements OnInit {
         private dialogRef: MatDialogRef<StripeFormDialogComponent>,
         @Inject(MAT_DIALOG_DATA) data ) {
             this.selectedPlan = data;
+            
     }
 
 

@@ -24,7 +24,8 @@ export class WidgetsComponent {
   myWidgets :   Widget[];
   myWidgetsShow : Array<boolean>;
 
-  constructor(private router : Router, 
+  constructor(
+    private router : Router, 
     private wgtService : WidgetService,
     private authService : AuthenticationService,
     private toastrService : ToastrService,

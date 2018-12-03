@@ -1,0 +1,44 @@
+<div mat-dialog-title style="font-size:14px !important">
+          
+          <input type="file" 
+                #fileImportInput
+                name="File Upload" 
+                id="txtFileUpload" 
+                (change)="fileChangeListener($event)" 
+                accept=".txt"
+                    />
+
+                <input *ngIf="fileImportInput.value" type="button" 
+                name="Reset" 
+                id="txtFileReset" 
+                class="btn btn-secondary" 
+                (click)="fileReset()" 
+                value="Reset"/>
+
+                <span *ngIf="fileImportInput.value" style="margin-left:5px">
+                    <button [disabled]="isSubmit || dataUploaded" style="width:120px" class="btn btn-primary" (click)="UploadData()"> Upload Data </button>
+                </span>
+                <div class="spinner" *ngIf="isSubmit">
+                    <div class="bounce1"></div>
+                    <div class="bounce2"></div>
+                    <div class="bounce3"></div>
+                </div>
+  </div>
+
+<mat-dialog-content>
+
+<div>
+    <table class="table table-responsive table-hover" border="1" 
+        style="width : 100%;">
+        <tbody>
+            <ng-container *ngFor="let csvRec of csvRecords;let i=index">
+                <tr>
+                    <ng-container *ngFor="let data of csvRec;let j=index"> 
+                        <td>{{data}}</td>
+                    </ng-container>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
+</mat-dialog-content>            
