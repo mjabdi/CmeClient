@@ -246,7 +246,7 @@ export class CreateWidgetComponent {
 
        if (!this.agreeChecked)
        {
-        this.toastrService.warning('Please check the "I agree with the above working hours" checkbox');
+        this.toastrService.warning('Please check the "I agree to the TTLN Terms and Conditions" checkbox');
         this.selectedTabIndex = 2;
         this.alarmAgree = true;
         return false;  
@@ -439,6 +439,28 @@ export class CreateWidgetComponent {
                  )
              }
          }
+     );
+   }
+
+   sendingEmail = false;
+   sendScriptEmail()
+   {
+     this.sendingEmail = true;
+
+     this.wgtService.sendSnippetCodeEmail(this.widgetID).subscribe(
+
+       data => 
+       {
+         this.snackbar.open('Email Sent','Dismiss',{
+           duration: 3000
+         });
+         this.sendingEmail = false;
+       },
+       error =>
+       {
+         this.toastrService.error('Sorry, cannot send email right now! Pleas try again.','Error');
+         this.sendingEmail = false;
+       }
      );
    }
 

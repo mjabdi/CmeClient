@@ -173,6 +173,13 @@
     color : #ff6600 !important;
     border: 0 !important;
     background: transparent !important;
+    opacity: 1;
+    transition: all 0.2s ease-out;
+}
+
+.btn-copy:hover
+{
+    opacity: 0.8;
 }
 
 .span-agree
@@ -396,5 +403,39 @@
     -webkit-animation-delay: -0.16s;
     animation-delay: -0.16s;
   }
+
+
+  .spinner3 {
+    /* width: 100%; */
+    /* text-align: center !important; */
+    font-size: 12px !important;
+    color:  #ff6600 !important;
+    display: inline-block;
+    vertical-align: top;
+    margin-right : 10px;
+  }
+  
+  .spinner3 > div {
+    width: 5px;
+    height: 5px;
+    background-color: #ff6600;
+    margin: 2px;
+  
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  }
+  
+  .spinner3 .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+  }
+  
+  .spinner3 .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+  }
+
 
   

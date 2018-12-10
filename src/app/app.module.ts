@@ -74,6 +74,7 @@ import { StripeFormDialogComponent } from './views/stripeform-dialog/stripeform-
 import { SubscriptionDetailDialogComponent } from './views/subscriptiondetail-dialog/subscriptiondetail-dialog.component';
 import { CustomerDetailDialgoComponent } from './views/customerdetail-dialog/customerdetail-dialog.component';
 import { LoadCsvFileDialog } from './views/loadcsvfile-dialog/loadcsvfile-dialog.component';
+import { MAT_DATE_LOCALE } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -132,6 +133,7 @@ import { LoadCsvFileDialog } from './views/loadcsvfile-dialog/loadcsvfile-dialog
     provide: LocationStrategy,
     useClass: HashLocationStrategy,
   },
+  {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
   AdminAuthGuard,
   AuthGuard,
   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -14,6 +14,8 @@ import { WidgetService } from '../../views/widgets/widget.service';
 import { LoadCsvFileDialog } from '../../views/loadcsvfile-dialog/loadcsvfile-dialog.component';
 import { CallReport } from './callreport';
 import { CallReportsService } from './callreports.service';
+import { FormControl } from '@angular/forms';
+
 
 
 @Component({
@@ -22,6 +24,12 @@ import { CallReportsService } from './callreports.service';
 })
 export class CallReportsComponent {
     
+
+    WidgetNames : Widget[];
+
+    fromDateControl = new FormControl();
+    untilDateControl = new FormControl();
+    selectedWidgetControl = new FormControl();
 
     constructor(
         private router : Router, 
@@ -35,12 +43,21 @@ export class CallReportsComponent {
         )
         { }
   
+        panelOpenState = false;
 
         callreports$ : Observable<CallReport[]>;
 
         ngOnInit()
         {
+            this.ResetSearch();
             this.callreports$ = this.callreportsService.getAllCallReports();
+            this.widgetService.getAllWidgetsHistory().subscribe(
+                (data : Widget[]) =>
+                {
+                    this.WidgetNames = data;
+                }
+            );
+
         }
 
         openFileDialog()
@@ -68,5 +85,58 @@ export class CallReportsComponent {
 
         }
         
+        fromDate = null;
+        untilDate = null;
+        selectedWidget = null;
+        Search()
+        {
+            this.fromDate = this.fromDateControl.value;
+            this.untilDate = this.untilDateControl.value;
+            this.selectedWidget = this.selectedWidgetControl.value;
+        }
+
+        ResetSearch()
+        {
+            this.fromDateControl.setValue(null);
+            this.untilDateControl.setValue(null);
+            this.selectedWidgetControl.setValue(null);
+
+            this.fromDate = this.fromDateControl.value;
+            this.untilDate = this.untilDateControl.value;
+            this.selectedWidget = this.selectedWidgetControl.value;
+        }
+
+        filterRecords(callreports : CallReport[]) : Array<CallReport>
+        {
+            var resultArray = new Array<CallReport>(); 
+
+            for (var i=0 ; i < callreports.length; i++)
+            {
+                var report = callreports[i];
+                var ok = true;
+
+                if (this.fromDate != null  && (Date.parse(report.time.toString()) < Date.parse(this.fromDate.toString())))
+                {
+                    ok = false;
+                }
+
+                if (this.untilDate != null && (Date.parse(report.time.toString()) - 86400000 > Date.parse(this.untilDate.toString())))
+                {
+                    ok = false;
+                }
+
+                if (this.selectedWidget != null && this.selectedWidget != 'null'  && report.extension != this.selectedWidget)
+                {
+                    ok = false;
+                }
+
+                if (ok)
+                {
+                    resultArray.push(report);
+                }
+            }
+
+            return resultArray;
+        }
 
 }

@@ -25,6 +25,8 @@ import { MySubscriptionService } from '../mysubscriptions/mysubscriptions.servic
 export class EditWidgetComponent {
 
 
+    sendingEmail = false;
+    
     mysubscriptions : MySubscription[];
 
     colorWidget = "rgb(77,189,116)"
@@ -318,4 +320,25 @@ export class EditWidgetComponent {
       }
 
 
+
+      sendScriptEmail()
+      {
+        this.sendingEmail = true;
+
+        this.wgtService.sendSnippetCodeEmail(this.myWidget.id).subscribe(
+
+          data => 
+          {
+            this.snackbar.open('Email Sent','Dismiss',{
+              duration: 3000
+            });
+            this.sendingEmail = false;
+          },
+          error =>
+          {
+            this.toastrService.error('Sorry, cannot send email right now! Pleas try again.','Error');
+            this.sendingEmail = false;
+          }
+        );
+      }
 }

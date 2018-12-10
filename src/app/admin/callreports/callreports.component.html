@@ -13,9 +13,71 @@
                        <div align="center" style="margin-bottom : 10px;">
                                 <button style="width:200px" class="btn btn-secondary" (click)="openFileDialog()">Import Gradwell File</button>
                         </div>
+
+
+                        <div class="col-md-12" style="margin-top:5px;margin-bottom:5px;">
+                            <mat-accordion>
+                                <mat-expansion-panel class="expansion-search" (opened)="panelOpenState = true"  (closed)="panelOpenState = false">
+                                  <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                      Advanced Search...
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+                                      {{panelOpenState ? 'click to collapse' : 'click to expand'}}
+                                    </mat-panel-description>
+                                  </mat-expansion-panel-header>
+                              
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                            <input matInput autocomplete="off" #fromdate [matDatepicker]="myDatepicker"
+                                            placeholder="From Date" [formControl]="fromDateControl">
+                                        <mat-datepicker-toggle matSuffix
+                                                               [for]="myDatepicker">
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #myDatepicker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                            <input matInput autocomplete="off"  #untildate [matDatepicker]="myDatepicker2"
+                                            placeholder="Until Date" [formControl]="untilDateControl">
+                                        <mat-datepicker-toggle matSuffix
+                                                               [for]="myDatepicker2">
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #myDatepicker2></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                            <mat-select autocomplete="off"  placeholder="Widget" [formControl]="selectedWidgetControl">
+                                                    <mat-option value=null>
+                                                        -- All Widgets --
+                                                    </mat-option>
+                                                    <mat-option *ngFor="let item of WidgetNames" [value]="item.extension">
+                                                      {{item.widgetName}}
+                                                    </mat-option>
+                                            </mat-select>                      
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <button  #resetbutton mat-raised-button class="btn btn-default" style="margin-right:5px" (click)="this.ResetSearch()"> RESET</button>
+                                    <button  #searchbutton mat-raised-button class="btn btn-primary" (click)="this.Search()" > SEARCH</button>
+                
+                                </div>
+                    
+                            </div>
+                
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                            </div>
+                
+
+
                    
                         <div class="table">                          
-                            <div class="row header">
+                            <div class="myrow header">
                                 <div class="cell">#</div>
                                 <div class="cell">Time</div>
                                 <div class="cell">Extension</div>
@@ -30,7 +92,7 @@
                                     No records
                             </div>    
 
-                            <div *ngFor="let call of callreports; let rowIndex = index" class="row">
+                            <div *ngFor="let call of this.filterRecords(callreports); let rowIndex = index" class="myrow">
                                     <div class="cell" data-title="#">
                                       {{rowIndex+1}}
                                     </div>
@@ -61,14 +123,8 @@
                                     </div>
                                 </div>
                          </ng-template>
-
-
                          </div>
-
-
-
-                    </div>
-       
+                    </div>       
                 </div>
         </div>
       </div>

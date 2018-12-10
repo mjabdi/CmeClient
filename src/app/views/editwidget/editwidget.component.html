@@ -191,8 +191,19 @@
         the '&lt;/Body&gt;' tag. 
         
         <div align="right">
+        
+        <button *ngIf="!sendingEmail" class="btn-copy" (click)="sendScriptEmail()">
+                <mat-icon [matTooltip]="'email this script to me'"  class="mat-icon material-icons" role="img" aria-hidden="true">mail_outline</mat-icon>
+        </button>
+
+        <div class="spinner3" *ngIf="sendingEmail">     
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+
         <button class="btn-copy" [ngxClipboard]="inputTarget" (cbOnSuccess) = "copied($event)">
-            <mat-icon [matTooltip]="'cpoy to clipboard'"  class="mat-icon material-icons" role="img" aria-hidden="true">content_copy</mat-icon>
+            <mat-icon [matTooltip]="'copy to clipboard'"  class="mat-icon material-icons" role="img" aria-hidden="true">content_copy</mat-icon>
         </button>
         </div>
 

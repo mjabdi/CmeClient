@@ -1,5 +1,16 @@
 <div mat-dialog-title style="font-size:14px !important">
           
+    <!-- <div class="col-md-3" style="display:inline;margin-right:10px;">
+        <mat-form-field class="example-full-width">
+                <input matInput autocomplete="off" #reportdate  [matDatepicker]="myDatepicker"
+                placeholder="Report Date" [value]="today">
+            <mat-datepicker-toggle matSuffix
+                                   [for]="myDatepicker">
+            </mat-datepicker-toggle>
+            <mat-datepicker #myDatepicker></mat-datepicker>
+        </mat-form-field>
+    </div> -->
+
           <input type="file" 
                 #fileImportInput
                 name="File Upload" 
@@ -26,6 +37,10 @@
   </div>
 
 <mat-dialog-content>
+
+<div *ngIf="this.dateReport.length > 0" style="text-align: center;width: 100%;color : gray">
+    {{this.dateReport}}
+</div>
 
 <div>
     <table class="table table-responsive table-hover" border="1" 

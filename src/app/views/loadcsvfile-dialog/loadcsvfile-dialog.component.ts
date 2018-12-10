@@ -5,6 +5,7 @@ import { Constants }                    from './file.constants';
 import { MySubscriptionService } from "../mysubscriptions/mysubscriptions.service";
 import { ToastrService } from "ngx-toastr";
 import { MatDialogRef } from "@angular/material";
+import { getLocaleMonthNames } from "@angular/common";
  
 @Component({
     selector: 'loadcsvfile-dialog',
@@ -19,6 +20,8 @@ export class LoadCsvFileDialog implements OnInit {
   fileImportInput: any;
 
   csvRecords = [];
+
+  dateReport = "";
 
   constructor(private _router: Router,
     private myService : MySubscriptionService,
@@ -45,6 +48,14 @@ export class LoadCsvFileDialog implements OnInit {
     }
 
     var input = $event.target;
+
+    var filename : string;
+    filename = input.files[0].name;
+    var year = filename.substr(11,4);
+    var month = filename.substr(16,2);
+    var day = filename.substr(19,2);
+    this.dateReport = year + "-" + month + "-" + day;
+
     var reader = new FileReader();
     reader.readAsText(input.files[0]);
 
@@ -76,17 +87,17 @@ export class LoadCsvFileDialog implements OnInit {
     this.fileImportInput.nativeElement.value = "";
     this.csvRecords = [];
     this.dataUploaded = false;
+    this.dateReport = "";
   }
 
   isSubmit = false;
   dataUploaded = false;
+
   UploadData()
   {
       this.isSubmit = true;
 
-
-
-      this.myService.uploadData(this.csvRecords).subscribe(
+      this.myService.uploadData(this.dateReport, this.csvRecords).subscribe(
         (data : number) => {
           if (data > 1)
           {

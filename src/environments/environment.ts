@@ -14,7 +14,7 @@ export const environment = {
   production: false,
 
      apiUrl: 'https://api.talktoleadsnow.com',
-    //apiUrl: 'http://localhost:5090',
+    // apiUrl: 'http://localhost:5090',
 
     
     // planId1 : 'plan_DyKREpq8pGQqPo',
@@ -23,5 +23,4 @@ export const environment = {
     planId3: 'plan_DyKTNXWj9EzUz6'
 
 
-};
-
+}

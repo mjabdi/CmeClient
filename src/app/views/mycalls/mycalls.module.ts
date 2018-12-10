@@ -5,13 +5,17 @@ import {MaterialModule} from '../../material.module';
 import {MyCallsRoutingModule} from './mycalls-routing.module';
 import { MyCallsComponent } from './mycalls.component';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     MyCallsRoutingModule,
     BsDropdownModule,
     MaterialModule,
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+
   ],
   declarations: [ MyCallsComponent ]
 })

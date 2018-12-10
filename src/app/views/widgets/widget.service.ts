@@ -38,6 +38,15 @@ export class WidgetService {
 }
 
 
+sendSnippetCodeEmail(id : string)
+{
+  var body = '';
+
+  return this.http.post(this.widgetUrl + "/emailsnippetcode/" + id,
+    body,
+    httpOptions);
+}
+
 
 getAllWidgetsNew() : Observable<Widget[]> {
     return this.http.get<Widget[]>(this.widgetUrl+'/new')

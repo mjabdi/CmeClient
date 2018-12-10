@@ -65,10 +65,10 @@ getMySubscriptions() : Observable<MySubscription[]> {
   }
 
 
-  uploadData(data : any[][])
+  uploadData(reportdate : string , data : any[][])
   {
     var body = JSON.stringify(data);
-    return this.http.post<any>(this.uploadreportUrl , body , httpOptions);
+    return this.http.post<any>(this.uploadreportUrl + '/' + reportdate , body , httpOptions);
   }
 
 }
